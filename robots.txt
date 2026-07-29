@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /buscar.html
+
+Sitemap: https://catedrahispanidad.urjc.es/sitemap.xml

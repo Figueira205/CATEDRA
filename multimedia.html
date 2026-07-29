@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multimedia — Galería · Cátedra de la Hispanidad</title>
+<meta name="description" content="Galería multimedia de la Cátedra de la Hispanidad: fotografías, vídeos, conferencias grabadas y documentos gráficos, con visor accesible.">
+<link rel="canonical" href="https://catedrahispanidad.urjc.es/multimedia">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='6' fill='%23A62035'/%3E%3Ctext x='24' y='32' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23F4F0E7'%3ECH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container header-bar">
+    <a class="brand" href="index.html" aria-label="Cátedra de la Hispanidad, inicio">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="4" fill="#A62035"/><path d="M7 38 22 12l7 11 12-5" fill="none" stroke="#B48A3C" stroke-width="1.3" opacity=".85"/><text x="24" y="32" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="17" fill="#F4F0E7" letter-spacing="1">CH</text></svg>
+      <span class="brand__text"><span class="brand__name">Cátedra de la Hispanidad</span><span class="brand__inst">Universidad Rey Juan Carlos</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal"><ul id="main-nav-list"></ul></nav>
+    <div class="header-utils">
+      <button type="button" class="util-btn" data-open-search aria-label="Abrir el buscador (Ctrl + K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg></button>
+      <a class="util-btn util-btn--lang" href="" aria-label="Idioma: español. La versión en inglés está en preparación" title="English version in preparation">ES·EN</a>
+      <button type="button" class="burger" id="menu-open" aria-label="Abrir el menú completo"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación completo">
+  <div class="mobile-menu__bar">
+    <span class="brand__name">Cátedra de la Hispanidad</span>
+    <button type="button" class="mobile-menu__close" id="menu-close">Cerrar <span aria-hidden="true">✕</span></button>
+  </div>
+  <nav id="mobile-nav" aria-label="Navegación completa"></nav>
+  <div class="mobile-menu__foot">
+    <form data-search-form role="search" class="searchbar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input type="search" name="q" placeholder="Buscar en la Cátedra" aria-label="Buscar en la Cátedra">
+    </form>
+    <a class="btn btn--light" href="contacto.html#colaboracion">Proponer una colaboración <span class="arr" aria-hidden="true">→</span></a>
+    <p class="mono">catedra.hispanidad@urjc.es · Madrid, España</p>
+  </div>
+</div>
+
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Buscador global de la Cátedra">
+  <div class="palette__box">
+    <div class="palette__input-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input id="palette-input" type="search" autocomplete="off" placeholder="Buscar personas, proyectos, publicaciones, actividades o recursos" aria-label="Buscar en toda la web">
+      <kbd>Esc</kbd>
+      <button type="button" id="palette-close" class="visually-hidden">Cerrar el buscador</button>
+    </div>
+    <div class="palette__results" id="palette-results"></div>
+  </div>
+</div>
+
+
+<nav class="breadcrumbs" aria-label="Miga de pan">
+  <div class="container"><ol>
+    <li><a href="index.html">Inicio</a></li>
+    <li><span aria-current="page">Multimedia</span></li>
+  </ol></div>
+</nav>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <p class="kicker">Multimedia · Archivo</p>
+      <h1>Ver, escuchar y <em class="serif" style="font-style:italic;color:var(--color-carmine)">explorar</em>.</h1>
+      <p class="lead">El archivo audiovisual de la Cátedra: fotografías, vídeos, conferencias grabadas y documentos gráficos de estudio.</p>
+    </div>
+  </section>
+
+  <div class="container" style="padding-block:clamp(48px,5vw,64px)">
+    <div class="filters" data-filter-group="tipo" data-filter-target="#galeria" role="group" aria-label="Filtrar por tipo">
+      <button type="button" class="filter-btn" data-filter="todos" aria-pressed="true">Todo</button>
+      <button type="button" class="filter-btn" data-filter="foto" aria-pressed="false">Fotografías</button>
+      <button type="button" class="filter-btn" data-filter="video" aria-pressed="false">Vídeos</button>
+      <button type="button" class="filter-btn" data-filter="documento" aria-pressed="false">Documentos gráficos</button>
+    </div>
+
+    <div id="galeria" class="mosaic">
+      <div class="m-wide" data-item data-tipo="video" style="display:contents">
+        <button type="button" class="mosaic__item m-wide" data-lightbox="../recursos/video_hispanidad.mp4" data-caption="La Hispanidad: memoria visual comentada — pieza de presentación de la Cátedra" data-meta="Vídeo · 2026">
+          <img src="assets/img/conquista.png" alt="Fotograma del vídeo: pintura de historia con el desembarco de una expedición en una costa caribeña" loading="lazy">
+          <span class="play-badge" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="mosaic__cap"><span class="m">Vídeo · Presentación</span><span class="t">La Hispanidad: memoria visual comentada</span></span>
+        </button>
+      </div>
+      <div class="m-2x2" data-item data-tipo="foto" style="display:contents">
+        <button type="button" class="mosaic__item m-2x2" data-lightbox="assets/img/aulas.png" data-caption="Sesión docente en el aula magna del campus" data-meta="Fotografía · Docencia">
+          <img src="assets/img/aulas.png" alt="Aula magna universitaria con estudiantes durante una sesión" loading="lazy">
+          <span class="mosaic__cap"><span class="m">Fotografía · Docencia</span><span class="t">Aula magna</span></span>
+        </button>
+      </div>
+      <div class="m-1x1" data-item data-tipo="foto" style="display:contents">
+        <button type="button" class="mosaic__item m-1x1" data-lightbox="assets/img/estudiantes.png" data-caption="Comunidad universitaria en el campus" data-meta="Fotografía · Campus">
+          <img src="assets/img/estudiantes.png" alt="Estudiantes conversando en una escalinata del campus" loading="lazy">
+          <span class="mosaic__cap"><span class="m">Fotografía</span><span class="t">Campus</span></span>
+        </button>
+      </div>
+      <div class="m-1x1" data-item data-tipo="foto" style="display:contents">
+        <button type="button" class="mosaic__item m-1x1" data-lightbox="assets/img/estudiantes2.png" data-caption="Estudiantes durante un curso de la Cátedra" data-meta="Fotografía · Formación">
+          <img src="assets/img/estudiantes2.png" alt="Estudiantes con ordenadores portátiles atienden en clase" loading="lazy">
+          <span class="mosaic__cap"><span class="m">Fotografía</span><span class="t">Formación</span></span>
+        </button>
+      </div>
+      <div class="m-2x1" data-item data-tipo="documento" style="display:contents">
+        <button type="button" class="mosaic__item m-2x1" data-lightbox="assets/img/conquistadores.png" data-caption="Pintura de historia (s. XIX–XX) con soldados españoles del siglo XVI. Material del fondo de estudio: la Cátedra analiza críticamente esta iconografía en el área de Arte y cultura visual" data-meta="Documento gráfico · Fondo de estudio">
+          <img src="assets/img/conquistadores.png" alt="Pintura de historia con soldados españoles del siglo XVI, material del fondo de estudio" loading="lazy">
+          <span class="mosaic__cap"><span class="m">Documento gráfico</span><span class="t">Iconografía histórica (fondo de estudio)</span></span>
+        </button>
+      </div>
+      <div class="m-2x1" data-item data-tipo="documento" style="display:contents">
+        <button type="button" class="mosaic__item m-2x1" data-lightbox="assets/img/conquista.png" data-caption="Pintura de historia con escena de desembarco. Iconografía comentada en el seminario «Archivos, memoria y patrimonio compartido»" data-meta="Documento gráfico · Fondo de estudio">
+          <img src="assets/img/conquista.png" alt="Pintura de historia: desembarco de una expedición española en una costa caribeña, material del fondo de estudio" loading="lazy">
+          <span class="mosaic__cap"><span class="m">Documento gráfico</span><span class="t">Escena de desembarco (fondo de estudio)</span></span>
+        </button>
+      </div>
+      <div class="m-1x1" data-item data-tipo="documento" style="display:contents">
+        <button type="button" class="mosaic__item m-1x1" data-lightbox="assets/img/Bandera_Hispana.png" data-caption="Bandera de la Hispanidad: documento gráfico del archivo, estudiado en su contexto histórico" data-meta="Documento gráfico · Archivo">
+          <img src="assets/img/Bandera_Hispana.png" alt="Bandera de la Hispanidad, documento gráfico del archivo de estudio" loading="lazy" style="object-fit:contain;background:#fff">
+          <span class="mosaic__cap"><span class="m">Documento gráfico</span><span class="t">Archivo vexilológico</span></span>
+        </button>
+      </div>
+    </div>
+    <div data-filter-empty hidden class="empty-state mt-7">
+      <h3>No hay piezas de ese tipo todavía</h3>
+      <p>El archivo crece con cada actividad. Vuelve pronto o consulta la <a href="actividades.html">agenda</a>.</p>
+    </div>
+
+    <hr class="rule">
+    <div class="grid">
+      <div class="col-6 prose">
+        <h2 style="font-size:1.35rem">Accesibilidad y derechos</h2>
+        <p style="font-size:.98rem">Los vídeos incorporan controles visibles y nunca reproducen sonido automáticamente. Las transcripciones y subtítulos se publican junto a cada pieza cuando existen. Los créditos y derechos de uso figuran en la ficha de cada elemento; las imágenes históricas se muestran como material de estudio, contextualizado críticamente.</p>
+      </div>
+      <div class="col-6 prose">
+        <h2 style="font-size:1.35rem">Cómo se organiza el archivo</h2>
+        <p style="font-size:.98rem">Cada pieza pertenece a la colección «Multimedia» del CMS, con campos de tipo, fecha, evento, proyecto, personas, créditos, derechos, transcripción y descarga autorizada. Los filtros de esta página se generan a partir de esos campos.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de contenido multimedia">
+  <button type="button" class="lightbox__nav lightbox__prev" aria-label="Elemento anterior">←</button>
+  <div class="lightbox__content">
+    <button type="button" class="lightbox__close" aria-label="Cerrar el visor">✕</button>
+    <div id="lightbox-media"></div>
+    <p class="lightbox__cap" id="lightbox-caption"></p>
+  </div>
+  <button type="button" class="lightbox__nav lightbox__next" aria-label="Elemento siguiente">→</button>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Cátedra de la Hispanidad, inicio">
+          <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="4" fill="#A62035"/><path d="M7 38 22 12l7 11 12-5" fill="none" stroke="#B48A3C" stroke-width="1.3" opacity=".85"/><text x="24" y="32" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="17" fill="#F4F0E7" letter-spacing="1">CH</text></svg>
+          <span class="brand__text"><span class="brand__name" style="color:#F4F0E7">Cátedra de la Hispanidad</span></span>
+        </a>
+        <p>Espacio universitario de investigación, enseñanza y divulgación sobre las realidades históricas, culturales, jurídicas y sociales del mundo hispánico.</p>
+        <ul class="footer-contact">
+          <li>Universidad Rey Juan Carlos · Madrid, España</li>
+          <li><a href="mailto:catedra.hispanidad@urjc.es" style="color:inherit">catedra.hispanidad@urjc.es</a></li>
+        </ul>
+        <div class="footer-inst">
+          <img src="assets/img/Logo_universidad.png" alt="Universidad Rey Juan Carlos" loading="lazy">
+          <span>Institución responsable de la Cátedra</span>
+        </div>
+        <div class="social">
+          <a href="https://x.com/" aria-label="Perfil de la Cátedra en X (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.3 22h-6.3l-4.9-6.4L6.5 22H3.4l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L7.6 3.8H5.7z"/></svg></a>
+          <a href="https://www.youtube.com/" aria-label="Canal de la Cátedra en YouTube (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C16.6 3.6 12 3.6 12 3.6s-4.6 0-7.7.3c-.5.1-1.5.1-2.4 1-.7.7-.9 2.3-.9 2.3S.8 9.1.8 11v1.9c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.9.2 7.6.3 7.6.3s4.6 0 7.7-.4c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8V11c0-1.9-.2-3.8-.2-3.8zM9.7 14.9V8.5l6.2 3.2z"/></svg></a>
+          <a href="https://www.instagram.com/" aria-label="Perfil de la Cátedra en Instagram (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9s.7.8.9 1.4c.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4s-.8.7-1.4.9c-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9s-.7-.8-.9-1.4c-.2-.4-.4-1-.4-2.2-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4s.8-.7 1.4-.9c.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1m0 2.1c-3.1 0-3.5 0-4.7.1-1.1.1-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.6-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.6.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.3.3-.6.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.6-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.6a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 8.4a3.3 3.3 0 1 0 0-6.6 3.3 3.3 0 0 0 0 6.6zm6.5-8.6a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="https://www.linkedin.com/" aria-label="Perfil de la Cátedra en LinkedIn (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.2 2.4 4.2 5.4zM5.3 7.4a2 2 0 1 1 0-4.1 2 2 0 0 1 0 4.1zM7.1 20.4H3.6V9h3.5z"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Secciones del sitio">
+        <h2>Secciones</h2>
+        <ul>
+          <li><a href="la-catedra.html">La Cátedra</a></li>
+          <li><a href="investigacion.html">Investigación</a></li>
+          <li><a href="actividades.html">Actividades</a></li>
+          <li><a href="publicaciones.html">Publicaciones</a></li>
+          <li><a href="multimedia.html">Multimedia</a></li>
+          <li><a href="premios.html">Premios</a></li>
+          <li><a href="convenios.html">Convenios</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Recursos">
+        <h2>Recursos</h2>
+        <ul>
+          <li><a href="revista.html">Revista</a></li>
+          <li><a href="repositorio.html">Repositorio abierto</a></li>
+          <li><a href="equipo.html">Dirección y equipo</a></li>
+          <li><a href="buscar.html">Buscador</a></li>
+          <li><a href="contacto.html#prensa">Prensa</a></li>
+          <li><a href="contacto.html#colaboracion">Proponer colaboración</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href="contacto.html">Formulario de contacto</a></li>
+          <li><a href="index.html#t-newsletter">Boletín de la Cátedra</a></li>
+          <li><a href="accesibilidad.html">Declaración de accesibilidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span class="copy">© <span data-year>2026</span> Cátedra de la Hispanidad · Universidad Rey Juan Carlos</span>
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="accesibilidad.html">Accesibilidad</a>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">HISPANIDAD</div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+
+</body>
+</html>

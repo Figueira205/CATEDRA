@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repositorio de libre acceso · Cátedra de la Hispanidad</title>
+<meta name="description" content="Repositorio en abierto de la Cátedra de la Hispanidad: artículos, informes, documentos de trabajo, monografías y fondo bibliográfico, con búsqueda y filtros.">
+<link rel="canonical" href="https://catedrahispanidad.urjc.es/repositorio">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='6' fill='%23A62035'/%3E%3Ctext x='24' y='32' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23F4F0E7'%3ECH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container header-bar">
+    <a class="brand" href="index.html" aria-label="Cátedra de la Hispanidad, inicio">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="4" fill="#A62035"/><path d="M7 38 22 12l7 11 12-5" fill="none" stroke="#B48A3C" stroke-width="1.3" opacity=".85"/><text x="24" y="32" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="17" fill="#F4F0E7" letter-spacing="1">CH</text></svg>
+      <span class="brand__text"><span class="brand__name">Cátedra de la Hispanidad</span><span class="brand__inst">Universidad Rey Juan Carlos</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal"><ul id="main-nav-list"></ul></nav>
+    <div class="header-utils">
+      <button type="button" class="util-btn" data-open-search aria-label="Abrir el buscador (Ctrl + K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg></button>
+      <a class="util-btn util-btn--lang" href="" aria-label="Idioma: español. La versión en inglés está en preparación" title="English version in preparation">ES·EN</a>
+      <button type="button" class="burger" id="menu-open" aria-label="Abrir el menú completo"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación completo">
+  <div class="mobile-menu__bar">
+    <span class="brand__name">Cátedra de la Hispanidad</span>
+    <button type="button" class="mobile-menu__close" id="menu-close">Cerrar <span aria-hidden="true">✕</span></button>
+  </div>
+  <nav id="mobile-nav" aria-label="Navegación completa"></nav>
+  <div class="mobile-menu__foot">
+    <form data-search-form role="search" class="searchbar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input type="search" name="q" placeholder="Buscar en la Cátedra" aria-label="Buscar en la Cátedra">
+    </form>
+    <a class="btn btn--light" href="contacto.html#colaboracion">Proponer una colaboración <span class="arr" aria-hidden="true">→</span></a>
+    <p class="mono">catedra.hispanidad@urjc.es · Madrid, España</p>
+  </div>
+</div>
+
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Buscador global de la Cátedra">
+  <div class="palette__box">
+    <div class="palette__input-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input id="palette-input" type="search" autocomplete="off" placeholder="Buscar personas, proyectos, publicaciones, actividades o recursos" aria-label="Buscar en toda la web">
+      <kbd>Esc</kbd>
+      <button type="button" id="palette-close" class="visually-hidden">Cerrar el buscador</button>
+    </div>
+    <div class="palette__results" id="palette-results"></div>
+  </div>
+</div>
+
+
+<nav class="breadcrumbs" aria-label="Miga de pan">
+  <div class="container"><ol>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="publicaciones.html">Publicaciones</a></li>
+    <li><span aria-current="page">Repositorio</span></li>
+  </ol></div>
+</nav>
+
+<main id="main">
+  <section class="page-hero page-hero--dark on-dark">
+    <div class="container">
+      <p class="kicker">Repositorio · Acceso abierto</p>
+      <h1>Conocimiento <em class="serif" style="font-style:italic;color:var(--color-gold)">abierto</em>.</h1>
+      <p class="lead">Artículos, informes, documentos de trabajo y el fondo bibliográfico de la Cátedra. Todo con su forma de citar; los documentos propios, con descarga en PDF.</p>
+    </div>
+  </section>
+
+  <div class="container" style="padding-block:clamp(48px,5vw,64px)">
+    <form class="searchbar" style="max-width:720px;margin-bottom:24px" onsubmit="return false" role="search" aria-label="Buscar en el repositorio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input type="search" id="repo-q" placeholder="Buscar por título, autor o palabra clave" aria-label="Buscar por título, autor o palabra clave">
+    </form>
+    <div class="filters" data-filter-group="tipo" data-filter-target="#repo-list" role="group" aria-label="Filtrar por tipo de documento">
+      <button type="button" class="filter-btn" data-filter="todos" aria-pressed="true">Todos</button>
+      <button type="button" class="filter-btn" data-filter="articulo" aria-pressed="false">Artículos</button>
+      <button type="button" class="filter-btn" data-filter="documento" aria-pressed="false">Documentos de trabajo</button>
+      <button type="button" class="filter-btn" data-filter="informe" aria-pressed="false">Informes</button>
+      <button type="button" class="filter-btn" data-filter="fondo" aria-pressed="false">Fondo bibliográfico</button>
+    </div>
+    <p class="mono mb-4" style="color:var(--color-ink-soft)"><span data-filter-count="tipo">7</span> registros · Los documentos propios son demostrativos y editables</p>
+
+    <div id="repo-list">
+      <article class="pub-row" data-item data-tipo="articulo">
+        <span class="pub-row__type">Artículo</span>
+        <div>
+          <h3><a href="publicacion.html">La Hispanidad como problema historiográfico</a></h3>
+          <p class="pub-row__abs">Revisión crítica de los usos del concepto en la historiografía del último siglo. Cuadernos de la Hispanidad, n.º 1.</p>
+          <p class="pub-row__meta"><span class="mono">Autoría editable</span><span class="mono">2026</span><span class="mono">PDF · pendiente de adjuntar</span><span class="mono">CC BY-NC-ND</span></p>
+        </div>
+        <div class="pub-row__actions"><a class="tag" href="publicacion.html">Leer</a><a class="tag" href="publicacion.html#citar">Citar</a></div>
+      </article>
+      <article class="pub-row" data-item data-tipo="documento">
+        <span class="pub-row__type">Doc. trabajo</span>
+        <div>
+          <h3><a href="publicacion.html">Cartografías del español contemporáneo</a></h3>
+          <p class="pub-row__abs">Documento de trabajo del proyecto «Lengua, pensamiento y creación entre orillas»: metodología y primeros mapas.</p>
+          <p class="pub-row__meta"><span class="mono">Equipo del proyecto</span><span class="mono">2026</span><span class="mono">PDF · pendiente de adjuntar</span></p>
+        </div>
+        <div class="pub-row__actions"><a class="tag" href="publicacion.html">Leer</a><a class="tag" href="publicacion.html#citar">Citar</a></div>
+      </article>
+      <article class="pub-row" data-item data-tipo="informe">
+        <span class="pub-row__type">Informe</span>
+        <div>
+          <h3><a href="publicacion.html">Instituciones y cultura jurídica hispánica</a></h3>
+          <p class="pub-row__abs">Primer entregable del proyecto «Redes jurídicas e instituciones del mundo hispánico».</p>
+          <p class="pub-row__meta"><span class="mono">Equipo del proyecto</span><span class="mono">2026</span><span class="mono">PDF · pendiente de adjuntar</span></p>
+        </div>
+        <div class="pub-row__actions"><a class="tag" href="proyecto.html">Proyecto</a><a class="tag" href="publicacion.html#citar">Citar</a></div>
+      </article>
+
+      <article class="pub-row" data-item data-tipo="fondo">
+        <span class="pub-row__type">Fondo</span>
+        <div style="display:grid;grid-template-columns:72px 1fr;gap:16px">
+          <img src="assets/img/libro1.jpg" alt="Cubierta de «Defensa de la Hispanidad», de Ramiro de Maeztu" loading="lazy" style="border:1px solid var(--color-border)">
+          <div>
+            <h3>Maeztu, Ramiro de. <em>Defensa de la Hispanidad</em> (1934)</h3>
+            <p class="pub-row__abs">Ensayo clásico y punto de partida obligado del debate sobre el concepto. Ejemplar del fondo bibliográfico de la Cátedra; consulta en sala.</p>
+            <p class="pub-row__meta"><span class="mono">Fondo bibliográfico</span><span class="mono">Sin descarga · derechos de terceros</span></p>
+          </div>
+        </div>
+        <div class="pub-row__actions"><a class="tag" href="contacto.html">Consultar</a></div>
+      </article>
+      <article class="pub-row" data-item data-tipo="fondo">
+        <span class="pub-row__type">Fondo</span>
+        <div style="display:grid;grid-template-columns:72px 1fr;gap:16px">
+          <img src="assets/img/libro5.jpg" alt="Cubierta de «El Imperio español. De Colón a Magallanes», de Hugh Thomas" loading="lazy" style="border:1px solid var(--color-border)">
+          <div>
+            <h3>Thomas, Hugh. <em>El Imperio español: de Colón a Magallanes</em></h3>
+            <p class="pub-row__abs">Primera entrega de la trilogía de Hugh Thomas sobre el imperio español. Junto a <em>El Imperio español de Carlos V</em> y <em>Conquest</em>, disponible en el fondo de la Cátedra.</p>
+            <p class="pub-row__meta"><span class="mono">Fondo bibliográfico</span><span class="mono">Sin descarga · derechos de terceros</span></p>
+          </div>
+        </div>
+        <div class="pub-row__actions"><a class="tag" href="contacto.html">Consultar</a></div>
+      </article>
+      <article class="pub-row" data-item data-tipo="fondo">
+        <span class="pub-row__type">Fondo</span>
+        <div style="display:grid;grid-template-columns:72px 1fr;gap:16px">
+          <img src="assets/img/libro2.png" alt="Cubierta de «Hispanidad. La aportación de España al Nuevo Mundo»" loading="lazy" style="border:1px solid var(--color-border)">
+          <div>
+            <h3>Pardo Gato, J. R. (coord.). <em>Hispanidad: la aportación de España al Nuevo Mundo</em></h3>
+            <p class="pub-row__abs">Volumen colectivo (Dykinson) con contribuciones de varios especialistas sobre la proyección americana de España.</p>
+            <p class="pub-row__meta"><span class="mono">Fondo bibliográfico</span><span class="mono">Sin descarga · derechos de terceros</span></p>
+          </div>
+        </div>
+        <div class="pub-row__actions"><a class="tag" href="contacto.html">Consultar</a></div>
+      </article>
+      <article class="pub-row" data-item data-tipo="fondo">
+        <span class="pub-row__type">Fondo</span>
+        <div style="display:grid;grid-template-columns:72px 1fr;gap:16px">
+          <img src="assets/img/libro3.jpg" alt="Cubierta de «El Sacro Imperio Romano Hispánico», de Alberto G. Ibáñez" loading="lazy" style="border:1px solid var(--color-border)">
+          <div>
+            <h3>Ibáñez, Alberto G. <em>El Sacro Imperio Romano Hispánico</em> (Sekotia)</h3>
+            <p class="pub-row__abs">Ensayo reciente sobre el pasado común hispánico y sus relecturas contemporáneas.</p>
+            <p class="pub-row__meta"><span class="mono">Fondo bibliográfico</span><span class="mono">Sin descarga · derechos de terceros</span></p>
+          </div>
+        </div>
+        <div class="pub-row__actions"><a class="tag" href="contacto.html">Consultar</a></div>
+      </article>
+    </div>
+
+    <div data-filter-empty hidden class="empty-state mt-7">
+      <h3>Sin documentos de ese tipo</h3>
+      <p>Prueba con otro filtro o usa el <a href="buscar.html">buscador global</a>.</p>
+    </div>
+    <div id="repo-empty" hidden class="empty-state mt-7">
+      <h3>No hemos encontrado una coincidencia exacta</h3>
+      <p>Prueba con otro término o explora <a href="investigacion.html#areas">las áreas temáticas</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Cátedra de la Hispanidad, inicio">
+          <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="4" fill="#A62035"/><path d="M7 38 22 12l7 11 12-5" fill="none" stroke="#B48A3C" stroke-width="1.3" opacity=".85"/><text x="24" y="32" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="17" fill="#F4F0E7" letter-spacing="1">CH</text></svg>
+          <span class="brand__text"><span class="brand__name" style="color:#F4F0E7">Cátedra de la Hispanidad</span></span>
+        </a>
+        <p>Espacio universitario de investigación, enseñanza y divulgación sobre las realidades históricas, culturales, jurídicas y sociales del mundo hispánico.</p>
+        <ul class="footer-contact">
+          <li>Universidad Rey Juan Carlos · Madrid, España</li>
+          <li><a href="mailto:catedra.hispanidad@urjc.es" style="color:inherit">catedra.hispanidad@urjc.es</a></li>
+        </ul>
+        <div class="footer-inst">
+          <img src="assets/img/Logo_universidad.png" alt="Universidad Rey Juan Carlos" loading="lazy">
+          <span>Institución responsable de la Cátedra</span>
+        </div>
+        <div class="social">
+          <a href="https://x.com/" aria-label="Perfil de la Cátedra en X (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.3 22h-6.3l-4.9-6.4L6.5 22H3.4l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L7.6 3.8H5.7z"/></svg></a>
+          <a href="https://www.youtube.com/" aria-label="Canal de la Cátedra en YouTube (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C16.6 3.6 12 3.6 12 3.6s-4.6 0-7.7.3c-.5.1-1.5.1-2.4 1-.7.7-.9 2.3-.9 2.3S.8 9.1.8 11v1.9c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.9.2 7.6.3 7.6.3s4.6 0 7.7-.4c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8V11c0-1.9-.2-3.8-.2-3.8zM9.7 14.9V8.5l6.2 3.2z"/></svg></a>
+          <a href="https://www.instagram.com/" aria-label="Perfil de la Cátedra en Instagram (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9s.7.8.9 1.4c.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4s-.8.7-1.4.9c-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9s-.7-.8-.9-1.4c-.2-.4-.4-1-.4-2.2-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4s.8-.7 1.4-.9c.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1m0 2.1c-3.1 0-3.5 0-4.7.1-1.1.1-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.6-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.6.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.3.3-.6.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.6-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.6a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 8.4a3.3 3.3 0 1 0 0-6.6 3.3 3.3 0 0 0 0 6.6zm6.5-8.6a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="https://www.linkedin.com/" aria-label="Perfil de la Cátedra en LinkedIn (se abre en una pestaña nueva)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.4h-3.5v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.2 2.4 4.2 5.4zM5.3 7.4a2 2 0 1 1 0-4.1 2 2 0 0 1 0 4.1zM7.1 20.4H3.6V9h3.5z"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Secciones del sitio">
+        <h2>Secciones</h2>
+        <ul>
+          <li><a href="la-catedra.html">La Cátedra</a></li>
+          <li><a href="investigacion.html">Investigación</a></li>
+          <li><a href="actividades.html">Actividades</a></li>
+          <li><a href="publicaciones.html">Publicaciones</a></li>
+          <li><a href="multimedia.html">Multimedia</a></li>
+          <li><a href="premios.html">Premios</a></li>
+          <li><a href="convenios.html">Convenios</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Recursos">
+        <h2>Recursos</h2>
+        <ul>
+          <li><a href="revista.html">Revista</a></li>
+          <li><a href="repositorio.html">Repositorio abierto</a></li>
+          <li><a href="equipo.html">Dirección y equipo</a></li>
+          <li><a href="buscar.html">Buscador</a></li>
+          <li><a href="contacto.html#prensa">Prensa</a></li>
+          <li><a href="contacto.html#colaboracion">Proponer colaboración</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href="contacto.html">Formulario de contacto</a></li>
+          <li><a href="index.html#t-newsletter">Boletín de la Cátedra</a></li>
+          <li><a href="accesibilidad.html">Declaración de accesibilidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span class="copy">© <span data-year>2026</span> Cátedra de la Hispanidad · Universidad Rey Juan Carlos</span>
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="accesibilidad.html">Accesibilidad</a>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">HISPANIDAD</div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+
+<script>
+/* Búsqueda de texto dentro del repositorio (mejora progresiva) */
+document.addEventListener("DOMContentLoaded", function () {
+  var q = document.getElementById("repo-q");
+  if (!q) return;
+  var rows = Array.prototype.slice.call(document.querySelectorAll("#repo-list [data-item]"));
+  var empty = document.getElementById("repo-empty");
+  var norm = function (s) { return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); };
+  q.addEventListener("input", function () {
+    var v = norm(q.value.trim());
+    var visible = 0;
+    rows.forEach(function (r) {
+      var show = !v || norm(r.textContent).indexOf(v) >= 0;
+      r.hidden = !show;
+      if (show) visible++;
+    });
+    empty.hidden = visible > 0;
+  });
+});
+</script>
+</body>
+</html>
