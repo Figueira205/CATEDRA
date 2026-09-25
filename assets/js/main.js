@@ -25,10 +25,13 @@
     if (i < 0) return esc(text);
     return esc(text.slice(0, i)) + "<mark>" + esc(text.slice(i, i + q.length)) + "</mark>" + esc(text.slice(i + q.length));
   }
+  /* La plataforma (Django) define CH_SEARCH_URL y CH_INDEX_URL; la web estática usa los valores por defecto. */
+  var SEARCH_URL = window.CH_SEARCH_URL || "buscar.html";
   var TYPE_LABELS = {
     persona: "Personas", proyecto: "Investigación", area: "Áreas", actividad: "Actividades",
     revista: "Revista", publicacion: "Publicaciones", multimedia: "Multimedia",
-    premio: "Premios", convenio: "Convenios", pagina: "Páginas"
+    premio: "Premios", convenio: "Convenios", pagina: "Páginas",
+    clase: "Formación", novedad: "Novedades", galeria: "Galería"
   };
 
   /* ---------- Cabecera: estado scroll ---------- */
@@ -67,9 +70,10 @@
         '<div class="container"><div class="mega__inner">' +
         '<div class="mega__label">' + esc(sec.label) + "</div>" +
         '<div class="mega__cols">' + links + "</div>" +
-        '<div class="mega__feat"><a href="' + sec.feature.url + '">' +
-        '<img src="' + sec.feature.img + '" alt="" width="640" height="426" loading="lazy">' +
-        '<span class="mono">' + esc(sec.feature.kicker) + "</span><p>" + esc(sec.feature.title) + "</p></a></div>" +
+        (sec.feature ?
+          '<div class="mega__feat"><a href="' + sec.feature.url + '">' +
+          (sec.feature.img ? '<img src="' + sec.feature.img + '" alt="" width="640" height="426" loading="lazy">' : "") +
+          '<span class="mono">' + esc(sec.feature.kicker) + "</span><p>" + esc(sec.feature.title) + "</p></a></div>" : "") +
         "</div></div>";
       header.appendChild(mega);
 
@@ -206,7 +210,22 @@
     paletteResults.innerHTML = out;
   }
 
+  /* Índice servido por la plataforma: se descarga una vez, al abrir el buscador. */
+  var indexLoading = false;
+  function loadRemoteIndex() {
+    if (!window.CH_INDEX_URL || window.CH_INDEX || indexLoading) return;
+    indexLoading = true;
+    fetch(window.CH_INDEX_URL, { credentials: "same-origin" })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        window.CH_INDEX = data;
+        if (palette.classList.contains("is-open")) renderPalette(paletteInput.value.trim());
+      })
+      .catch(function () { indexLoading = false; });
+  }
+
   function openPalette() {
+    loadRemoteIndex();
     closeAllMegas();
     paletteLast = d.activeElement;
     palette.classList.add("is-open");
@@ -231,7 +250,7 @@
       if (e.key === "Enter" && paletteInput.value.trim()) {
         var first = $(".palette__item", paletteResults);
         if (first && e.target === paletteInput) { window.location.href = first.href; }
-        else if (!first) { window.location.href = "buscar.html?q=" + encodeURIComponent(paletteInput.value.trim()); }
+        else if (!first) { window.location.href = SEARCH_URL + "?q=" + encodeURIComponent(paletteInput.value.trim()); }
       }
     });
     paletteInput.addEventListener("input", function () { renderPalette(paletteInput.value.trim()); });
@@ -248,7 +267,7 @@
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var q = f.querySelector("input[name='q']").value.trim();
-      window.location.href = q ? "buscar.html?q=" + encodeURIComponent(q) : "buscar.html";
+      window.location.href = q ? SEARCH_URL + "?q=" + encodeURIComponent(q) : SEARCH_URL;
     });
   });
 
