@@ -1,0 +1,5 @@
+{% load wagtailimages_tags %}{% image e.imagen max-1600x1600 as grande %}
+<button type="button" class="mosaic__item {% if ancho %}m-wide{% else %}m-1x1{% endif %}" data-lightbox="{{ grande.url }}" data-caption="{{ e.titulo }}{% if e.descripcion %} — {{ e.descripcion }}{% endif %}" data-meta="{% if e.tipo == 'documento' %}Documento gráfico{% else %}Fotografía{% endif %}">
+  {% image e.imagen fill-800x600 loading="lazy" %}
+  <span class="mosaic__cap"><span class="m">{% if e.tipo == 'documento' %}Documento gráfico{% else %}Fotografía{% endif %}</span><span class="t">{{ e.titulo }}</span></span>
+</button>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" %}
+<section class="section section--tight" id="proximas" aria-labelledby="t-proximas">
+  <div class="container">
+    <div class="sec-head"><h2 class="sec-head__title" id="t-proximas">Próximas actividades</h2></div>
+    {% if proximas %}
+      <div role="list">{% for a in proximas %}{% include "sitio/includes/fila_actividad.html" with actividad=a %}{% endfor %}</div>
+    {% else %}
+      <div class="empty-state"><p>Pronto anunciaremos nuevas actividades. Suscríbete al boletín para no perderte ninguna.</p></div>
+    {% endif %}
+  </div>
+</section>
+{% if celebradas.object_list %}
+<section class="section section--muted section--tight" id="celebradas" aria-labelledby="t-celebradas">
+  <div class="container">
+    <div class="sec-head"><h2 class="sec-head__title" id="t-celebradas">Actividades celebradas</h2></div>
+    <div role="list">{% for a in celebradas %}{% include "sitio/includes/fila_actividad.html" with actividad=a %}{% endfor %}</div>
+    {% include "includes/paginacion.html" with pagina=celebradas %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

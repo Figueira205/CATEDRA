@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" %}
+{% if page.cuerpo %}
+<section class="section section--tight">
+  <div class="container"><div class="prose cuerpo">{% for b in page.cuerpo %}{% include_block b %}{% endfor %}</div></div>
+</section>
+{% endif %}
+{% with hijas=page.get_children.live.in_menu %}{% if hijas %}
+<section class="section section--muted section--tight">
+  <div class="container"><div class="grid">
+    {% for h in hijas %}
+    <div class="col-4 reveal"><a class="card" href="{% pageurl h %}"><div class="card__body">
+      <h2 class="card__title">{{ h.title }}</h2>
+      {% if h.search_description %}<p class="card__desc">{{ h.search_description }}</p>{% endif %}
+      <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
+    </div></a></div>
+    {% endfor %}
+  </div></div>
+</section>
+{% endif %}{% endwith %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<div class="container" style="padding-block:clamp(48px,5vw,64px)">
+  <div class="doc-layout">
+    <aside>
+      <div class="datasheet">
+        <dl>
+          <div class="row"><dt>Tipo</dt><dd>{{ page.get_tipo_display }}</dd></div>
+          <div class="row"><dt>Fecha</dt><dd>{{ page.fecha_inicio|date:"l j \d\e F \d\e Y" }}</dd></div>
+          <div class="row"><dt>Hora</dt><dd>{{ page.fecha_inicio|time:"H:i" }}{% if page.fecha_fin %}–{{ page.fecha_fin|time:"H:i" }}{% endif %}</dd></div>
+          <div class="row"><dt>Modalidad</dt><dd>{{ page.get_modalidad_display }}</dd></div>
+          {% if page.lugar %}<div class="row"><dt>Lugar</dt><dd>{{ page.lugar }}</dd></div>{% endif %}
+          <div class="row"><dt>Acceso</dt><dd>Libre</dd></div>
+        </dl>
+      </div>
+      <div class="mt-6 stack-4">
+        {% if page.enlace_inscripcion %}<a class="btn btn--primary btn--bloque" href="{{ page.enlace_inscripcion }}" rel="noopener">Inscribirme</a>{% endif %}
+        <button type="button" class="btn btn--ghost btn--bloque" data-ics="{{ ics_json }}">Añadir al calendario (.ics)</button>
+      </div>
+    </aside>
+    <article>
+      <p class="kicker">{{ page.get_tipo_display }}</p>
+      <h1 class="titulo-doc">{{ page.title }}</h1>
+      {% if page.resumen %}<p class="lead">{{ page.resumen }}</p>{% endif %}
+      {% if page.imagen %}<figure class="img-frame mt-6">{% image page.imagen width-1200 %}</figure>{% endif %}
+      <div class="prose cuerpo mt-6">{% for b in page.cuerpo %}{% include_block b %}{% endfor %}</div>
+    </article>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{# Qué ve quien todavía NO tiene acceso a un producto: crear cuenta o comprar. #}
+{% if producto.acceso == "registro" %}
+  <p class="acceso-nota">Contenido gratuito para usuarios registrados.</p>
+  <a class="btn btn--primary btn--bloque" href="{% url 'account_signup' %}?next={{ request.path|urlencode }}">Crear cuenta gratuita</a>
+  <a class="btn btn--ghost btn--bloque" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Ya tengo cuenta</a>
+{% elif producto.acceso == "pago" %}
+  <p class="precio">{{ producto.precio|floatformat:2 }} € <span class="mono">IVA incluido</span></p>
+  {% if user.is_authenticated %}
+    <form method="post" action="{% url 'compras:comprar' producto.pk %}">{% csrf_token %}
+      <button type="submit" class="btn btn--primary btn--bloque">Adquirir <span class="arr" aria-hidden="true">→</span></button>
+    </form>
+    <p class="acceso-nota">Pago seguro con Stripe. Quedará disponible en <a href="{% url 'mi_cuenta' %}">Mi cuenta</a>.</p>
+  {% else %}
+    <a class="btn btn--primary btn--bloque" href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Acceder para adquirir</a>
+    <p class="acceso-nota">¿Aún no tienes cuenta? <a href="{% url 'account_signup' %}?next={{ request.path|urlencode }}">Créala gratis</a>: la necesitas para guardar tus compras.</p>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Boletín{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <p class="kicker">Boletín</p>
+  {% if baja %}
+    {% if hecho %}
+      <h1>Baja completada</h1><p class="lead">Hemos borrado tu correo de la lista. No recibirás más envíos.</p>
+    {% else %}
+      <h1>Darse de baja</h1><p class="lead">¿Quieres dejar de recibir el boletín en {{ suscriptor.email }}?</p>
+      <form method="post" class="mt-6">{% csrf_token %}<button type="submit" class="btn btn--primary">Confirmar la baja</button></form>
+    {% endif %}
+  {% else %}
+    <h1>Suscripción confirmada</h1><p class="lead">Gracias. Recibirás el cuaderno de la Cátedra en {{ suscriptor.email }}.</p>
+  {% endif %}
+  <p class="mt-6"><a class="btn btn--ghost" href="/">Volver al inicio</a></p>
+</div></section>
+{% endblock %}

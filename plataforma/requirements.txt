@@ -1,0 +1,11 @@
+# Dependencias de producción. Versiones acotadas: actualizar a propósito, no por accidente.
+Django>=5.2,<5.3                 # LTS, soporte hasta abril de 2028
+wagtail>=8.0,<8.1                # CMS: panel para profesores y editores
+django-allauth[mfa]>=65.19,<66   # Registro, login, verificación de correo, 2FA
+argon2-cffi>=23,<26              # Hash de contraseñas Argon2
+stripe>=15.6,<16                 # Pagos (Stripe Checkout + webhooks)
+django-environ>=0.12,<0.13       # Configuración por variables de entorno (.env)
+django-csp>=4.0,<5               # Cabecera Content-Security-Policy
+psycopg[binary]>=3.2,<4          # PostgreSQL
+gunicorn>=23,<24                 # Servidor de aplicación en producción
+whitenoise>=6.9,<7               # Archivos estáticos

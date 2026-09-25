@@ -1,0 +1,77 @@
+/* ============================================================
+   Plataforma: piezas que no existían en la web estática
+   (cuentas, compras, vídeo, avisos). Usa los tokens de styles.css.
+   ============================================================ */
+
+/* Avisos (mensajes de Django) */
+.avisos{padding-top:var(--s-5)}
+.aviso{margin:0 0 var(--s-3);padding:var(--s-4) var(--s-5);border-left:3px solid var(--color-atlantic);background:var(--color-white);font-size:var(--text-small)}
+.aviso--success{border-color:var(--color-success)}
+.aviso--error{border-color:var(--color-error)}
+.aviso--warning{border-color:var(--color-gold)}
+
+/* Cabecera: botón Acceder / Mi cuenta */
+.cuenta-btn{white-space:nowrap;padding-inline:var(--s-4);width:auto}
+
+/* Botones de ancho completo (columnas laterales) */
+.btn--bloque{width:100%;justify-content:center}
+
+/* Caja de acceso y compra */
+.caja-acceso form{margin:0}
+.precio{font-size:var(--text-h3);font-weight:700;letter-spacing:-.02em;margin:0}
+.precio .mono{font-size:var(--text-meta);font-weight:400;color:var(--color-ink-soft);letter-spacing:.04em}
+.acceso-nota{font-size:var(--text-small);color:var(--color-ink-soft);margin:0}
+.tag--pago{background:var(--color-carmine);color:var(--color-white);border-color:var(--color-carmine)}
+.tag--libre{color:var(--color-success);border-color:currentColor}
+
+/* Títulos de fichas y lectura */
+.titulo-doc{font-size:var(--text-h2);letter-spacing:-.02em;line-height:1.02;margin:16px 0}
+.lectura{max-width:860px}
+.cita-destacada{font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.4;border-left:3px solid var(--color-carmine);padding-left:24px}
+.portada-libro img{width:100%;height:auto;box-shadow:0 12px 32px rgba(17,17,17,.14)}
+.card__media.portada-libro{aspect-ratio:5/7;overflow:hidden}
+.card__media.portada-libro img{width:100%;height:100%;object-fit:cover}
+
+/* Vídeo incrustado 16:9 */
+.video-embed{position:relative;aspect-ratio:16/9;background:#000}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* Contenido libre (StreamField) */
+.cuerpo > * + *{margin-top:var(--s-5)}
+.bloque-imagen figcaption{font-size:var(--text-meta);color:var(--color-ink-soft);margin-top:var(--s-2)}
+.error-msg.visible{display:block}
+
+/* Mi cuenta */
+.lista-cuenta{border-top:var(--line)}
+.fila-cuenta{display:flex;align-items:center;justify-content:space-between;gap:var(--s-5);padding:var(--s-5) 0;border-bottom:var(--line)}
+.fila-cuenta h3{font-size:1.2rem;margin:4px 0}
+.fila-cuenta h3 a{color:inherit;text-decoration:none}
+.fila-cuenta p{margin:0;color:var(--color-ink-soft)}
+.enlaces-cuenta{list-style:none;padding:0}
+.tabla-simple{width:100%;border-collapse:collapse;font-size:var(--text-small)}
+.tabla-simple th,.tabla-simple td{text-align:left;padding:10px 8px;border-bottom:var(--line)}
+.tabla-simple th{font-family:var(--font-mono);font-size:var(--text-meta);text-transform:uppercase;letter-spacing:.06em;font-weight:500}
+@media (max-width:640px){
+  .fila-cuenta{flex-direction:column;align-items:flex-start}
+  .tabla-simple{display:block;overflow-x:auto}
+}
+
+/* Pantallas de acceso, registro y 2FA (allauth) */
+.pagina-cuenta main{max-width:560px;margin-inline:auto;padding:clamp(48px,8vw,96px) var(--page-pad)}
+.pagina-cuenta main h1{font-size:var(--text-h3);letter-spacing:-.02em;margin:0 0 var(--s-5)}
+.pagina-cuenta main h2{font-size:1.3rem;margin:var(--s-6) 0 var(--s-3)}
+.pagina-cuenta main p{color:var(--color-ink-soft)}
+.pagina-cuenta main form{margin-top:var(--s-5)}
+.pagina-cuenta main .btn{margin:var(--s-2) var(--s-2) 0 0}
+.pagina-cuenta main ul.errorlist{list-style:none;padding:0;margin:0 0 var(--s-3);color:var(--color-error);font-size:var(--text-small)}
+.pagina-cuenta .form-check{display:flex;gap:var(--s-2);align-items:center;margin-bottom:var(--s-5)}
+
+/* Boletín en el pie */
+.boletin-form--compacto .form-field{margin-bottom:var(--s-3)}
+.boletin-form--compacto .form-field label,.boletin-form--compacto .form-check label{color:var(--color-paper-muted);font-size:var(--text-small)}
+.boletin-form--compacto .form-check a{color:inherit}
+.boletin-form--compacto .form-check{display:flex;gap:var(--s-2);align-items:flex-start;margin-bottom:var(--s-4)}
+
+/* Portada: numeración correlativa de las secciones visibles (las vacías no se muestran) */
+.portada main{counter-reset:seccion}
+.portada .sec-head__num::before{counter-increment:seccion;content:counter(seccion,decimal-leading-zero)}

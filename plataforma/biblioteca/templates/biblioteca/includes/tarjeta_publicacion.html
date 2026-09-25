@@ -1,0 +1,9 @@
+{% load wagtailcore_tags wagtailimages_tags %}<a class="card" href="{% pageurl publicacion %}">
+  {% if publicacion.portada %}<div class="card__media portada-libro">{% image publicacion.portada fill-400x560 loading="lazy" %}</div>{% endif %}
+  <div class="card__body">
+    <p class="card__meta"><span class="mono">{{ publicacion.get_tipo_display|upper }}</span>{% include "compras/includes/etiqueta_acceso.html" with producto=publicacion %}</p>
+    <h3 class="card__title" style="font-size:1.1rem">{{ publicacion.title }}</h3>
+    {% if publicacion.autoria %}<p class="card__desc">{{ publicacion.autoria }}</p>{% endif %}
+    <div class="card__foot"><span class="mono">{% if publicacion.fecha_publicacion %}{{ publicacion.fecha_publicacion|date:"Y" }}{% endif %}</span><span class="arr-btn" aria-hidden="true">→</span></div>
+  </div>
+</a>

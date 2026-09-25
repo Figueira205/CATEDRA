@@ -1,0 +1,9 @@
+<section class="panel summary nice-padding" aria-labelledby="resumen-catedra-titulo">
+  <h2 id="resumen-catedra-titulo" class="w-h3">Cátedra · últimos 30 días</h2>
+  <ul class="w-flex w-flex-wrap w-gap-8 w-p-0" style="list-style:none">
+    <li><strong style="font-size:1.6rem">{{ ventas_30 }}</strong><br>ventas · {{ ingresos_30|floatformat:2 }} €</li>
+    <li><strong style="font-size:1.6rem">{{ usuarios_30 }}</strong><br>cuentas nuevas (de {{ usuarios }})</li>
+    <li><strong style="font-size:1.6rem">{{ ventas_total }}</strong><br>ventas en total</li>
+    <li><strong style="font-size:1.6rem">{{ suscriptores }}</strong><br>suscriptores al boletín</li>
+  </ul>
+</section>

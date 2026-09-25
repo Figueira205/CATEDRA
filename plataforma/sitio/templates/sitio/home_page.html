@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block title %}Cátedra de la Hispanidad · Universidad Rey Juan Carlos{% endblock %}
+{% block title_sufijo %}{% endblock %}
+{% block body_class %}portada{% endblock %}
+
+{% block content %}
+{# 01 · Cabecera con contenido en foco #}
+<section class="hero" aria-labelledby="hero-title">
+  <canvas class="hero__atlas" id="hero-atlas" aria-hidden="true"></canvas>
+  <div class="container">
+    <div class="grid hero__grid">
+      <div class="col-7">
+        {% if page.hero_antetitulo %}<p class="kicker">{{ page.hero_antetitulo }}</p>{% endif %}
+        <h1 class="hero__title" id="hero-title">{{ page.hero_titulo }}{% if page.hero_titulo_destacado %} <em>{{ page.hero_titulo_destacado }}</em>{% endif %}.</h1>
+        {% if page.hero_entradilla %}<p class="hero__lead">{{ page.hero_entradilla }}</p>{% endif %}
+        <div class="hero__ctas">
+          {% if proximas_actividades %}<a class="btn btn--primary" href="{% pageurl proximas_actividades.0.get_parent %}">Consultar la agenda <span class="arr" aria-hidden="true">→</span></a>{% endif %}
+          {% for s in menu_principal|slice:":1" %}<a class="btn btn--ghost" href="{{ s.url }}">Conocer {{ s.label }}</a>{% endfor %}
+        </div>
+      </div>
+      {% if page.destacado and page.destacado.live %}{% with d=page.destacado.specific %}
+      <div class="col-5">
+        <a class="spotlight reveal" href="{% pageurl d %}">
+          {% with img=d.imagen|default:d.portada %}{% if img %}
+          <div class="spotlight__media">
+            <span class="spotlight__badge">EN FOCO</span>
+            {% image img fill-840x472 fetchpriority="high" %}
+          </div>
+          {% endif %}{% endwith %}
+          <div class="spotlight__body">
+            <p class="spotlight__meta"><span class="mono">{{ d.get_verbose_name|upper }}</span>
+              {% if d.fecha_inicio %}<span class="mono">{{ d.fecha_inicio|date:"j M Y"|upper }}</span>{% elif d.fecha %}<span class="mono">{{ d.fecha|date:"j M Y"|upper }}</span>{% endif %}</p>
+            <h2 class="spotlight__title">{{ d.title }}</h2>
+            {% if d.resumen %}<p class="spotlight__desc">{{ d.resumen }}</p>{% endif %}
+            <span class="spotlight__cta">Ver más <span class="arr" aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      </div>
+      {% endwith %}{% endif %}
+    </div>
+  </div>
+</section>
+
+{# 02 · Presentación #}
+{% if page.presentacion_titulo or page.presentacion_texto %}
+<section class="section" aria-labelledby="t-presentacion">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-presentacion">{{ page.presentacion_titulo }}</h2>
+    </div>
+    <div class="grid">
+      <div class="col-6 reveal"><div class="prose">{{ page.presentacion_texto|richtext }}</div></div>
+      <div class="col-6 reveal">
+        {% if page.presentacion_imagen %}
+        <figure class="img-frame">{% image page.presentacion_imagen fill-960x640 loading="lazy" %}</figure>
+        {% endif %}
+        {% if page.presentacion_cita %}
+        <blockquote class="prose mt-6" style="max-width:none"><p class="cita-destacada">«{{ page.presentacion_cita }}»</p></blockquote>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# 03 · Agenda #}
+{% if proximas_actividades %}
+<section class="section section--muted" aria-labelledby="t-agenda">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-agenda">Próximamente</h2>
+      <span class="sec-head__aside"><a class="link-arrow" href="{% pageurl proximas_actividades.0.get_parent %}">Consultar la agenda completa <span class="arr" aria-hidden="true">→</span></a></span>
+    </div>
+    <div role="list">
+      {% for a in proximas_actividades %}{% include "sitio/includes/fila_actividad.html" with actividad=a %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# 04 · Biblioteca #}
+{% if ultimas_publicaciones %}
+<section class="section" aria-labelledby="t-biblioteca">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-biblioteca">Desde la Biblioteca</h2>
+      <span class="sec-head__aside"><a class="link-arrow" href="{% pageurl ultimas_publicaciones.0.get_parent %}">Ir a la Biblioteca <span class="arr" aria-hidden="true">→</span></a></span>
+    </div>
+    <div class="grid">
+      {% for p in ultimas_publicaciones %}<div class="col-3 reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# 05 · Galería #}
+{% if galeria_elementos %}
+<section class="section section--muted" aria-labelledby="t-galeria">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-galeria">La Cátedra en imágenes</h2>
+      <span class="sec-head__aside"><a class="link-arrow" href="{% pageurl galeria %}">Ir a la Galería <span class="arr" aria-hidden="true">→</span></a></span>
+    </div>
+    <div class="mosaic">
+      {% for bloque in galeria_elementos %}{% include "sitio/includes/elemento_galeria.html" with e=bloque.value ancho=forloop.first %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# 06 · Boletín #}
+<section class="section section--carmine on-dark" aria-labelledby="t-newsletter" id="boletin-portada">
+  <div class="container">
+    <div class="grid">
+      <div class="col-6">
+        <p class="kicker">Boletín</p>
+        <h2 class="sec-head__title" id="t-newsletter" style="margin:16px 0">Recibir el cuaderno de la Cátedra</h2>
+        <p class="serif" style="opacity:.9;max-width:44ch">Actividades, publicaciones y convocatorias, reunidas en un envío editorial. Sin ruido y con baja frecuencia.</p>
+      </div>
+      <div class="col-6">{% include "includes/boletin_form.html" %}</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

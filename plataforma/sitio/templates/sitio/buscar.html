@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block title %}Buscar{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <p class="kicker">Buscador</p>
+  <h1>Buscar en la Cátedra</h1>
+  <form method="get" action="{% url 'buscar' %}" role="search" class="searchbar mt-6">
+    <input type="search" name="q" value="{{ q }}" placeholder="Publicaciones, clases, actividades…" aria-label="Término de búsqueda" autofocus>
+    <button type="submit" class="btn btn--ink">Buscar</button>
+  </form>
+</div></section>
+<section class="section section--tight"><div class="container">
+  {% if q %}
+    <p class="mono">{{ resultados.paginator.count }} resultado{{ resultados.paginator.count|pluralize }} para «{{ q }}»</p>
+    {% for r in resultados %}{% with p=r.specific %}
+      <article class="search-result"><span class="type">{{ p.get_verbose_name }}</span>
+        <h3><a href="{% pageurl p %}">{{ p.title }}</a></h3>
+        {% if p.resumen %}<p>{{ p.resumen }}</p>{% elif p.search_description %}<p>{{ p.search_description }}</p>{% endif %}
+      </article>
+    {% endwith %}{% empty %}
+      <div class="empty-state"><h3>No hemos encontrado resultados</h3><p>Prueba con otro término o explora las secciones del menú.</p></div>
+    {% endfor %}
+    {% include "includes/paginacion.html" with pagina=resultados %}
+  {% endif %}
+</div></section>
+{% endblock %}

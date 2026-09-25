@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<article class="container lectura" style="padding-block:clamp(48px,5vw,64px)">
+  <p class="kicker">Novedades · {{ page.fecha|date:"j \d\e F \d\e Y" }}</p>
+  <h1 class="titulo-doc">{{ page.title }}</h1>
+  {% if page.autoria %}<p class="mono" style="color:var(--color-ink-soft)">{{ page.autoria }}</p>{% endif %}
+  {% if page.resumen %}<p class="lead mt-6">{{ page.resumen }}</p>{% endif %}
+  {% if page.imagen %}<figure class="img-frame mt-6">{% image page.imagen width-1200 %}</figure>{% endif %}
+  <div class="prose cuerpo mt-6">{% for b in page.cuerpo %}{% include_block b %}{% endfor %}</div>
+</article>
+{% endblock %}

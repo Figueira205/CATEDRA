@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" with entradilla_rica=page.entradilla %}
+{% if proximos_directos %}
+<section class="section section--tight" aria-labelledby="t-directos">
+  <div class="container">
+    <div class="sec-head"><h2 class="sec-head__title" id="t-directos">Próximas clases en directo</h2></div>
+    <div class="grid">{% for c in proximos_directos %}<div class="col-4 reveal">{% include "formacion/includes/tarjeta_clase.html" with clase=c %}</div>{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+<section class="section section--muted section--tight" aria-labelledby="t-clases">
+  <div class="container">
+    <div class="sec-head"><h2 class="sec-head__title" id="t-clases">Clases</h2></div>
+    {% if clases %}
+    <div class="grid">{% for c in clases %}<div class="col-4 reveal">{% include "formacion/includes/tarjeta_clase.html" with clase=c %}</div>{% endfor %}</div>
+    {% else %}<div class="empty-state"><p>Pronto publicaremos las primeras clases.</p></div>{% endif %}
+  </div>
+</section>
+{% endblock %}

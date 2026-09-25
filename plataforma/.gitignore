@@ -1,0 +1,10 @@
+# Nunca versionar: secretos, datos y archivos generados
+.env
+.venv/
+__pycache__/
+*.pyc
+db.sqlite3
+media/
+privado/
+staticfiles/
+copias/

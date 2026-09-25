@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<div class="container" style="padding-block:clamp(48px,5vw,64px)">
+  <div class="doc-layout">
+    <aside>
+      <div class="datasheet"><dl>
+        <div class="row"><dt>Modalidad</dt><dd>{{ page.get_modalidad_display }}</dd></div>
+        {% if page.fecha %}<div class="row"><dt>Fecha</dt><dd>{{ page.fecha|date:"j \d\e F \d\e Y · H:i" }}</dd></div>{% endif %}
+        {% if page.duracion_minutos %}<div class="row"><dt>Duración</dt><dd>{{ page.duracion_minutos }} minutos</dd></div>{% endif %}
+        {% if page.docente %}<div class="row"><dt>Docente</dt><dd>{{ page.docente }}</dd></div>{% endif %}
+      </dl></div>
+      <div class="caja-acceso mt-6 stack-4">
+        {% if tiene_acceso %}
+          {% if page.modalidad == "directo" and page.enlace_directo %}
+            {% if page.directo_abierto %}
+              <a class="btn btn--primary btn--bloque" href="{% url 'formacion:entrar_directo' page.pk %}" rel="noopener">Entrar al directo</a>
+            {% else %}
+              <p class="acceso-nota">El acceso al directo se abre 30 minutos antes del inicio.</p>
+            {% endif %}
+          {% endif %}
+          {% if page.es_de_pago %}<p class="acceso-nota">Tienes acceso a esta clase.</p>{% endif %}
+        {% else %}
+          {% include "compras/includes/acceso.html" with producto=page %}
+        {% endif %}
+      </div>
+    </aside>
+    <article>
+      <p class="kicker">Formación · {% include "compras/includes/etiqueta_acceso.html" with producto=page %}</p>
+      <h1 class="titulo-doc">{{ page.title }}</h1>
+      {% if page.resumen %}<p class="lead">{{ page.resumen }}</p>{% endif %}
+      {% if tiene_acceso and page.video_incrustado %}
+        <div class="video-embed mt-6"><iframe src="{{ page.video_incrustado }}" title="{{ page.title }}" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      {% elif page.imagen %}
+        <figure class="img-frame mt-6">{% image page.imagen width-1200 %}</figure>
+      {% endif %}
+      <div class="prose mt-6">{{ page.descripcion|richtext }}</div>
+    </article>
+  </div>
+</div>
+{% endblock %}

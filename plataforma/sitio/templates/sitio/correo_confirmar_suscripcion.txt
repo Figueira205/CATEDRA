@@ -1,0 +1,9 @@
+Hola{% if suscriptor.nombre %}, {{ suscriptor.nombre }}{% endif %}:
+
+Para confirmar tu suscripción al boletín de la Cátedra de la Hispanidad, abre este enlace:
+
+{{ enlace }}
+
+Si no has pedido la suscripción, ignora este mensaje: no te enviaremos nada más.
+
+Cátedra de la Hispanidad

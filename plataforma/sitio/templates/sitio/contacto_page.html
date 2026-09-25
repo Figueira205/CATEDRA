@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" with entradilla_rica=page.entradilla %}
+<section class="section section--tight">
+  <div class="container"><div class="grid">
+    <div class="col-7">
+      <form method="post" action="{% pageurl page %}" class="formulario">
+        {% csrf_token %}
+        {% for campo in form %}
+          {% if campo.is_hidden %}{{ campo }}{% else %}
+          <div class="{% if campo.widget_type == 'checkbox' %}form-check{% else %}form-field{% endif %}{% if campo.errors %} has-error{% endif %}">
+            {% if campo.widget_type == 'checkbox' %}{{ campo }} {{ campo.label_tag }}{% else %}{{ campo.label_tag }} {{ campo }}{% endif %}
+            {% if campo.help_text %}<p class="form-note">{{ campo.help_text }}</p>{% endif %}
+            {% for e in campo.errors %}<p class="error-msg visible">{{ e }}</p>{% endfor %}
+          </div>
+          {% endif %}
+        {% endfor %}
+        <p class="form-note">Usamos tus datos solo para responder a tu mensaje. <a href="/privacidad/">Política de privacidad</a>.</p>
+        <button type="submit" class="btn btn--primary">Enviar <span class="arr" aria-hidden="true">→</span></button>
+      </form>
+    </div>
+    <div class="col-5">
+      {% with conf=settings.sitio.ConfiguracionSitio %}
+      <div class="datasheet"><dl>
+        {% if conf.correo_contacto %}<div class="row"><dt>Correo</dt><dd><a href="mailto:{{ conf.correo_contacto }}">{{ conf.correo_contacto }}</a></dd></div>{% endif %}
+        <div class="row"><dt>Dirección</dt><dd>{{ conf.direccion }}</dd></div>
+      </dl></div>
+      {% endwith %}
+    </div>
+  </div></div>
+</section>
+{% endblock %}

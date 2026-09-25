@@ -1,0 +1,5 @@
+{% load wagtailcore_tags %}<a role="listitem" class="event-row" href="{% pageurl actividad %}">
+  <span class="event-row__date"><span class="event-row__day">{{ actividad.fecha_inicio|date:"d" }}</span><span class="event-row__month">{{ actividad.fecha_inicio|date:"M"|upper }}</span></span>
+  <span><span class="mono">{{ actividad.get_tipo_display }} · {{ actividad.get_modalidad_display }}</span><span class="event-row__title" style="display:block">{{ actividad.title }}</span><span class="event-row__meta"><span>{{ actividad.fecha_inicio|time:"H:i" }}{% if actividad.fecha_fin %}–{{ actividad.fecha_fin|time:"H:i" }}{% endif %}</span>{% if actividad.lugar %}<span>{{ actividad.lugar }}</span>{% endif %}</span></span>
+  <span class="arr-btn" aria-hidden="true">→</span>
+</a>

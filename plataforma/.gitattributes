@@ -1,0 +1,4 @@
+# Los scripts se ejecutan en Linux (Docker/VPS): siempre con saltos de línea LF.
+*.sh text eol=lf
+Dockerfile text eol=lf
+docker/Caddyfile text eol=lf

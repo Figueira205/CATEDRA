@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<div class="container" style="padding-block:clamp(48px,5vw,64px)">
+  <div class="doc-layout">
+    <aside>
+      {% if page.portada %}<figure class="img-frame portada-libro">{% image page.portada width-480 %}</figure>{% endif %}
+      <div class="datasheet mt-6"><dl>
+        <div class="row"><dt>Tipo</dt><dd>{{ page.get_tipo_display }}</dd></div>
+        {% if page.autoria %}<div class="row"><dt>Autoría</dt><dd>{{ page.autoria }}</dd></div>{% endif %}
+        {% if page.fecha_publicacion %}<div class="row"><dt>Publicación</dt><dd>{{ page.fecha_publicacion|date:"F Y" }}</dd></div>{% endif %}
+        {% if page.paginas %}<div class="row"><dt>Páginas</dt><dd>{{ page.paginas }}</dd></div>{% endif %}
+        {% if page.isbn %}<div class="row"><dt>ISBN / ISSN</dt><dd>{{ page.isbn }}</dd></div>{% endif %}
+        {% if page.doi %}<div class="row"><dt>DOI</dt><dd>{{ page.doi }}</dd></div>{% endif %}
+      </dl></div>
+      <div class="caja-acceso mt-6 stack-4">
+        {% if tiene_acceso %}
+          {% if page.archivo %}<a class="btn btn--primary btn--bloque" href="{% url 'compras:descargar' page.pk %}">Descargar</a>{% endif %}
+          {% if page.es_de_pago %}<p class="acceso-nota">Ya forma parte de tu biblioteca.</p>{% endif %}
+        {% else %}
+          {% include "compras/includes/acceso.html" with producto=page %}
+        {% endif %}
+      </div>
+    </aside>
+    <article>
+      <p class="kicker">{{ page.get_tipo_display }} · {% include "compras/includes/etiqueta_acceso.html" with producto=page %}</p>
+      <h1 class="titulo-doc">{{ page.title }}</h1>
+      {% if page.resumen %}<p class="lead">{{ page.resumen }}</p>{% endif %}
+      <div class="prose mt-6">{{ page.sinopsis|richtext }}</div>
+    </article>
+  </div>
+</div>
+{% endblock %}

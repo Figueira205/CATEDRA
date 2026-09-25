@@ -1,0 +1,1 @@
+{% load wagtailcore_tags %}<p><a class="btn btn--primary" href="{% if value.pagina %}{% pageurl value.pagina %}{% else %}{{ value.url }}{% endif %}">{{ value.texto }} <span class="arr" aria-hidden="true">→</span></a></p>

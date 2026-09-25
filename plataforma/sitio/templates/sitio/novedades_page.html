@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" %}
+<section class="section section--tight">
+  <div class="container">
+    {% if novedades.object_list %}
+    <div class="grid">
+      {% for n in novedades %}
+      <article class="col-4 reveal"><a class="card" href="{% pageurl n %}">
+        {% if n.imagen %}<div class="card__media">{% image n.imagen fill-640x400 loading="lazy" %}</div>{% endif %}
+        <div class="card__body">
+          <p class="card__meta"><span class="mono">{{ n.fecha|date:"j M Y"|upper }}</span></p>
+          <h2 class="card__title" style="font-size:1.2rem">{{ n.title }}</h2>
+          {% if n.resumen %}<p class="card__desc">{{ n.resumen }}</p>{% endif %}
+          <div class="card__foot"><span class="mono">Leer</span><span class="arr-btn" aria-hidden="true">→</span></div>
+        </div>
+      </a></article>
+      {% endfor %}
+    </div>
+    {% include "includes/paginacion.html" with pagina=novedades %}
+    {% else %}
+    <div class="empty-state"><p>Todavía no hay novedades publicadas.</p></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

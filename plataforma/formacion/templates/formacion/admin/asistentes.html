@@ -1,0 +1,13 @@
+{% extends "wagtailadmin/generic/base.html" %}
+{% block main_content %}
+<p><a href="{% url 'estadisticas_formacion' %}">← Volver a las estadísticas</a></p>
+<p>{{ asistencias|length }} asistencia{{ asistencias|length|pluralize }}{% if anonimas %} ({{ anonimas }} sin cuenta){% endif %}.</p>
+<table class="listing">
+  <thead><tr><th>Persona</th><th>Correo</th><th>Entrada</th></tr></thead>
+  <tbody>
+  {% for a in asistencias %}
+    <tr><td>{% if a.usuario %}{{ a.usuario.get_full_name|default:"—" }}{% else %}Sin cuenta{% endif %}</td><td>{{ a.usuario.email|default:"—" }}</td><td>{{ a.fecha|date:"j/m/Y H:i" }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

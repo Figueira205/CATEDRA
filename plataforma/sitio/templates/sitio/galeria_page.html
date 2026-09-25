@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" %}
+<section class="section section--tight">
+  <div class="container">
+    {% if page.elementos %}
+    <div class="filters" data-filter-group="tipo" data-filter-target="#galeria" role="group" aria-label="Filtrar por tipo">
+      <button type="button" class="filter-btn" data-filter="todos" aria-pressed="true">Todo</button>
+      <button type="button" class="filter-btn" data-filter="foto" aria-pressed="false">Fotografías</button>
+      <button type="button" class="filter-btn" data-filter="documento" aria-pressed="false">Documentos gráficos</button>
+    </div>
+    <div id="galeria" class="mosaic">
+      {% for bloque in page.elementos %}
+      <div data-item data-tipo="{{ bloque.value.tipo }}" style="display:contents">{% include "sitio/includes/elemento_galeria.html" with e=bloque.value ancho=False %}</div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><p>La galería se está preparando.</p></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

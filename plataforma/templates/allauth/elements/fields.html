@@ -1,0 +1,10 @@
+{% if attrs.form.non_field_errors %}<div class="aviso aviso--error">{{ attrs.form.non_field_errors }}</div>{% endif %}
+{% for f in attrs.form %}
+  {% if f.is_hidden %}{{ f }}{% else %}
+  <div class="{% if f.widget_type == 'checkbox' %}form-check{% else %}form-field{% endif %}">
+    {% if f.widget_type == 'checkbox' %}{{ f }} {{ f.label_tag }}{% else %}{{ f.label_tag }} {{ f }}{% endif %}
+    {% if f.help_text %}<div class="form-note">{{ f.help_text|safe }}</div>{% endif %}
+    {{ f.errors }}
+  </div>
+  {% endif %}
+{% endfor %}

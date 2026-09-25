@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block title %}Pago{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <p class="kicker">Compra</p>
+  {% if compra.estado == "pagada" %}
+    <h1>¡Listo! Ya es tuyo</h1>
+    <p class="lead">«{{ compra.concepto }}» ya está en tu cuenta. Stripe te enviará la factura por correo.</p>
+    <p class="mt-6"><a class="btn btn--primary" href="{% pageurl pagina %}">Ir al contenido</a> <a class="btn btn--ghost" href="{% url 'mi_cuenta' %}">Mi cuenta</a></p>
+  {% else %}
+    <h1>Estamos confirmando tu pago</h1>
+    <p class="lead">Algunos métodos de pago tardan unos minutos. En cuanto se confirme, «{{ compra.concepto }}» aparecerá en tu cuenta.</p>
+    <p class="mt-6"><a class="btn btn--primary" href="{% url 'mi_cuenta' %}">Ir a Mi cuenta</a></p>
+  {% endif %}
+</div></section>
+{% endblock %}

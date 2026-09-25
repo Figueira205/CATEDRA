@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" with entradilla_rica=page.entradilla %}
+<section class="section section--tight">
+  <div class="container">
+    <nav class="filters" aria-label="Filtrar la Biblioteca">
+      <a class="filter-btn" href="?" aria-pressed="{% if not tipo_activo and not acceso_activo %}true{% else %}false{% endif %}">Todo</a>
+      {% for valor, nombre in tipos %}<a class="filter-btn" href="?tipo={{ valor }}" aria-pressed="{% if tipo_activo == valor %}true{% else %}false{% endif %}">{{ nombre }}</a>{% endfor %}
+      <a class="filter-btn" href="?acceso=libre" aria-pressed="{% if acceso_activo == 'libre' %}true{% else %}false{% endif %}">Acceso abierto</a>
+      <a class="filter-btn" href="?acceso=pago" aria-pressed="{% if acceso_activo == 'pago' %}true{% else %}false{% endif %}">A la venta</a>
+    </nav>
+    {% if publicaciones.object_list %}
+    <div class="grid mt-6">
+      {% for p in publicaciones %}<div class="col-3 reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
+    </div>
+    {% include "includes/paginacion.html" with pagina=publicaciones %}
+    {% else %}
+    <div class="empty-state mt-6"><p>No hay publicaciones con estos filtros todavía.</p></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

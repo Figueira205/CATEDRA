@@ -1,0 +1,9 @@
+{% load wagtailcore_tags wagtailimages_tags %}<a class="card" href="{% pageurl clase %}">
+  {% if clase.imagen %}<div class="card__media">{% image clase.imagen fill-640x400 loading="lazy" %}</div>{% endif %}
+  <div class="card__body">
+    <p class="card__meta"><span class="mono">{% if clase.modalidad == "directo" %}EN DIRECTO{% if clase.fecha %} · {{ clase.fecha|date:"j M · H:i"|upper }}{% endif %}{% else %}GRABADA{% endif %}</span>{% include "compras/includes/etiqueta_acceso.html" with producto=clase %}</p>
+    <h3 class="card__title" style="font-size:1.15rem">{{ clase.title }}</h3>
+    {% if clase.docente %}<p class="card__desc">{{ clase.docente }}</p>{% endif %}
+    <div class="card__foot"><span class="mono">{% if clase.duracion_minutos %}{{ clase.duracion_minutos }} min{% endif %}</span><span class="arr-btn" aria-hidden="true">→</span></div>
+  </div>
+</a>

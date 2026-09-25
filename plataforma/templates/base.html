@@ -1,0 +1,154 @@
+{% load static wagtailcore_tags wagtailuserbar %}<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% elif page %}{{ page.title }}{% endif %}{% endblock %}{% block title_sufijo %} · Cátedra de la Hispanidad{% endblock %}</title>
+<meta name="description" content="{% block description %}{% if page.search_description %}{{ page.search_description }}{% else %}Cátedra de la Hispanidad: investigación, formación, publicaciones y actividades sobre el mundo hispánico.{% endif %}{% endblock %}">
+{% if page %}<link rel="canonical" href="{{ page.full_url }}">{% endif %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{% block og_title %}{{ page.title|default:'Cátedra de la Hispanidad' }}{% endblock %}">
+<meta property="og:locale" content="es_ES">
+{% block robots %}{% endblock %}
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='6' fill='%23A62035'/%3E%3Ctext x='24' y='32' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23F4F0E7'%3ECH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'catedra/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'catedra/css/plataforma.css' %}">
+{% if UMAMI_SCRIPT_URL and UMAMI_WEBSITE_ID %}<script defer src="{{ UMAMI_SCRIPT_URL }}" data-website-id="{{ UMAMI_WEBSITE_ID }}" data-do-not-track="true"></script>{% endif %}
+{% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% wagtailuserbar %}
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container header-bar">
+    <a class="brand" href="/" aria-label="Cátedra de la Hispanidad, inicio">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="4" fill="#A62035"/><path d="M7 38 22 12l7 11 12-5" fill="none" stroke="#B48A3C" stroke-width="1.3" opacity=".85"/><text x="24" y="32" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="17" fill="#F4F0E7" letter-spacing="1">CH</text></svg>
+      <span class="brand__text"><span class="brand__name">Cátedra de la Hispanidad</span><span class="brand__inst">Universidad Rey Juan Carlos</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal"><ul id="main-nav-list"></ul></nav>
+    <div class="header-utils">
+      <button type="button" class="util-btn" data-open-search aria-label="Abrir el buscador (Ctrl + K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg></button>
+      {% if user.is_authenticated %}
+        <a class="util-btn util-btn--lang cuenta-btn" href="{% url 'mi_cuenta' %}">Mi cuenta</a>
+      {% else %}
+        <a class="util-btn util-btn--lang cuenta-btn" href="{% url 'account_login' %}">Acceder</a>
+      {% endif %}
+      <button type="button" class="burger" id="menu-open" aria-label="Abrir el menú completo"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación completo">
+  <div class="mobile-menu__bar">
+    <span class="brand__name">Cátedra de la Hispanidad</span>
+    <button type="button" class="mobile-menu__close" id="menu-close">Cerrar <span aria-hidden="true">✕</span></button>
+  </div>
+  <nav id="mobile-nav" aria-label="Navegación completa"></nav>
+  <div class="mobile-menu__foot">
+    <form data-search-form role="search" class="searchbar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input type="search" name="q" placeholder="Buscar en la Cátedra" aria-label="Buscar en la Cátedra">
+    </form>
+    {% if user.is_authenticated %}
+      <a class="btn btn--light" href="{% url 'mi_cuenta' %}">Mi cuenta <span class="arr" aria-hidden="true">→</span></a>
+    {% else %}
+      <a class="btn btn--light" href="{% url 'account_login' %}">Acceder o crear cuenta <span class="arr" aria-hidden="true">→</span></a>
+    {% endif %}
+    <p class="mono">{{ settings.sitio.ConfiguracionSitio.correo_contacto }} · Madrid, España</p>
+  </div>
+</div>
+
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Buscador global de la Cátedra">
+  <div class="palette__box">
+    <div class="palette__input-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input id="palette-input" type="search" autocomplete="off" placeholder="Buscar publicaciones, clases, actividades o páginas" aria-label="Buscar en toda la web">
+      <kbd>Esc</kbd>
+      <button type="button" id="palette-close" class="visually-hidden">Cerrar el buscador</button>
+    </div>
+    <div class="palette__results" id="palette-results"></div>
+  </div>
+</div>
+
+{% block breadcrumbs %}{% if page and page.depth > 2 %}
+<nav class="breadcrumbs" aria-label="Miga de pan">
+  <div class="container"><ol>
+    {% for ancestro in page.get_ancestors %}{% if ancestro.depth > 1 %}
+    <li><a href="{% pageurl ancestro %}">{% if ancestro.depth == 2 %}Inicio{% else %}{{ ancestro.title }}{% endif %}</a></li>
+    {% endif %}{% endfor %}
+    <li><span aria-current="page">{{ page.title }}</span></li>
+  </ol></div>
+</nav>
+{% endif %}{% endblock %}
+
+{% if messages %}
+<div class="avisos container" role="status">
+  {% for m in messages %}<p class="aviso aviso--{{ m.tags }}">{{ m }}</p>{% endfor %}
+</div>
+{% endif %}
+
+<main id="main">
+{% block content %}{% endblock %}
+</main>
+
+{% with conf=settings.sitio.ConfiguracionSitio %}
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="Cátedra de la Hispanidad, inicio">
+          <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="4" fill="#A62035"/><path d="M7 38 22 12l7 11 12-5" fill="none" stroke="#B48A3C" stroke-width="1.3" opacity=".85"/><text x="24" y="32" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="17" fill="#F4F0E7" letter-spacing="1">CH</text></svg>
+          <span class="brand__text"><span class="brand__name" style="color:#F4F0E7">Cátedra de la Hispanidad</span></span>
+        </a>
+        <p>{{ conf.descripcion_pie }}</p>
+        <ul class="footer-contact">
+          <li>{{ conf.direccion }}</li>
+          {% if conf.correo_contacto %}<li><a href="mailto:{{ conf.correo_contacto }}" style="color:inherit">{{ conf.correo_contacto }}</a></li>{% endif %}
+        </ul>
+        <div class="footer-inst">
+          <img src="{% static 'catedra/img/Logo_universidad2.png' %}" alt="Universidad Rey Juan Carlos" loading="lazy">
+          <span>Institución responsable de la Cátedra</span>
+        </div>
+        {% include "includes/redes.html" %}
+      </div>
+      <nav class="footer-col" aria-label="Secciones del sitio">
+        <h2>Secciones</h2>
+        <ul>{% for s in menu_principal %}<li><a href="{{ s.url }}">{{ s.label }}</a></li>{% endfor %}</ul>
+      </nav>
+      <div class="footer-col">
+        <h2>Tu cuenta</h2>
+        <ul>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'mi_cuenta' %}">Mi cuenta</a></li>
+            <li><a href="{% url 'account_logout' %}">Cerrar sesión</a></li>
+          {% else %}
+            <li><a href="{% url 'account_login' %}">Acceder</a></li>
+            <li><a href="{% url 'account_signup' %}">Crear una cuenta</a></li>
+          {% endif %}
+          <li><a href="{% url 'buscar' %}">Buscador</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" id="boletin">
+        <h2>Boletín</h2>
+        {% include "includes/boletin_form.html" with compacto=True %}
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span class="copy">© {% now "Y" %} Cátedra de la Hispanidad · Universidad Rey Juan Carlos</span>
+      {% for p in paginas_legales %}<a href="{{ p.url }}">{{ p.title }}</a>{% endfor %}
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">HISPANIDAD</div>
+  </div>
+</footer>
+{% endwith %}
+
+{{ menu_principal|json_script:"ch-menu" }}
+<script src="{% static 'catedra/js/plataforma.js' %}" data-buscar="{% url 'buscar' %}" data-indice="{% url 'indice_busqueda' %}" defer></script>
+<script src="{% static 'catedra/js/main.js' %}" defer></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

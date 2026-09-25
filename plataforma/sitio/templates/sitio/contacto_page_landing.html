@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <p class="kicker">Contacto</p>
+  <h1>Mensaje enviado</h1>
+  <div class="lead">{% if page.gracias %}{{ page.gracias|richtext }}{% else %}Gracias por escribirnos. Te responderemos lo antes posible.{% endif %}</div>
+  <p class="mt-6"><a class="btn btn--ghost" href="/">Volver al inicio</a></p>
+</div></section>
+{% endblock %}

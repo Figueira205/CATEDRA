@@ -1,0 +1,44 @@
+# Caddy obtiene y renueva los certificados HTTPS (Let's Encrypt) automáticamente.
+
+{$DOMINIO} {
+	encode zstd gzip
+
+	# Documentos del panel: siempre a través de Django (respeta la privacidad de colecciones).
+	# Los bloques handle son excluyentes y gana la ruta más específica.
+	handle /media/documents/* {
+		respond 404
+	}
+
+	# Imágenes y archivos públicos subidos desde el panel.
+	handle_path /media/* {
+		root * /srv/media
+		header Cache-Control "public, max-age=2592000"
+		file_server
+	}
+
+	handle {
+		reverse_proxy web:8000
+	}
+
+	request_body {
+		max_size 100MB
+	}
+
+	header {
+		-Server
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(self)"
+	}
+
+	log {
+		output stdout
+	}
+}
+
+www.{$DOMINIO} {
+	redir https://{$DOMINIO}{uri} permanent
+}
+
+{$DOMINIO_ESTADISTICAS} {
+	encode zstd gzip
+	reverse_proxy umami:3000
+}

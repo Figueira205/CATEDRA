@@ -1,0 +1,11 @@
+.venv
+.env
+*.sqlite3
+media
+privado
+staticfiles
+copias
+__pycache__
+*.pyc
+.git
+docs

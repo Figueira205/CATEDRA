@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Página no encontrada{% endblock %}
+{% block content %}
+<section class="err-hero"><div class="container">
+  <p class="err-code">404</p>
+  <h1>Esta página no existe o ha cambiado de lugar</h1>
+  <p class="lead">Prueba con el buscador o vuelve al inicio.</p>
+  <p class="mt-6"><a class="btn btn--primary" href="/">Ir al inicio</a> <a class="btn btn--ghost" href="{% url 'buscar' %}">Buscar</a></p>
+</div></section>
+{% endblock %}

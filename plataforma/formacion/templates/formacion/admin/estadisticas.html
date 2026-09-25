@@ -1,0 +1,18 @@
+{% extends "wagtailadmin/generic/base.html" %}
+{% block main_content %}
+<p style="margin-bottom:1.5rem">Vistas: veces que alguien con acceso abrió una clase con vídeo. Las visitas por país y región están en el panel de analítica (Umami).</p>
+<table class="listing">
+  <thead><tr><th>Clase</th><th>Modalidad</th><th>Acceso</th><th>Vistas</th><th>Vistas (30 días)</th><th>Personas distintas</th><th>Asistentes al directo</th></tr></thead>
+  <tbody>
+  {% for c in clases %}
+    <tr>
+      <td><a href="{% url 'wagtailadmin_pages:edit' c.pk %}">{{ c.title }}</a></td>
+      <td>{{ c.get_modalidad_display }}</td>
+      <td>{{ c.get_acceso_display }}</td>
+      <td>{{ c.vistas }}</td><td>{{ c.vistas_30 }}</td><td>{{ c.personas }}</td>
+      <td>{% if c.asistentes %}<a href="{% url 'asistentes_clase' c.pk %}">{{ c.asistentes }}</a>{% else %}0{% endif %}</td>
+    </tr>
+  {% empty %}<tr><td colspan="7">Todavía no hay clases.</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

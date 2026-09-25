@@ -1,0 +1,1 @@
+{% if producto.acceso == "pago" %}<span class="tag tag--pago">{{ producto.precio|floatformat:2 }} €</span>{% elif producto.acceso == "registro" %}<span class="tag">Con cuenta gratuita</span>{% else %}<span class="tag tag--libre">Acceso abierto</span>{% endif %}

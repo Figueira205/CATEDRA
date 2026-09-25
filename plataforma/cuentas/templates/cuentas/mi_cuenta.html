@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block title %}Mi cuenta{% endblock %}
+{% block robots %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <p class="kicker">Espacio del estudiante</p>
+  <h1>Hola{% if user.first_name %}, {{ user.first_name }}{% endif %}</h1>
+  <p class="lead">Aquí tienes tus libros, tus clases y los datos de tu cuenta.</p>
+</div></section>
+
+<section class="section section--tight" aria-labelledby="t-libros">
+  <div class="container">
+    <div class="sec-head"><h2 class="sec-head__title" id="t-libros">Mis libros</h2></div>
+    {% if libros %}
+    <div class="lista-cuenta">
+      {% for compra, p in libros %}
+      <div class="fila-cuenta">
+        <div><p class="mono">{{ p.get_tipo_display|upper }}</p><h3><a href="{% pageurl p %}">{{ p.title }}</a></h3>{% if p.autoria %}<p>{{ p.autoria }}</p>{% endif %}</div>
+        {% if p.archivo %}<a class="btn btn--primary" href="{% url 'compras:descargar' p.pk %}">Descargar</a>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><p>Todavía no tienes libros. Descubre el catálogo en la Biblioteca.</p></div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section--muted section--tight" aria-labelledby="t-clases">
+  <div class="container">
+    <div class="sec-head"><h2 class="sec-head__title" id="t-clases">Mis clases</h2></div>
+    {% if clases %}
+    <div class="lista-cuenta">
+      {% for compra, c in clases %}
+      <div class="fila-cuenta">
+        <div><p class="mono">{% if c.modalidad == "directo" %}EN DIRECTO{% if c.fecha %} · {{ c.fecha|date:"j M Y · H:i"|upper }}{% endif %}{% else %}GRABADA{% endif %}</p><h3><a href="{% pageurl c %}">{{ c.title }}</a></h3>{% if c.docente %}<p>{{ c.docente }}</p>{% endif %}</div>
+        <a class="btn btn--primary" href="{% pageurl c %}">Ver la clase</a>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><p>Todavía no tienes clases exclusivas.</p></div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="t-datos">
+  <div class="container"><div class="grid">
+    <div class="col-6">
+      <div class="sec-head"><h2 class="sec-head__title" id="t-datos">Mi cuenta</h2></div>
+      <div class="datasheet"><dl>
+        <div class="row"><dt>Correo</dt><dd>{{ user.email }}</dd></div>
+        <div class="row"><dt>Alta</dt><dd>{{ user.date_joined|date:"j \d\e F \d\e Y" }}</dd></div>
+      </dl></div>
+      <ul class="stack-4 mt-6 enlaces-cuenta">
+        <li><a class="link-arrow" href="{% url 'account_change_password' %}">Cambiar la contraseña <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="link-arrow" href="{% url 'account_email' %}">Correo electrónico <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="link-arrow" href="{% url 'mfa_index' %}">Verificación en dos pasos <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="link-arrow" href="{% url 'account_logout' %}">Cerrar sesión <span class="arr" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <div class="sec-head"><h2 class="sec-head__title">Historial de compras</h2></div>
+      {% if historial %}
+      <table class="tabla-simple">
+        <thead><tr><th>Fecha</th><th>Contenido</th><th>Importe</th><th>Estado</th></tr></thead>
+        <tbody>{% for c in historial %}<tr><td>{{ c.creada|date:"d/m/Y" }}</td><td>{{ c.concepto }}</td><td>{{ c.importe|floatformat:2 }} €</td><td>{{ c.get_estado_display }}</td></tr>{% endfor %}</tbody>
+      </table>
+      <p class="form-note">Las facturas te llegan por correo desde Stripe.</p>
+      {% else %}<p>Sin compras todavía.</p>{% endif %}
+    </div>
+  </div></div>
+</section>
+{% endblock %}
