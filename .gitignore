@@ -1,0 +1,6 @@
+# Vídeos y archivos pesados: se alojan en YouTube/Vimeo, nunca en el repositorio
+*.mp4
+*.mov
+*.webm
+*.avi
+*.mkv
