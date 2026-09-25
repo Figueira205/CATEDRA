@@ -12,11 +12,15 @@ python -m http.server 8765 --directory web
 
 y abrir <http://localhost:8765>. (Abrir los archivos con doble clic también funciona, pero los parámetros de URL de los filtros y del buscador requieren servidor.)
 
+## Menú principal
+
+La Cátedra · Actividades · Biblioteca · Galería · Contacto. Investigación, proyectos y convenios cuelgan de La Cátedra; premios, de Actividades. Criterio: una sección no entra en el menú hasta que tiene contenido real.
+
 ## Estructura
 
 ```
 web/
-├── index.html                 Portada (hero + atlas, buscador, agenda, revista…)
+├── index.html                 Portada: 6 bloques (presentación, la Cátedra, agenda, biblioteca, galería, boletín)
 ├── la-catedra.html            Quiénes somos, campo de estudio, misión, objetivos
 ├── equipo.html / persona.html Equipo con filtros · plantilla de ficha personal
 ├── investigacion.html         8 áreas temáticas y líneas
@@ -43,7 +47,7 @@ web/
 
 | Quiero cambiar… | Archivo |
 |---|---|
-| Menús (mega menú, menú móvil) | `assets/js/data.js` → `CH_NAV` |
+| Menús (mega menú, menú móvil) | `assets/js/data.js` → `CH_NAV` (una entrada sin `items` se muestra como enlace directo) |
 | Resultados del buscador global | `assets/js/data.js` → `CH_INDEX` |
 | Agenda y calendario | `assets/js/data.js` → `CH_EVENTS` (fechas ISO `AAAA-MM-DD`) |
 | Colores, tipografías, espaciado | `assets/css/styles.css` → bloque `:root` (tokens `--color-*`, `--text-*`, `--s-*`) |

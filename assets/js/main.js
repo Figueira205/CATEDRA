@@ -46,6 +46,12 @@
   if (navRoot && window.CH_NAV) {
     window.CH_NAV.forEach(function (sec, idx) {
       var li = d.createElement("li");
+      if (!sec.items) {
+        li.innerHTML = '<a class="nav-link" href="' + sec.url + '">' + esc(sec.label) + "</a>";
+        li.addEventListener("mouseenter", closeAllMegas);
+        navRoot.appendChild(li);
+        return;
+      }
       li.innerHTML =
         '<button class="nav-link" aria-expanded="false" aria-controls="mega-' + idx + '">' +
         esc(sec.label) + ' <span class="caret" aria-hidden="true"></span></button>';
@@ -113,6 +119,11 @@
     window.CH_NAV.forEach(function (sec) {
       var item = d.createElement("div");
       item.className = "mm-item";
+      if (!sec.items) {
+        item.innerHTML = '<a class="mm-top" href="' + sec.url + '">' + esc(sec.label) + "</a>";
+        mnav.appendChild(item);
+        return;
+      }
       item.innerHTML =
         '<button class="mm-top" aria-expanded="false">' + esc(sec.label) +
         ' <span aria-hidden="true">+</span></button>' +
