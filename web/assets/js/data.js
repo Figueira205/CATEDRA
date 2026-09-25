@@ -12,82 +12,46 @@ window.CH_NAV = [
     feature: { img: "assets/img/estudiantes.png", kicker: "Presentación", title: "Una conversación académica entre orillas", url: "la-catedra.html" },
     items: [
       ["Quiénes somos", "la-catedra.html#quienes-somos"],
-      ["Campo de estudio", "la-catedra.html#campo-de-estudio"],
-      ["Misión y valores", "la-catedra.html#mision"],
-      ["Qué pretendemos", "la-catedra.html#que-pretendemos"],
-      ["Historia", "la-catedra.html#historia"],
+      ["Misión y objetivos", "la-catedra.html#mision"],
       ["Dirección y equipo", "equipo.html"],
-      ["Instituciones impulsoras", "la-catedra.html#instituciones"],
-      ["Contacto institucional", "contacto.html"]
-    ]
-  },
-  {
-    label: "Investigación", url: "investigacion.html",
-    feature: { img: "assets/img/libro2.png", kicker: "Proyecto activo", title: "Redes jurídicas e instituciones del mundo hispánico", url: "proyecto.html" },
-    items: [
-      ["Presentación", "investigacion.html"],
-      ["Áreas temáticas", "investigacion.html#areas"],
-      ["Líneas de investigación", "investigacion.html#lineas"],
-      ["Proyectos activos", "proyectos.html?estado=activo"],
-      ["Proyectos finalizados", "proyectos.html?estado=finalizado"],
-      ["Todos los proyectos", "proyectos.html"],
-      ["Investigadores", "equipo.html#investigadores"],
-      ["Resultados y publicaciones", "repositorio.html"]
+      ["Investigación", "investigacion.html"],
+      ["Proyectos", "proyectos.html"],
+      ["Convenios e instituciones", "convenios.html"]
     ]
   },
   {
     label: "Actividades", url: "actividades.html",
     feature: { img: "assets/img/aulas.png", kicker: "Próximamente", title: "Seminario permanente: Pensar la Hispanidad en el siglo XXI", url: "actividad.html" },
     items: [
-      ["Agenda general", "actividades.html"],
+      ["Agenda", "actividades.html"],
       ["Próximas actividades", "actividades.html#proximas"],
-      ["Seminarios permanentes", "actividades.html?tipo=seminario"],
-      ["Cursos de verano", "actividades.html?tipo=curso"],
-      ["Congresos y jornadas", "actividades.html?tipo=jornada"],
-      ["Conferencias", "actividades.html?tipo=conferencia"],
+      ["Vista de calendario", "actividades.html#calendario"],
       ["Actividades celebradas", "actividades.html#celebradas"],
-      ["Vista de calendario", "actividades.html#calendario"]
+      ["Premios y convocatorias", "premios.html"]
     ]
   },
   {
-    label: "Publicaciones", url: "publicaciones.html",
+    label: "Biblioteca", url: "publicaciones.html",
     feature: { img: "assets/img/libro3.jpg", kicker: "Revista", title: "Cuadernos de la Hispanidad · N.º 1", url: "revista-numero-01.html" },
     items: [
-      ["Panorama de publicaciones", "publicaciones.html"],
+      ["Todo el catálogo", "publicaciones.html"],
       ["Revista de la Cátedra", "revista.html"],
       ["Último número", "revista-numero-01.html"],
-      ["Repositorio de libre acceso", "repositorio.html"],
-      ["Documentos de trabajo", "repositorio.html?tipo=documento"],
-      ["Convocatoria editorial", "publicaciones.html#convocatoria"],
-      ["Normas para autores", "publicaciones.html#normas"],
-      ["Comité editorial", "publicaciones.html#comite"]
+      ["Publicaciones en abierto", "repositorio.html"],
+      ["Publicar con nosotros", "publicaciones.html#convocatoria"]
     ]
   },
   {
-    label: "Multimedia", url: "multimedia.html",
+    label: "Galería", url: "multimedia.html",
     feature: { img: "assets/img/conquista.png", kicker: "Galería", title: "Fotografías y documentos gráficos", url: "multimedia.html" },
     items: [
-      ["Galería multimedia", "multimedia.html"],
+      ["Toda la galería", "multimedia.html"],
       ["Fotografías", "multimedia.html?tipo=foto"],
-      ["Vídeos", "multimedia.html?tipo=video"],
-      ["Conferencias grabadas", "multimedia.html?tipo=conferencia"],
       ["Documentos gráficos", "multimedia.html?tipo=documento"]
     ]
   },
-  {
-    label: "Más", url: "premios.html",
-    feature: { img: "assets/img/libro5.jpg", kicker: "Convocatoria", title: "Premio de Ensayo de la Cátedra · 1.ª edición", url: "premios.html" },
-    items: [
-      ["Premios y convocatorias", "premios.html"],
-      ["Bases y documentación", "premios.html#bases"],
-      ["Convenios y colaboraciones", "convenios.html"],
-      ["Prensa", "contacto.html#prensa"],
-      ["Contacto", "contacto.html"],
-      ["Aviso legal", "aviso-legal.html"],
-      ["Privacidad", "privacidad.html"],
-      ["Accesibilidad", "accesibilidad.html"]
-    ]
-  }
+  /* Sin «items»: se muestra como enlace directo, sin desplegable */
+  { label: "Contacto", url: "contacto.html" }
 ];
 
 /* Índice de búsqueda global.
@@ -133,7 +97,7 @@ window.CH_INDEX = [
   { t: "Defensa de la Hispanidad (fondo bibliográfico)", type: "publicacion", url: "repositorio.html", d: "Referencia del fondo bibliográfico histórico de la Cátedra." },
 
   // Multimedia
-  { t: "Galería multimedia", type: "multimedia", url: "multimedia.html", d: "Fotografías y documentos gráficos." },
+  { t: "Galería", type: "multimedia", url: "multimedia.html", d: "Fotografías y documentos gráficos." },
 
   // Premios / convenios
   { t: "Premio de Ensayo de la Cátedra · 1.ª edición", type: "premio", url: "premios.html", d: "Convocatoria demostrativa abierta. Consulta las bases y plazos." },
@@ -160,5 +124,5 @@ window.CH_SUGGESTIONS = [
   { t: "Próximos seminarios", url: "actividades.html#proximas", k: "Actividades" },
   { t: "Último número de la revista", url: "revista-numero-01.html", k: "Revista" },
   { t: "Dirección y equipo", url: "equipo.html", k: "Personas" },
-  { t: "Publicaciones en abierto", url: "repositorio.html", k: "Repositorio" }
+  { t: "Publicaciones en abierto", url: "repositorio.html", k: "Biblioteca" }
 ];
