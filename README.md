@@ -25,7 +25,7 @@ web/
 ├── publicaciones.html         Hub: convocatoria editorial, normas, comité
 ├── revista.html / revista-numero-01.html / publicacion.html
 ├── repositorio.html           Buscador + filtros + fondo bibliográfico
-├── multimedia.html            Mosaico con lightbox accesible y vídeo
+├── multimedia.html            Mosaico con lightbox accesible (admite vídeo MP4/WebM)
 ├── premios.html · convenios.html · contacto.html
 ├── buscar.html                Página de resultados (lee ?q=)
 ├── 404.html · aviso-legal · privacidad · cookies · accesibilidad
@@ -36,7 +36,7 @@ web/
     ├── css/styles.css         Tokens de diseño + componentes (ver abajo)
     ├── js/data.js             CONTENIDO EDITABLE: navegación, índice de búsqueda, agenda
     ├── js/main.js             Comportamiento (menús, buscador, filtros, lightbox, calendario…)
-    └── img/                   Recursos reales de /recursos (el vídeo de 400 MB se enlaza desde ../recursos)
+    └── img/                   Recursos reales de /recursos
 ```
 
 ## Dónde se edita cada cosa
@@ -63,7 +63,7 @@ El sitio está organizado exactamente como un tema de WordPress:
 3. **Datos dinámicos.** `CH_NAV`, `CH_INDEX` y `CH_EVENTS` se generan desde WP con `wp_localize_script` (o la REST API): los menús desde `wp_nav_menu`, el índice de búsqueda desde una consulta a todos los CPT, la agenda desde el CPT `actividad`. El buscador cliente puede sustituirse por SearchWP/Relevanssi manteniendo la misma interfaz.
 4. **Formularios.** Los formularios (contacto, inscripción, boletín) validan en cliente; en WP se conectan a Gravity Forms/WPForms/Contact Form 7 conservando etiquetas y mensajes de error.
 5. **URLs.** Los enlaces permanentes del sitemap (`/investigacion/proyectos/[slug]`, `/revista/[numero]`…) se configuran en Ajustes → Enlaces permanentes + slugs de CPT.
-6. **Rendimiento.** Servir las fuentes localmente (plugin OMGF o descarga manual), convertir las imágenes a WebP/AVIF (el HTML ya declara `width/height`, `loading="lazy"` y `fetchpriority` en el LCP) y subir el vídeo a un streaming (YouTube privado/Vimeo) en lugar del MP4 de 400 MB.
+6. **Rendimiento.** Servir las fuentes localmente (plugin OMGF o descarga manual), convertir las imágenes a WebP/AVIF (el HTML ya declara `width/height`, `loading="lazy"` y `fetchpriority` en el LCP) y alojar los vídeos en un servicio de streaming (YouTube/Vimeo), nunca en el repositorio.
 7. **Idiomas.** Estructura preparada para ES/EN (selector en cabecera): con WPML o Polylang, añadir `hreflang` y mantener al usuario en la página equivalente.
 
 ## Identidad «Atlas vivo»

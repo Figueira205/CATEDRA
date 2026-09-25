@@ -65,7 +65,7 @@ window.CH_NAV = [
   },
   {
     label: "Multimedia", url: "multimedia.html",
-    feature: { img: "assets/img/conquista.png", kicker: "Archivo audiovisual", title: "La Hispanidad: memoria visual comentada", url: "multimedia.html" },
+    feature: { img: "assets/img/conquista.png", kicker: "Galería", title: "Fotografías y documentos gráficos", url: "multimedia.html" },
     items: [
       ["Galería multimedia", "multimedia.html"],
       ["Fotografías", "multimedia.html?tipo=foto"],
@@ -133,8 +133,7 @@ window.CH_INDEX = [
   { t: "Defensa de la Hispanidad (fondo bibliográfico)", type: "publicacion", url: "repositorio.html", d: "Referencia del fondo bibliográfico histórico de la Cátedra." },
 
   // Multimedia
-  { t: "Galería multimedia", type: "multimedia", url: "multimedia.html", d: "Fotografías, vídeos, entrevistas y documentos gráficos." },
-  { t: "Vídeo: La Hispanidad — memoria visual comentada", type: "multimedia", url: "multimedia.html", d: "Pieza audiovisual de presentación de la Cátedra." },
+  { t: "Galería multimedia", type: "multimedia", url: "multimedia.html", d: "Fotografías y documentos gráficos." },
 
   // Premios / convenios
   { t: "Premio de Ensayo de la Cátedra · 1.ª edición", type: "premio", url: "premios.html", d: "Convocatoria demostrativa abierta. Consulta las bases y plazos." },
