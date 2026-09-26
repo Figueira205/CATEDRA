@@ -740,10 +740,21 @@ ul[class],ol[class],
 /* Ficha de datos (proyecto/evento) */
 .datasheet{border:var(--line);border-radius:var(--radius);background:var(--color-white)}
 .datasheet dl{display:grid;grid-template-columns:1fr}
-.datasheet .row{display:grid;grid-template-columns:150px 1fr;gap:var(--s-4);padding:var(--s-4);border-top:var(--line)}
+/* Etiqueta encima del valor (no en columnas): con textos reales del CMS, un valor largo
+   (p. ej. «Cátedra de la Hispanidad») nunca cabía en la columna estrecha que quedaba junto
+   a una etiqueta de 150px, sobre todo en la barra lateral de 260px de las fichas. Apilarlos
+   evita el problema de raíz, sin necesidad de partir palabras. */
+.datasheet .row{padding:var(--s-4);border-top:var(--line)}
 .datasheet .row:first-child{border-top:0}
-.datasheet dt{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-soft);padding-top:3px}
+.datasheet dt{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-soft);margin-bottom:4px}
 .datasheet dd{font-weight:500}
+
+/* Salvaguarda: una columna «1fr» de CSS Grid no se encoge por debajo del contenido, así que
+   una palabra larga sin espacios puede desbordar la caja. min-width:0 lo evita sin cambiar
+   cómo se ajusta el texto (solo permite que la pista se encoja para envolverlo con normalidad). */
+.event-row,.pub-row,.footer-main,.mega__inner,.doc-layout,.atlas-item__btn,.prize,.journal__issue{min-width:0}
+.event-row>*,.pub-row>*,.footer-main>*,.mega__inner>*,.doc-layout>*,.atlas-item__btn>*,.prize>*,.journal__issue>*{min-width:0}
+.grid>[class^="col-"],.grid>[class*=" col-"]{min-width:0}
 
 /* Cita bibliográfica */
 .cite-box{
