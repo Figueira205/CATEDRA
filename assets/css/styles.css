@@ -371,12 +371,15 @@ ul[class],ol[class],
 @media (max-width:767px){.hero{min-height:0;padding-block:var(--s-7)}}
 .hero__atlas{position:absolute;inset:0;pointer-events:none;opacity:.5}
 .hero__grid{position:relative;align-items:end;padding-block:clamp(var(--s-7),6vh,var(--s-9))}
-/* En escritorio, .hero centra verticalmente su contenido (justify-content:center) y
-   el padding de .hero__grid es el margen entre ese contenido centrado y los bordes
-   de .hero. En móvil .hero ya no centra (min-height:0 más arriba): sin quitar este
-   padding interno se sumaba al de .hero y dejaba un hueco muerto de hasta 96-144px
-   antes del primer texto. Va después de la regla base para ganar el empate de
-   especificidad (misma regla que .header-utils y .event-row más arriba). */
+/* El padding SUPERIOR de .hero__grid solo aporta algo cuando el contenido es más
+   bajo que la caja y .hero (justify-content:center) tiene hueco real que repartir;
+   en la práctica el contenido suele ser más alto que el mínimo de .hero, así que
+   ese padding-top es casi siempre un hueco muerto fijo (hasta 96px) entre la
+   cabecera y el primer texto, sin ninguna función de centrado. Se reduce a un
+   margen editorial pequeño. El padding INFERIOR se mantiene: separa el bloque del
+   borde inferior de .hero (align-items:end lo pega a esa línea). Va después de la
+   regla base para ganar el empate de especificidad (como .header-utils más arriba). */
+.hero__grid{padding-top:clamp(var(--s-3),2vh,var(--s-5))}
 @media (max-width:767px){.hero__grid{padding-block:0}}
 .hero__title{
   font-size:var(--text-display);line-height:.98;letter-spacing:-.03em;font-weight:750;
