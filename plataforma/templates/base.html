@@ -33,9 +33,9 @@
     <div class="header-utils">
       <button type="button" class="util-btn" data-open-search aria-label="Abrir el buscador (Ctrl + K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg></button>
       {% if user.is_authenticated %}
-        <a class="util-btn util-btn--lang cuenta-btn" href="{% url 'mi_cuenta' %}">Mi cuenta</a>
+        <a class="util-btn cuenta-btn" href="{% url 'mi_cuenta' %}">Mi cuenta</a>
       {% else %}
-        <a class="util-btn util-btn--lang cuenta-btn" href="{% url 'account_login' %}">Acceder</a>
+        <a class="util-btn cuenta-btn" href="{% url 'account_login' %}">Acceder</a>
       {% endif %}
       <button type="button" class="burger" id="menu-open" aria-label="Abrir el menú completo"><span></span><span></span><span></span></button>
     </div>

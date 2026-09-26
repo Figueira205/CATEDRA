@@ -254,6 +254,11 @@ ul[class],ol[class],
 .brand__name{font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
 .brand__inst{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-soft)}
 @media (max-width:479px){.brand__inst{display:none}}
+/* Icono «CH» solo, sin el nombre completo, en un móvil muy estrecho: el propio
+   enlace ya lleva aria-label="Cátedra de la Hispanidad, inicio", así que sigue
+   siendo accesible. Sin esto no cabían a la vez la marca, el buscador, «Acceder /
+   Mi cuenta» (en la plataforma) y el botón de menú. */
+@media (max-width:479px){.brand__text{display:none}}
 
 .main-nav{margin-left:auto}
 .main-nav>ul{display:flex;gap:2px}
@@ -271,7 +276,7 @@ ul[class],ol[class],
 .main-nav .nav-link[aria-expanded="true"]::after,.main-nav .nav-link[aria-current="page"]::after{transform:scaleX(1)}
 .nav-link .caret{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform var(--t-fast)}
 .nav-link[aria-expanded="true"] .caret{transform:rotate(225deg) translateY(-1px)}
-@media (max-width:1240px){.main-nav{display:none}}
+@media (max-width:1240px){.main-nav{display:none}.mega{display:none}}
 
 .header-utils{display:flex;align-items:center;gap:var(--s-2);margin-left:var(--s-2)}
 @media (min-width:1241px){.header-utils{margin-left:0}}
@@ -313,6 +318,21 @@ ul[class],ol[class],
 .mega__feat a{text-decoration:none}
 .mega__feat a:hover p{color:var(--color-carmine)}
 
+/* Cabecera compacta en móvil: el icono ☰ del menú llegaba a quedar 80px fuera de la
+   pantalla en un iPhone (390px), porque marca + buscador + selector ES·EN + menú no
+   caben todos en una fila estrecha. El selector de idioma no hace nada todavía (el
+   inglés está «en preparación»), así que se retira de la barra compacta y se reducen
+   huecos y el icono de marca; toda la funcionalidad sigue accesible desde el buscador
+   y el menú completo. Va al final de la sección para ganar el empate de especificidad
+   con las reglas de arriba (.util-btn, .header-utils, .brand) sin usar !important. */
+@media (max-width:599px){
+  .header-bar{gap:var(--s-3)}
+  .brand{gap:var(--s-2)}
+  .brand__mark{width:38px;height:38px}
+  .header-utils{gap:4px;margin-left:4px}
+  .util-btn--lang{display:none}
+}
+
 /* Menú móvil pantalla completa */
 .mobile-menu{
   position:fixed;inset:0;z-index:150;background:var(--color-ink);color:var(--color-paper);
@@ -351,6 +371,10 @@ ul[class],ol[class],
   text-wrap:balance;margin:var(--s-5) 0;
 }
 .hero__title em{font-family:var(--font-serif);font-style:italic;font-weight:500;color:var(--color-carmine)}
+/* En un móvil estrecho, «conversación» a 56px (el mínimo del clamp de --text-display) no
+   cabe en una sola línea y se corta por el borde de la pantalla: se reduce el mínimo solo
+   aquí, sin tocar el token global (usado también en otros titulares más cortos). */
+@media (max-width:480px){.hero__title{font-size:clamp(2.6rem,12vw,3.4rem)}}
 .hero__lead{font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.45;max-width:30em;color:var(--color-ink-soft)}
 .hero__ctas{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)}
 
@@ -469,11 +493,11 @@ ul[class],ol[class],
   transition:background var(--t-fast);
 }
 .event-row:hover{background:var(--color-white)}
-@media (max-width:767px){.event-row{grid-template-columns:86px 1fr}.event-row .arr-btn{display:none}}
+@media (max-width:767px){.event-row{grid-template-columns:86px 1fr}}
 .event-row__date{text-align:center;border-right:2px solid var(--color-carmine);padding-right:var(--s-4)}
 .event-row__day{font-size:clamp(2rem,4vw,3rem);font-weight:750;line-height:1;letter-spacing:-.02em}
 .event-row__month{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-carmine)}
-.event-row__title{font-size:1.35rem;font-weight:700;line-height:1.2;margin:4px 0}
+.event-row__title{font-size:1.35rem;font-weight:700;line-height:1.2;margin:4px 0;overflow-wrap:anywhere}
 .event-row:hover .event-row__title{color:var(--color-carmine)}
 .event-row__meta{display:flex;gap:var(--s-4);flex-wrap:wrap;color:var(--color-ink-soft);font-size:.9rem}
 .event-row .arr-btn{
@@ -482,6 +506,10 @@ ul[class],ol[class],
   transition:all var(--t-fast);
 }
 .event-row:hover .arr-btn{background:var(--color-carmine);border-color:var(--color-carmine);color:#fff;transform:translateX(4px)}
+/* La regla original que ocultaba esta flecha en móvil quedaba antes que la base de
+   arriba: con la misma especificidad, perdía el empate y la flecha se veía igual en
+   cualquier ancho, sin espacio para ella junto al texto. Va aquí, al final, para ganar. */
+@media (max-width:767px){.event-row .arr-btn{display:none}}
 
 /* Publicación fila (repositorio) */
 .pub-row{
@@ -563,7 +591,14 @@ ul[class],ol[class],
 }
 .mosaic__item:hover .mosaic__cap,.mosaic__item:focus-visible .mosaic__cap{opacity:1;transform:none}
 @media (hover:none){.mosaic__cap{opacity:1;transform:none}}
-.mosaic__cap .t{font-weight:700;line-height:1.2;display:block}
+.mosaic__cap .t{
+  font-weight:700;line-height:1.2;
+  /* En una miniatura pequeña (p. ej. .m-1x1) un pie de dos palabras puede no caber:
+     se recorta con puntos suspensivos a 2 líneas en vez de cortarse a media letra
+     (el .mosaic__item exterior ya tiene overflow:hidden). */
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+  overflow-wrap:anywhere;
+}
 .mosaic__cap .m{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--color-gold)}
 .m-2x2{grid-column:span 4;grid-row:span 3}
 .m-2x1{grid-column:span 4;grid-row:span 2}
@@ -755,6 +790,7 @@ ul[class],ol[class],
 .event-row,.pub-row,.footer-main,.mega__inner,.doc-layout,.atlas-item__btn,.prize,.journal__issue{min-width:0}
 .event-row>*,.pub-row>*,.footer-main>*,.mega__inner>*,.doc-layout>*,.atlas-item__btn>*,.prize>*,.journal__issue>*{min-width:0}
 .grid>[class^="col-"],.grid>[class*=" col-"]{min-width:0}
+.mosaic>*{min-width:0}
 
 /* Cita bibliográfica */
 .cite-box{
