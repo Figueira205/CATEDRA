@@ -278,7 +278,12 @@ ul[class],ol[class],
 .nav-link[aria-expanded="true"] .caret{transform:rotate(225deg) translateY(-1px)}
 @media (max-width:1240px){.main-nav{display:none}.mega{display:none}}
 
-.header-utils{display:flex;align-items:center;gap:var(--s-2);margin-left:var(--s-2)}
+/* Con el menú de escritorio oculto (todo lo que no sea un portátil grande: tablet
+   incluida), nada empujaba el grupo de buscador+cuenta+☰ hacia el borde derecho:
+   se quedaba pegado justo detrás del logo, con un hueco vacío hasta el borde. El
+   menú (☰) debe estar siempre en la esquina superior derecha, que es donde el
+   pulgar llega con más comodidad. */
+.header-utils{display:flex;align-items:center;gap:var(--s-2);margin-left:auto}
 @media (min-width:1241px){.header-utils{margin-left:0}}
 .util-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -366,6 +371,13 @@ ul[class],ol[class],
 @media (max-width:767px){.hero{min-height:0;padding-block:var(--s-7)}}
 .hero__atlas{position:absolute;inset:0;pointer-events:none;opacity:.5}
 .hero__grid{position:relative;align-items:end;padding-block:clamp(var(--s-7),6vh,var(--s-9))}
+/* En escritorio, .hero centra verticalmente su contenido (justify-content:center) y
+   el padding de .hero__grid es el margen entre ese contenido centrado y los bordes
+   de .hero. En móvil .hero ya no centra (min-height:0 más arriba): sin quitar este
+   padding interno se sumaba al de .hero y dejaba un hueco muerto de hasta 96-144px
+   antes del primer texto. Va después de la regla base para ganar el empate de
+   especificidad (misma regla que .header-utils y .event-row más arriba). */
+@media (max-width:767px){.hero__grid{padding-block:0}}
 .hero__title{
   font-size:var(--text-display);line-height:.98;letter-spacing:-.03em;font-weight:750;
   text-wrap:balance;margin:var(--s-5) 0;
