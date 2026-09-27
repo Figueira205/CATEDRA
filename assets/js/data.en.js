@@ -9,7 +9,7 @@
 window.CH_NAV = [
   {
     label: "The Chair", url: "la-catedra.html",
-    feature: { img: "../assets/img/estudiantes.png", kicker: "About", title: "An academic conversation across shores", url: "la-catedra.html" },
+    feature: { img: "../assets/img/estudiantes.jpg", kicker: "About", title: "An academic conversation across shores", url: "la-catedra.html" },
     items: [
       ["Who we are", "la-catedra.html#quienes-somos"],
       ["Mission and objectives", "la-catedra.html#mision"],
@@ -21,7 +21,7 @@ window.CH_NAV = [
   },
   {
     label: "Activities", url: "actividades.html",
-    feature: { img: "../assets/img/aulas.png", kicker: "Coming up", title: "Ongoing seminar: Rethinking Hispanidad in the 21st Century", url: "actividad.html" },
+    feature: { img: "../assets/img/aulas.jpg", kicker: "Coming up", title: "Ongoing seminar: Rethinking Hispanidad in the 21st Century", url: "actividad.html" },
     items: [
       ["Calendar", "actividades.html"],
       ["Upcoming activities", "actividades.html#proximas"],
@@ -43,7 +43,7 @@ window.CH_NAV = [
   },
   {
     label: "Gallery", url: "multimedia.html",
-    feature: { img: "../assets/img/conquista.png", kicker: "Gallery", title: "Photographs and archival documents", url: "multimedia.html" },
+    feature: { img: "../assets/img/conquista.jpg", kicker: "Gallery", title: "Photographs and archival documents", url: "multimedia.html" },
     items: [
       ["Full gallery", "multimedia.html"],
       ["Photographs", "multimedia.html?tipo=foto"],
