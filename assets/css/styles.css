@@ -215,7 +215,7 @@ ul[class],ol[class],
 .tag--state{border-color:var(--color-success);color:var(--color-success)}
 .tag--state::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 .tag--closed{border-color:var(--color-ink-soft);color:var(--color-ink-soft)}
-.tag--demo{border-style:dashed;border-color:var(--color-gold);color:#7a5a20;background:transparent}
+.tag--demo{border-style:dashed;border-color:var(--color-gold);color:#7a5a20;background:transparent;border-radius:var(--radius)}
 .tag--area{border-color:var(--color-atlantic);color:var(--color-atlantic)}
 
 /* Filtros pill */
