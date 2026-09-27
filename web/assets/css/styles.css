@@ -813,7 +813,7 @@ ul[class],ol[class],
   padding:var(--s-5);border-radius:0 var(--radius) var(--radius) 0;
 }
 .cite-box h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--color-gold-ink);margin-bottom:var(--s-3)}
-.cite-box p{font-family:var(--font-serif);font-size:.95rem}
+.cite-box p{font-family:var(--font-serif);font-size:.95rem;overflow-wrap:anywhere}
 .cite-box button{margin-top:var(--s-3)}
 
 /* Acordeón genérico */
