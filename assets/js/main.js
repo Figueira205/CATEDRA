@@ -27,12 +27,59 @@
   }
   /* La plataforma (Django) define CH_SEARCH_URL y CH_INDEX_URL; la web estática usa los valores por defecto. */
   var SEARCH_URL = window.CH_SEARCH_URL || "buscar.html";
-  var TYPE_LABELS = {
-    persona: "Personas", proyecto: "Investigación", area: "Áreas", actividad: "Actividades",
-    revista: "Revista", publicacion: "Publicaciones", multimedia: "Multimedia",
-    premio: "Premios", convenio: "Convenios", pagina: "Páginas",
-    clase: "Formación", novedad: "Novedades", galeria: "Galería"
+
+  /* ---------- Textos de interfaz (ES / EN) ----------
+     Un único main.js sirve ambos idiomas: elige el diccionario según
+     <html lang="…">, así no hace falta mantener dos copias del script. */
+  var LANG = (d.documentElement.getAttribute("lang") || "es").slice(0, 2) === "en" ? "en" : "es";
+  var STRINGS = {
+    es: {
+      types: {
+        persona: "Personas", proyecto: "Investigación", area: "Áreas", actividad: "Actividades",
+        revista: "Revista", publicacion: "Publicaciones", multimedia: "Multimedia",
+        premio: "Premios", convenio: "Convenios", pagina: "Páginas",
+        clase: "Formación", novedad: "Novedades", galeria: "Galería"
+      },
+      suggestions: "Sugerencias", open: "Abrir",
+      noMatch: "No hemos encontrado una coincidencia exacta. Prueba con otro término o pulsa Intro para ver áreas relacionadas.",
+      searchPrompt: "Escribe un término para buscar personas, proyectos, publicaciones, actividades o recursos.",
+      resultsFor: function (n, q) { return n + " resultado" + (n === 1 ? "" : "s") + " para «" + q + "»"; },
+      noResultsFor: function (q) { return "0 resultados para «" + q + "»"; },
+      noResultsTitle: "No hemos encontrado una coincidencia exacta",
+      noResultsHint: "Prueba con otro término o explora estas áreas relacionadas.",
+      relatedTags: [["Áreas temáticas", "investigacion.html#areas"], ["Proyectos", "proyectos.html"], ["Repositorio", "repositorio.html"], ["Agenda", "actividades.html"]],
+      copied: "Copiado ✓",
+      monthsShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+      monthsLong: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+      weekdays: ["L", "M", "X", "J", "V", "S", "D"],
+      prevMonth: "Mes anterior", nextMonth: "Mes siguiente",
+      calendarCaption: function (mes, anio) { return "Calendario de actividades de " + mes + " " + anio; }
+    },
+    en: {
+      types: {
+        persona: "People", proyecto: "Research", area: "Areas", actividad: "Activities",
+        revista: "Journal", publicacion: "Publications", multimedia: "Multimedia",
+        premio: "Prizes", convenio: "Agreements", pagina: "Pages",
+        clase: "Training", novedad: "News", galeria: "Gallery"
+      },
+      suggestions: "Suggestions", open: "Open",
+      noMatch: "We couldn't find an exact match. Try another term or press Enter to see related areas.",
+      searchPrompt: "Type a term to search people, projects, publications, activities or resources.",
+      resultsFor: function (n, q) { return n + " result" + (n === 1 ? "" : "s") + " for “" + q + "”"; },
+      noResultsFor: function (q) { return "0 results for “" + q + "”"; },
+      noResultsTitle: "We couldn't find an exact match",
+      noResultsHint: "Try another term or explore these related areas.",
+      relatedTags: [["Thematic areas", "investigacion.html#areas"], ["Projects", "proyectos.html"], ["Repository", "repositorio.html"], ["Calendar", "actividades.html"]],
+      copied: "Copied ✓",
+      monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      monthsLong: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      weekdays: ["M", "T", "W", "T", "F", "S", "S"],
+      prevMonth: "Previous month", nextMonth: "Next month",
+      calendarCaption: function (mes, anio) { return "Activities calendar for " + mes + " " + anio; }
+    }
   };
+  var UI = STRINGS[LANG];
+  var TYPE_LABELS = UI.types;
 
   /* ---------- Cabecera: estado scroll ---------- */
   var header = $(".site-header");
@@ -188,21 +235,21 @@
   function renderPalette(q) {
     var out = "";
     if (!q) {
-      out += '<div class="palette__group">Sugerencias</div>';
+      out += '<div class="palette__group">' + UI.suggestions + '</div>';
       (window.CH_SUGGESTIONS || []).forEach(function (s) {
         out += '<a class="palette__item" href="' + s.url + '"><span class="t">' + esc(s.t) + '</span><span class="k">' + esc(s.k) + "</span></a>";
       });
     } else {
       var res = searchIndex(q, 14);
       if (!res.length) {
-        out = '<div class="palette__empty">No hemos encontrado una coincidencia exacta. Prueba con otro término o pulsa Intro para ver áreas relacionadas.</div>';
+        out = '<div class="palette__empty">' + UI.noMatch + '</div>';
       } else {
         var groups = {};
         res.forEach(function (r) { (groups[r.type] = groups[r.type] || []).push(r); });
         Object.keys(groups).forEach(function (g) {
           out += '<div class="palette__group">' + (TYPE_LABELS[g] || g) + "</div>";
           groups[g].forEach(function (r) {
-            out += '<a class="palette__item" href="' + r.url + '"><span class="t">' + highlight(r.t, q) + '</span><span class="k">Abrir</span></a>';
+            out += '<a class="palette__item" href="' + r.url + '"><span class="t">' + highlight(r.t, q) + '</span><span class="k">' + UI.open + '</span></a>';
           });
         });
       }
@@ -283,22 +330,21 @@
     function runPageSearch(query) {
       var res = query ? searchIndex(query, 50) : [];
       if (!query) {
-        summary.textContent = "Escribe un término para buscar personas, proyectos, publicaciones, actividades o recursos.";
+        summary.textContent = UI.searchPrompt;
         container.innerHTML = "";
         return;
       }
       if (!res.length) {
-        summary.textContent = "0 resultados para «" + query + "»";
+        summary.textContent = UI.noResultsFor(query);
         container.innerHTML =
-          '<div class="empty-state"><h3>No hemos encontrado una coincidencia exacta</h3>' +
-          "<p>Prueba con otro término o explora estas áreas relacionadas.</p>" +
-          '<p style="margin-top:16px"><a class="tag" href="investigacion.html#areas">Áreas temáticas</a> ' +
-          '<a class="tag" href="proyectos.html">Proyectos</a> ' +
-          '<a class="tag" href="repositorio.html">Repositorio</a> ' +
-          '<a class="tag" href="actividades.html">Agenda</a></p></div>';
+          '<div class="empty-state"><h3>' + UI.noResultsTitle + '</h3>' +
+          "<p>" + UI.noResultsHint + "</p>" +
+          '<p style="margin-top:16px">' + UI.relatedTags.map(function (t) {
+            return '<a class="tag" href="' + t[1] + '">' + t[0] + '</a>';
+          }).join(" ") + '</p></div>';
         return;
       }
-      summary.textContent = res.length + " resultado" + (res.length === 1 ? "" : "s") + " para «" + query + "»";
+      summary.textContent = UI.resultsFor(res.length, query);
       container.innerHTML = res.map(function (r) {
         return '<article class="search-result"><span class="type">' + (TYPE_LABELS[r.type] || r.type) + "</span>" +
           '<h3><a href="' + r.url + '">' + highlight(r.t, query) + "</a></h3>" +
@@ -551,7 +597,7 @@
       if (!target) return;
       navigator.clipboard.writeText(target.textContent.trim()).then(function () {
         var old = btn.textContent;
-        btn.textContent = "Copiado ✓";
+        btn.textContent = UI.copied;
         setTimeout(function () { btn.textContent = old; }, 1800);
       });
     });
@@ -583,9 +629,8 @@
       .sort(function (a, b) { return a.date < b.date ? -1 : 1; })[0];
     if (next) {
       var dt = new Date(next.date + "T12:00:00");
-      var months = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
       nextEvSlot.innerHTML =
-        '<span class="d">' + dt.getDate() + " " + months[dt.getMonth()] + " · " + esc(next.type) + "</span>" +
+        '<span class="d">' + dt.getDate() + " " + UI.monthsShort[dt.getMonth()] + " · " + esc(next.type) + "</span>" +
         '<span class="t">' + esc(next.title) + "</span>";
       nextEvSlot.href = next.url;
     }
@@ -596,16 +641,15 @@
   if (calRoot && window.CH_EVENTS) {
     var current = new Date();
     current.setDate(1);
-    var monthNames = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     function renderCal() {
       var y = current.getFullYear(), m = current.getMonth();
       var firstDay = (new Date(y, m, 1).getDay() + 6) % 7; // lunes=0
       var daysIn = new Date(y, m + 1, 0).getDate();
-      var html = '<div class="cal__head"><span class="cal__title">' + monthNames[m] + " " + y + "</span>" +
-        '<div class="cal__nav"><button type="button" aria-label="Mes anterior" data-cal="-1">←</button>' +
-        '<button type="button" aria-label="Mes siguiente" data-cal="1">→</button></div></div>' +
-        "<table><caption class='visually-hidden'>Calendario de actividades de " + monthNames[m] + " " + y + "</caption>" +
-        "<thead><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr></thead><tbody><tr>";
+      var html = '<div class="cal__head"><span class="cal__title">' + UI.monthsLong[m] + " " + y + "</span>" +
+        '<div class="cal__nav"><button type="button" aria-label="' + UI.prevMonth + '" data-cal="-1">←</button>' +
+        '<button type="button" aria-label="' + UI.nextMonth + '" data-cal="1">→</button></div></div>' +
+        "<table><caption class='visually-hidden'>" + UI.calendarCaption(UI.monthsLong[m], y) + "</caption>" +
+        "<thead><tr>" + UI.weekdays.map(function (w) { return "<th>" + w + "</th>"; }).join("") + "</tr></thead><tbody><tr>";
       var cell = 0;
       for (; cell < firstDay; cell++) html += '<td class="is-other"></td>';
       for (var day = 1; day <= daysIn; day++) {
