@@ -9,7 +9,7 @@
 window.CH_NAV = [
   {
     label: "La Cátedra", url: "la-catedra.html",
-    feature: { img: "assets/img/estudiantes.png", kicker: "Presentación", title: "Una conversación académica entre orillas", url: "la-catedra.html" },
+    feature: { img: "assets/img/estudiantes.jpg", kicker: "Presentación", title: "Una conversación académica entre orillas", url: "la-catedra.html" },
     items: [
       ["Quiénes somos", "la-catedra.html#quienes-somos"],
       ["Misión y objetivos", "la-catedra.html#mision"],
@@ -21,7 +21,7 @@ window.CH_NAV = [
   },
   {
     label: "Actividades", url: "actividades.html",
-    feature: { img: "assets/img/aulas.png", kicker: "Próximamente", title: "Seminario permanente: Pensar la Hispanidad en el siglo XXI", url: "actividad.html" },
+    feature: { img: "assets/img/aulas.jpg", kicker: "Próximamente", title: "Seminario permanente: Pensar la Hispanidad en el siglo XXI", url: "actividad.html" },
     items: [
       ["Agenda", "actividades.html"],
       ["Próximas actividades", "actividades.html#proximas"],
@@ -43,7 +43,7 @@ window.CH_NAV = [
   },
   {
     label: "Galería", url: "multimedia.html",
-    feature: { img: "assets/img/conquista.png", kicker: "Galería", title: "Fotografías y documentos gráficos", url: "multimedia.html" },
+    feature: { img: "assets/img/conquista.jpg", kicker: "Galería", title: "Fotografías y documentos gráficos", url: "multimedia.html" },
     items: [
       ["Toda la galería", "multimedia.html"],
       ["Fotografías", "multimedia.html?tipo=foto"],
