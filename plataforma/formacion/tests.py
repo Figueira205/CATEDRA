@@ -36,14 +36,32 @@ class FormacionTests(TestCase):
         self.assertNotContains(r, "youtube-nocookie.com")
         self.assertFalse(Visualizacion.objects.exists())
 
-    def test_video_visible_y_contado_con_compra(self):
+    def test_enlace_del_video_nunca_aparece_en_la_pagina(self):
         clase = self.p["clase"]
         Compra.objects.create(usuario=self.usuario, pagina=clase, concepto=clase.title, importe=clase.precio,
                               estado=Compra.Estado.PAGADA)
         self.client.force_login(self.usuario)
         r = self.client.get(clase.url)
-        self.assertContains(r, "youtube-nocookie.com/embed/dQw4w9WgXcQ")
+        self.assertNotContains(r, "youtube-nocookie.com/embed/dQw4w9WgXcQ")
+        self.assertContains(r, reverse("formacion:video_embed", args=[clase.pk]))
+        self.assertFalse(Visualizacion.objects.exists())  # visitar la página no cuenta como visualización
+
+    def test_video_embed_entrega_el_enlace_con_compra_y_cuenta_visualizacion(self):
+        clase = self.p["clase"]
+        Compra.objects.create(usuario=self.usuario, pagina=clase, concepto=clase.title, importe=clase.precio,
+                              estado=Compra.Estado.PAGADA)
+        self.client.force_login(self.usuario)
+        r = self.client.get(reverse("formacion:video_embed", args=[clase.pk]))
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.json()["embed_url"], "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0")
         self.assertEqual(Visualizacion.objects.filter(clase=clase, usuario=self.usuario).count(), 1)
+
+    def test_video_embed_rechaza_sin_acceso(self):
+        clase = self.p["clase"]
+        self.client.force_login(self.usuario)
+        r = self.client.get(reverse("formacion:video_embed", args=[clase.pk]))
+        self.assertEqual(r.status_code, 403)
+        self.assertFalse(Visualizacion.objects.exists())
 
     def test_enlace_del_directo_nunca_aparece_en_la_pagina(self):
         r = self.client.get(self.p["directo"].url)

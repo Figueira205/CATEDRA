@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 {% block content %}
 <div class="container" style="padding-block:clamp(48px,5vw,64px)">
   <div class="doc-layout">
@@ -29,8 +29,10 @@
       <p class="kicker">Formación · {% include "compras/includes/etiqueta_acceso.html" with producto=page %}</p>
       <h1 class="titulo-doc">{{ page.title }}</h1>
       {% if page.resumen %}<p class="lead">{{ page.resumen }}</p>{% endif %}
-      {% if tiene_acceso and page.video_incrustado %}
-        <div class="video-embed mt-6"><iframe src="{{ page.video_incrustado }}" title="{{ page.title }}" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      {% if tiene_acceso and page.tiene_video %}
+        <div class="video-embed mt-6" data-clase-video="{{ page.pk }}" data-titulo="{{ page.title }}">
+          <p class="video-embed__cargando">Cargando el vídeo…</p>
+        </div>
       {% elif page.imagen %}
         <figure class="img-frame mt-6">{% image page.imagen width-1200 %}</figure>
       {% endif %}
@@ -38,4 +40,7 @@
     </article>
   </div>
 </div>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'catedra/js/clase-video.js' %}" data-url="{% url 'formacion:video_embed' page.pk %}" defer></script>
 {% endblock %}

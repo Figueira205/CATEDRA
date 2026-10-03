@@ -100,7 +100,16 @@ class ClasePage(Producto, Page):
 
     @property
     def video_incrustado(self):
+        """Solo para formacion.views.video_embed. NUNCA referenciar esto desde una plantilla:
+        Wagtail pasa `page` entero al contexto, así que esta propiedad es accesible desde
+        cualquier plantilla aunque no esté en `ctx` — la protección real es no usarla ahí.
+        Las plantillas deben usar `tiene_video` (no revela el enlace) y pedir el vídeo por
+        fetch a formacion:video_embed, que sí comprueba el acceso antes de responder."""
         return url_incrustada(self.video_url)
+
+    @property
+    def tiene_video(self):
+        return bool(self.video_url)
 
     @property
     def directo_abierto(self):
@@ -113,10 +122,11 @@ class ClasePage(Producto, Page):
 
     def get_context(self, request, *args, **kwargs):
         ctx = super().get_context(request, *args, **kwargs)
-        acceso = self.usuario_tiene_acceso(request.user)
-        ctx["tiene_acceso"] = acceso
-        if acceso and self.video_url and not getattr(request, "is_preview", False):
-            Visualizacion.objects.create(clase=self, usuario=request.user if request.user.is_authenticated else None)
+        # El enlace del vídeo NO se pone aquí ni se pasa a la plantilla: se
+        # entrega por fetch desde formacion.views.video_embed, que es quien
+        # registra la Visualizacion (así cuenta reproducciones reales, no
+        # visitas a la página, y el enlace nunca llega al HTML servido).
+        ctx["tiene_acceso"] = self.usuario_tiene_acceso(request.user)
         return ctx
 
 
