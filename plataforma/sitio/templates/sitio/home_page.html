@@ -38,7 +38,34 @@
           </div>
         </a>
       </div>
-      {% endwith %}{% endif %}
+      {% endwith %}{% else %}
+      <div class="col-5">
+        <div class="hero-carousel reveal" data-carousel aria-roledescription="carrusel" aria-label="Secciones destacadas de la Cátedra">
+          <div class="hero-carousel__track">
+            <a class="hero-carousel__slide is-active" href="/la-catedra/">
+              <img src="{% static 'catedra/img/conquista.png' %}" alt="" loading="eager">
+              <span class="hero-carousel__cursor" aria-hidden="true">Ver</span>
+              <span class="hero-carousel__cap"><span class="mono">LA CÁTEDRA</span><span class="t">Quiénes somos y qué investigamos</span></span>
+            </a>
+            <a class="hero-carousel__slide" href="/actividades/">
+              <img src="{% static 'catedra/img/aulas.png' %}" alt="" loading="lazy">
+              <span class="hero-carousel__cursor" aria-hidden="true">Ver</span>
+              <span class="hero-carousel__cap"><span class="mono">ACTIVIDADES</span><span class="t">Seminarios, jornadas y conferencias</span></span>
+            </a>
+            <a class="hero-carousel__slide" href="/formacion/">
+              <img src="{% static 'catedra/img/estudiantes2.png' %}" alt="" loading="lazy">
+              <span class="hero-carousel__cursor" aria-hidden="true">Ver</span>
+              <span class="hero-carousel__cap"><span class="mono">FORMACIÓN</span><span class="t">Clases en directo y grabadas</span></span>
+            </a>
+          </div>
+          <div class="hero-carousel__dots" role="tablist" aria-label="Diapositivas">
+            <button type="button" class="is-active" role="tab" aria-selected="true" data-dot aria-label="La Cátedra"></button>
+            <button type="button" role="tab" aria-selected="false" data-dot aria-label="Actividades"></button>
+            <button type="button" role="tab" aria-selected="false" data-dot aria-label="Formación"></button>
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>

@@ -474,6 +474,46 @@
     });
   }
 
+  /* ---------- Carrusel editorial del hero ---------- */
+  var heroCarousel = $("[data-carousel]");
+  if (heroCarousel) {
+    var hcSlides = $$(".hero-carousel__slide", heroCarousel);
+    var hcDots = $$(".hero-carousel__dots button", heroCarousel);
+    var hcIndex = 0, hcTimer = null;
+    var hcShow = function (i) {
+      hcIndex = (i + hcSlides.length) % hcSlides.length;
+      hcSlides.forEach(function (s, n) { s.classList.toggle("is-active", n === hcIndex); });
+      hcDots.forEach(function (d, n) {
+        d.classList.toggle("is-active", n === hcIndex);
+        d.setAttribute("aria-selected", n === hcIndex ? "true" : "false");
+      });
+    };
+    var hcStop = function () { if (hcTimer) { clearInterval(hcTimer); hcTimer = null; } };
+    var hcStart = function () {
+      if (reduceMotion || hcSlides.length < 2) return;
+      hcStop();
+      hcTimer = setInterval(function () { if (!document.hidden) hcShow(hcIndex + 1); }, 4500);
+    };
+    hcDots.forEach(function (d, n) { d.addEventListener("click", function () { hcShow(n); hcStart(); }); });
+    heroCarousel.addEventListener("mouseenter", hcStop);
+    heroCarousel.addEventListener("mouseleave", hcStart);
+    heroCarousel.addEventListener("focusin", hcStop);
+    heroCarousel.addEventListener("focusout", hcStart);
+    /* La etiqueta "Ver" sigue al cursor dentro de la diapositiva: solo escucha
+       mousemove (no afecta a quien navega con teclado o táctil). */
+    hcSlides.forEach(function (slide) {
+      var cursor = $(".hero-carousel__cursor", slide);
+      if (!cursor) return;
+      slide.addEventListener("mousemove", function (e) {
+        var r = slide.getBoundingClientRect();
+        cursor.style.left = (e.clientX - r.left) + "px";
+        cursor.style.top = (e.clientY - r.top) + "px";
+      });
+    });
+    hcShow(0);
+    hcStart();
+  }
+
   /* ---------- Aparición al hacer scroll ---------- */
   /* Los elementos .reveal que comparten padre (tarjetas de un grid, filas de una
      agenda, piezas del mosaico…) entran en cascada en vez de todos a la vez: se
