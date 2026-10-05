@@ -207,8 +207,13 @@
     <div class="grid">
       {% for v in clases_destacadas %}
       <div class="col-4 reveal">
-        <div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/{{ v.youtube_id }}" title="{{ v.titulo }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-embed" data-yt-id="{{ v.youtube_id }}">
+          <button type="button" class="video-embed__play" aria-label="Reproducir: {{ v.titulo }}">
+            <img src="https://i.ytimg.com/vi/{{ v.youtube_id }}/hqdefault.jpg" alt="" loading="lazy">
+            <span class="play-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
         </div>
         <p style="font-weight:700;line-height:1.3;margin-top:var(--s-3)">{{ v.titulo }}</p>
       </div>

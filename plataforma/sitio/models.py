@@ -45,7 +45,7 @@ CLASES_DESTACADAS = [
     {"youtube_id": "7DOrYiVZRow", "titulo": "Delitos de odio en los recintos académicos | TEDxLucena"},
     {"youtube_id": "1xQNpBHv51E", "titulo": "Felipe II: «El primer monarca Global»"},
     {"youtube_id": "_mrjXeiGp1k", "titulo": "Felipe II, rey de Inglaterra"},
-    {"youtube_id": "9Z00JzAC17g", "titulo": "El pte. López Obrador es un inculto o un mentiroso"},
+    {"youtube_id": "47LYGvMr38k", "titulo": "HISPANGLIA"},
     {"youtube_id": "LmMWFOz64rY", "titulo": "Mariana de Austria"},
 ]
 

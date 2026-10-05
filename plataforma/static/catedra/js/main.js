@@ -621,6 +621,22 @@
     hcalRenderDay(hcalSelected);
   }
 
+  /* ---------- Portadas de YouTube con reproducción al pulsar ---------- */
+  $$(".video-embed[data-yt-id]").forEach(function (wrap) {
+    var btn = $(".video-embed__play", wrap);
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var id = wrap.getAttribute("data-yt-id");
+      var ifr = d.createElement("iframe");
+      ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+      ifr.title = btn.getAttribute("aria-label") || "";
+      ifr.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+      ifr.allowFullscreen = true;
+      wrap.innerHTML = "";
+      wrap.appendChild(ifr);
+    });
+  });
+
   /* ---------- Parallax discreto en imágenes marcadas [data-parallax] ---------- */
   var parallaxEls = $$("[data-parallax]");
   if (parallaxEls.length && !reduceMotion) {

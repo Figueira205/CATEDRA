@@ -743,10 +743,19 @@ ul[class],ol[class],
 .lightbox__content img,.lightbox__content video{max-height:78vh;width:auto;max-width:100%;margin-inline:auto;border-radius:var(--radius)}
 
 /* Vídeo de clase (formacion.ClasePage): el iframe lo inyecta clase-video.js tras comprobar acceso */
-.video-embed{position:relative;aspect-ratio:16/9;background:var(--color-ink);border-radius:var(--radius);overflow:hidden}
+.video-embed{position:relative;aspect-ratio:16/9;background:var(--color-ink);border-radius:10px;overflow:hidden}
 .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-embed__cargando,.video-embed__error{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:var(--s-5);text-align:center;color:var(--color-paper);font-family:var(--font-mono);font-size:.9rem}
 .video-embed__error{color:var(--color-gold)}
+
+/* Portada de YouTube con botón de reproducir: antes de pulsar play solo se ve
+   la miniatura propia, sin la cabecera/marca de YouTube que trae el iframe
+   incrustado de serie. El iframe real se inyecta por JS al pulsar. */
+.video-embed__play{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:var(--color-ink)}
+.video-embed__play img{width:100%;height:100%;object-fit:cover;display:block;transition:transform var(--t-med) var(--ease),opacity var(--t-fast)}
+.video-embed__play:hover img{transform:scale(1.03);opacity:.85}
+.video-embed__play .play-badge{transition:transform var(--t-fast) var(--ease),background var(--t-fast)}
+.video-embed__play:hover .play-badge{transform:translate(-50%,-50%) scale(1.08);background:var(--color-carmine);color:#fff}
 .lightbox__cap{color:var(--color-paper);text-align:center;padding-top:var(--s-4);font-size:.95rem}
 .lightbox__cap .mono{color:var(--color-gold)}
 .lightbox__close{
