@@ -521,13 +521,25 @@
   }
 
   /* ---------- Aparición al hacer scroll ---------- */
+  /* Los elementos .reveal que comparten padre (tarjetas de un grid, filas de una
+     agenda, piezas del mosaico…) entran en cascada en vez de todos a la vez: se
+     calcula un pequeño retraso creciente según su posición entre hermanos .reveal,
+     tope en 6 para que una lista larga no tarde una eternidad en terminar. */
+  var revealGroups = new window.WeakMap();
+  function revealDelay(el) {
+    var parent = el.parentElement;
+    if (!parent) return 0;
+    var n = revealGroups.get(parent) || 0;
+    revealGroups.set(parent, n + 1);
+    return Math.min(n, 6) * 70;
+  }
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -40px" });
-    $$(".reveal").forEach(function (el) { io.observe(el); });
+    $$(".reveal").forEach(function (el) { el.style.transitionDelay = revealDelay(el) + "ms"; io.observe(el); });
   } else {
     $$(".reveal").forEach(function (el) { el.classList.add("is-visible"); });
   }
