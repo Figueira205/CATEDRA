@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" %}
+<section class="section section--tight">
+  <div class="container">
+    {% if personas %}
+    <div class="grid">
+      {% for persona in personas %}
+      <div class="col-3 reveal">{% include "sitio/includes/tarjeta_persona.html" with persona=persona %}</div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><p>Los perfiles del equipo se publicarán próximamente.</p></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

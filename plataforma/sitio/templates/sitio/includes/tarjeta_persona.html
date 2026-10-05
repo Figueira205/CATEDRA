@@ -1,0 +1,7 @@
+{% load wagtailcore_tags wagtailimages_tags %}<a class="person" href="{% pageurl persona %}">
+  <div class="person__photo">
+    {% if persona.foto %}{% image persona.foto fill-480x600 loading="lazy" %}{% else %}<span class="person__initials">{{ persona.iniciales }}</span>{% endif %}
+  </div>
+  <p class="person__name">{{ persona.title }}</p>
+  {% if persona.cargo %}<p class="person__role">{{ persona.cargo }}</p>{% endif %}
+</a>

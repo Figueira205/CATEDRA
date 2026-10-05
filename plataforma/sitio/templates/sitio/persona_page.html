@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<div class="container" style="padding-block:clamp(48px,5vw,64px)">
+  <div class="doc-layout">
+    <aside>
+      <div class="person__photo">
+        {% if page.foto %}{% image page.foto fill-480x600 %}{% else %}<span class="person__initials">{{ page.iniciales }}</span>{% endif %}
+      </div>
+      <div class="datasheet mt-6"><dl>
+        <div class="row"><dt>Área</dt><dd>{{ page.get_categoria_display }}</dd></div>
+        {% if page.cargo %}<div class="row"><dt>Cargo</dt><dd>{{ page.cargo }}</dd></div>{% endif %}
+      </dl></div>
+      <p class="mt-6"><a class="link-arrow" href="{% pageurl page.get_parent %}">Volver al equipo <span class="arr" aria-hidden="true">→</span></a></p>
+    </aside>
+    <article>
+      <p class="kicker">{{ page.get_categoria_display }}</p>
+      <h1 class="titulo-doc">{{ page.title }}</h1>
+      {% if page.cargo %}<p class="lead">{{ page.cargo }}</p>{% endif %}
+      {% if page.resumen %}<div class="prose mt-6"><p>{{ page.resumen }}</p></div>
+      {% else %}<div class="prose mt-6"><p class="empty-state">Este perfil se completará próximamente.</p></div>{% endif %}
+    </article>
+  </div>
+</div>
+{% endblock %}

@@ -145,6 +145,24 @@
   </div>
 </section>
 
+{# 02c · Dirección y equipo #}
+{% if equipo_destacado %}
+<section class="section section--muted" aria-labelledby="t-equipo">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-equipo">Dirección y equipo</h2>
+      <span class="sec-head__aside"><a class="link-arrow" href="/equipo/">Ver el equipo completo <span class="arr" aria-hidden="true">→</span></a></span>
+    </div>
+    <div class="grid">
+      {% for persona in equipo_destacado %}
+      <div class="col-4 reveal">{% include "sitio/includes/tarjeta_persona.html" with persona=persona %}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 {# 03 · Agenda #}
 {% if proximas_actividades %}
 <section class="section section--muted" aria-labelledby="t-agenda">

@@ -74,6 +74,7 @@ class HomePage(Page):
         ctx["galeria_elementos"] = list(galeria.elementos)[:5] if galeria else []
         ctx["ultimas_novedades"] = NovedadPage.objects.live().order_by("-fecha")[:3]
         ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
+        ctx["equipo_destacado"] = PersonaPage.objects.live().order_by("orden", "title")[:6]
         return ctx
 
 
@@ -259,6 +260,59 @@ class NovedadPage(Page):
     class Meta:
         verbose_name = "novedad"
         verbose_name_plural = "novedades"
+
+
+# ----------------------------------------------------------------------- Equipo
+class EquipoPage(Page):
+    antetitulo = models.CharField(max_length=120, blank=True, default="Dirección y equipo")
+    entradilla = models.TextField(blank=True)
+
+    content_panels = Page.content_panels + [FieldPanel("antetitulo"), FieldPanel("entradilla")]
+    subpage_types = ["sitio.PersonaPage"]
+    max_count = 1
+
+    class Meta:
+        verbose_name = "equipo"
+
+    def get_context(self, request, *args, **kwargs):
+        ctx = super().get_context(request, *args, **kwargs)
+        ctx["personas"] = PersonaPage.objects.child_of(self).live().order_by("orden", "title")
+        return ctx
+
+
+class PersonaPage(Page):
+    class Categoria(models.TextChoices):
+        DIRECCION = "direccion", "Dirección"
+        COORDINACION = "coordinacion", "Coordinación académica"
+        CONSEJO = "consejo", "Consejo académico"
+        DOCENCIA = "docencia", "Docencia"
+        INVESTIGACION = "investigacion", "Investigación"
+        COLABORACION = "colaboracion", "Colaboración"
+
+    categoria = models.CharField(max_length=20, choices=Categoria.choices, default=Categoria.COLABORACION)
+    cargo = models.CharField("cargo o rol", max_length=160, blank=True)
+    foto = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+        help_text="Opcional. Sin foto se muestran las iniciales del nombre.",
+    )
+    resumen = models.TextField("resumen o biografía breve", blank=True, max_length=600)
+    orden = models.PositiveSmallIntegerField(default=0, help_text="Orden dentro del equipo (menor número primero).")
+
+    content_panels = Page.content_panels + [
+        FieldPanel("categoria"), FieldPanel("cargo"), FieldPanel("foto"), FieldPanel("resumen"), FieldPanel("orden"),
+    ]
+    search_fields = Page.search_fields + [index.SearchField("cargo"), index.SearchField("resumen")]
+    parent_page_types = ["sitio.EquipoPage"]
+    subpage_types = []
+
+    class Meta:
+        verbose_name = "integrante del equipo"
+        verbose_name_plural = "integrantes del equipo"
+
+    @property
+    def iniciales(self):
+        partes = self.title.split()
+        return "".join(p[0] for p in partes[:2]).upper() or "—"
 
 
 # ---------------------------------------------------------------------- Galería
