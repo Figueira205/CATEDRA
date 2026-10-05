@@ -160,7 +160,7 @@
       var item = d.createElement("div");
       item.className = "mm-item";
       if (!sec.items) {
-        item.innerHTML = '<a class="mm-top" href="' + sec.url + '"><span class="mm-num">' + num + "</span>" + esc(sec.label) + "</a>";
+        item.innerHTML = '<a class="mm-top" href="' + sec.url + '"><span><span class="mm-num">' + num + "</span>" + esc(sec.label) + "</span></a>";
         mnav.appendChild(item);
         return;
       }
