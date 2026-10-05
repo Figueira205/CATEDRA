@@ -395,6 +395,16 @@ ul[class],ol[class],
 .hero__lead{font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.45;max-width:30em;color:var(--color-ink-soft)}
 .hero__ctas{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)}
 
+/* Tipografía ampliada de la portada (solo .portada, cuerpo de base.html lo
+   marca en home_page.html): en portátil/escritorio el titular y los títulos
+   de sección se quedaban por debajo del tope del clamp, con mucho hueco
+   alrededor del texto. Se sube el tope y el crecimiento con el viewport
+   sin tocar los tokens globales (los usa el resto del sitio también). */
+.portada .hero__title{font-size:clamp(3.2rem,6.4vw,6.6rem)}
+.portada .hero__lead{font-size:clamp(1.3rem,2vw,2rem)}
+.portada .sec-head__title{font-size:clamp(2.6rem,5.3vw,5.8rem)}
+.portada .kicker{font-size:.86rem}
+
 .spotlight{
   border:2px solid var(--color-ink);border-radius:var(--radius);
   background:var(--color-white);overflow:hidden;
