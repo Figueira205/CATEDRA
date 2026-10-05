@@ -623,7 +623,7 @@
     if (!parent) return 0;
     var n = revealGroups.get(parent) || 0;
     revealGroups.set(parent, n + 1);
-    return Math.min(n, 6) * 70;
+    return Math.min(n, 6) * 130;
   }
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {

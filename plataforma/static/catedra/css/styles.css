@@ -54,6 +54,7 @@
 
   /* Movimiento */
   --ease:cubic-bezier(.33,1,.68,1);
+  --ease-premium:cubic-bezier(.16,1,.3,1); /* salida lenta y deliberada, para las entradas de sección */
   --t-fast:.18s;
   --t-med:.32s;
 
@@ -441,7 +442,7 @@ ul[class],ol[class],
 .hero-carousel__track{position:relative;width:100%;height:100%}
 .hero-carousel__slide{
   position:absolute;inset:0;display:block;text-decoration:none;overflow:hidden;
-  opacity:0;visibility:hidden;transition:opacity .9s var(--ease);
+  opacity:0;visibility:hidden;transition:opacity 1.1s var(--ease-premium);
 }
 .hero-carousel__slide.is-active{opacity:1;visibility:visible;z-index:1}
 .hero-carousel__slide img{
@@ -458,8 +459,11 @@ ul[class],ol[class],
   position:absolute;left:0;right:0;bottom:0;z-index:2;
   padding:var(--s-5);color:#fff;display:flex;flex-direction:column;gap:4px;
 }
-.hero-carousel__cap .mono{color:var(--color-gold);letter-spacing:.1em}
-.hero-carousel__cap .t{font-weight:700;font-size:1.15rem;line-height:1.25}
+.hero-carousel__cap .mono{color:var(--color-gold);letter-spacing:.1em;display:block;opacity:0;transform:translateY(16px)}
+.hero-carousel__cap .t{font-weight:700;font-size:1.15rem;line-height:1.25;display:block;opacity:0;transform:translateY(16px)}
+.hero-carousel__slide.is-active .hero-carousel__cap .mono{animation:cap-in .7s var(--ease-premium) .2s both}
+.hero-carousel__slide.is-active .hero-carousel__cap .t{animation:cap-in .7s var(--ease-premium) .34s both}
+@keyframes cap-in{to{opacity:1;transform:none}}
 .hero-carousel__dots{position:absolute;top:var(--s-4);right:var(--s-4);z-index:3;display:flex;gap:7px}
 .hero-carousel__dots button{
   width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);
@@ -971,9 +975,15 @@ ul[class],ol[class],
 .text-center{text-align:center}
 .mt-6{margin-top:var(--s-6)}.mt-7{margin-top:var(--s-7)}.mb-4{margin-bottom:var(--s-4)}.mb-6{margin-bottom:var(--s-6)}
 
-/* Aparición al hacer scroll */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+/* Aparición al hacer scroll: deliberadamente lenta (1s, curva "premium" con
+   salida suave) y con más recorrido que antes, para que la web se sienta
+   trabajada y no "instantánea". Los modificadores --left/--right entran
+   desde fuera del contenido hacia dentro (p. ej. el calendario de la
+   portada: el mes desde la izquierda, el panel del día desde la derecha). */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 1s var(--ease-premium),transform 1s var(--ease-premium)}
 .reveal.is-visible{opacity:1;transform:none}
+.reveal--left{transform:translate(-64px,0)}
+.reveal--right{transform:translate(64px,0)}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
 /* Cortina de entrada de la portada: cubre la pantalla un instante breve (hasta
@@ -1007,13 +1017,13 @@ ul[class],ol[class],
 /* Entrada de la portada: el bloque de texto y la pieza «en foco» aparecen en
    cascada nada más cargar, en vez de plantarse de golpe (lo cubre el reset
    global de prefers-reduced-motion de la sección 2, que anula duración). */
-@keyframes hero-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.hero__grid>.col-7>*,.hero__grid .spotlight{animation:hero-in .7s var(--ease) both}
-.hero__grid>.col-7>*:nth-child(1){animation-delay:.04s}
-.hero__grid>.col-7>*:nth-child(2){animation-delay:.12s}
-.hero__grid>.col-7>*:nth-child(3){animation-delay:.22s}
-.hero__grid>.col-7>*:nth-child(4){animation-delay:.32s}
-.hero__grid .spotlight{animation-delay:.4s}
+@keyframes hero-in{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero__grid>.col-7>*,.hero__grid .spotlight,.hero__grid .hero-carousel{animation:hero-in 1.1s var(--ease-premium) both}
+.hero__grid>.col-7>*:nth-child(1){animation-delay:.1s}
+.hero__grid>.col-7>*:nth-child(2){animation-delay:.26s}
+.hero__grid>.col-7>*:nth-child(3){animation-delay:.44s}
+.hero__grid>.col-7>*:nth-child(4){animation-delay:.62s}
+.hero__grid .spotlight,.hero__grid .hero-carousel{animation-delay:.74s}
 
 /* Calendario de la portada: mes pequeño a la izquierda, contenido del día
    seleccionado a la derecha. Datos reales (pasados y futuros) servidos por
