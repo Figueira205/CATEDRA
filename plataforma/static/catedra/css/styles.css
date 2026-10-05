@@ -110,13 +110,15 @@ ul[class],ol[class],
 @media (max-width:1023px){.grid{grid-template-columns:repeat(6,1fr)}}
 @media (max-width:767px){.grid{grid-template-columns:repeat(4,1fr)}}
 [class*="col-"]{grid-column:span 12}
-.col-3{grid-column:span 3}.col-4{grid-column:span 4}.col-5{grid-column:span 5}
+.col-2{grid-column:span 2}.col-3{grid-column:span 3}.col-4{grid-column:span 4}.col-5{grid-column:span 5}
 .col-6{grid-column:span 6}.col-7{grid-column:span 7}.col-8{grid-column:span 8}.col-9{grid-column:span 9}
 @media (max-width:1023px){
+  .col-2{grid-column:span 2}
   .col-3,.col-4{grid-column:span 3}
   .col-5,.col-6,.col-7,.col-8,.col-9{grid-column:span 6}
 }
 @media (max-width:767px){
+  .col-2{grid-column:span 2}
   .col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9{grid-column:span 4}
 }
 
