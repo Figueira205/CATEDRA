@@ -6,14 +6,9 @@ from wagtail.models import Site
 #: (anclas), en vez de en páginas hijas reales del árbol de Wagtail. Si en el
 #: futuro alguna de estas páginas pasa a tener hijas reales marcadas «Mostrar
 #: en menús», ese slug puede quitarse de aquí y volverá a generarse solo.
+#: La Cátedra se quitó a propósito (2026-10-06, pedido del usuario): al ser
+#: todo una misma página, no quería desplegable ahí, solo en Actividades.
 SUBMENU_ANCLAS = {
-    "la-catedra": [
-        ["Quiénes somos", "#quienes-somos"],
-        ["Investigación", "#campo-de-estudio"],
-        ["Misión y valores", "#mision-y-valores"],
-        ["Historia", "#historia"],
-        ["Dirección y equipo", "#direccion-y-equipo"],
-    ],
     "actividades": [
         ["Agenda completa", ""],
         ["Próximas actividades", "#proximas"],
