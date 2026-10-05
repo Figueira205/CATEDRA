@@ -631,6 +631,18 @@ ul[class],ol[class],
 .atlas-canvas-box{position:sticky;top:calc(var(--header-h-compact) + 24px)}
 .atlas-canvas-box svg{width:100%;height:auto;display:block}
 @media (max-width:1023px){.atlas-canvas-box{display:none}}
+#atlas-svg .atlas-line line{stroke:var(--color-border-dark);stroke-width:1}
+#atlas-svg .atlas-hub circle{fill:var(--color-carmine);stroke:var(--color-gold);stroke-width:1.5}
+#atlas-svg .atlas-node circle{fill:var(--color-atlantic-deep);stroke:var(--color-gold);stroke-width:1.5;transition:r var(--t-med) var(--ease),fill var(--t-med) var(--ease)}
+#atlas-svg .atlas-node text{fill:var(--color-paper-muted);font-family:var(--font-mono);font-size:9px;letter-spacing:.03em;text-transform:uppercase}
+#atlas-svg .atlas-node.is-active circle{fill:var(--color-carmine);r:9}
+#atlas-svg .atlas-node.is-active text{fill:var(--color-paper)}
+
+/* Imagen con parallax discreto (la-catedra_page.html): se mueve algo más
+   despacio que el scroll, vía JS (transform translateY calculado), nunca si
+   prefers-reduced-motion. */
+.img-frame--parallax{overflow:hidden}
+.img-frame--parallax img{will-change:transform}
 
 /* ---------- 10. REVISTA ---------- */
 .journal{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter)}

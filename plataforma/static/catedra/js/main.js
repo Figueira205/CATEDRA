@@ -612,6 +612,26 @@
     hcalRenderDay(hcalSelected);
   }
 
+  /* ---------- Parallax discreto en imágenes marcadas [data-parallax] ---------- */
+  var parallaxEls = $$("[data-parallax]");
+  if (parallaxEls.length && !reduceMotion) {
+    var parallaxImgs = parallaxEls
+      .map(function (el) { return { el: el, img: $("img", el) }; })
+      .filter(function (p) { return p.img; });
+    var onParallax = function () {
+      var vh = window.innerHeight;
+      parallaxImgs.forEach(function (p) {
+        var r = p.el.getBoundingClientRect();
+        var center = r.top + r.height / 2 - vh / 2;
+        var shift = Math.max(-24, Math.min(24, center * -0.08));
+        p.img.style.transform = "translateY(" + shift + "px) scale(1.12)";
+      });
+    };
+    onParallax();
+    window.addEventListener("scroll", onParallax, { passive: true });
+    window.addEventListener("resize", onParallax);
+  }
+
   /* ---------- Aparición al hacer scroll ---------- */
   /* Los elementos .reveal que comparten padre (tarjetas de un grid, filas de una
      agenda, piezas del mosaico…) entran en cascada en vez de todos a la vez: se

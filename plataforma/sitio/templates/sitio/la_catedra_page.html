@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} · Cátedra de la Hispanidad{% endblock %}
+{% block body_class %}pagina-catedra{% endblock %}
+
+{% block content %}
+{# 01 · Cabecera con imagen #}
+<section class="page-hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="grid" style="align-items:center">
+      <div class="{% if page.imagen_cabecera %}col-7{% else %}col-12{% endif %} reveal">
+        {% if page.antetitulo %}<p class="kicker">{{ page.antetitulo }}</p>{% endif %}
+        <h1 id="hero-title">{{ page.title }}</h1>
+        {% if page.entradilla %}<p class="lead">{{ page.entradilla }}</p>{% endif %}
+      </div>
+      {% if page.imagen_cabecera %}
+      <div class="col-5 reveal">
+        <figure class="img-frame img-frame--parallax" data-parallax>
+          {% image page.imagen_cabecera fill-960x1080 fetchpriority="high" %}
+        </figure>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{# 02 · Secciones del cuerpo editorial (editables desde el panel) #}
+{% for s in secciones %}
+<section class="section {% cycle '' 'section--muted' %}"{% if s.titulo %} aria-labelledby="sec-{{ forloop.counter }}"{% endif %}>
+  <div class="container">
+    {% if s.titulo %}
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="sec-{{ forloop.counter }}">{{ s.titulo }}</h2>
+    </div>
+    {% endif %}
+    <div class="grid">
+      <div class="col-8 reveal"><div class="prose">{% for b in s.bloques %}{% include_block b %}{% endfor %}</div></div>
+    </div>
+  </div>
+</section>
+{% if s.titulo == "Campo de estudio" and areas_catedra %}
+{# 02b · Atlas interactivo de las ocho áreas: restablece en formato visual el
+   mismo contenido ya aprobado del párrafo anterior, con un diagrama de red
+   que resalta el nodo del área abierta (mismo lenguaje visual que los puntos
+   animados de la portada). #}
+<section class="section section--atlantic on-dark" aria-labelledby="t-atlas">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-atlas">El atlas, área por área</h2>
+    </div>
+    <div class="atlas-wrap">
+      <div class="atlas-list reveal reveal--left">
+        {% for area in areas_catedra %}
+        <div class="atlas-item" data-area="{{ area.slug }}">
+          <button type="button" class="atlas-item__btn" aria-expanded="false">
+            <span class="atlas-item__num">{{ forloop.counter|stringformat:"02d" }}</span>
+            <span class="atlas-item__name">{{ area.nombre }}</span>
+          </button>
+          <div class="atlas-item__panel"><p>{{ area.descripcion }}</p></div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="atlas-canvas-box reveal reveal--right">
+        {% include "sitio/includes/atlas_svg.html" %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endfor %}
+
+{# 03 · Fondo de estudio: imágenes reales ya publicadas en la galería #}
+{% if galeria_catedra %}
+<section class="section" aria-labelledby="t-fondo">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-fondo">El fondo de estudio</h2>
+      <span class="sec-head__aside"><a class="link-arrow" href="/galeria/">Ver la galería completa <span class="arr" aria-hidden="true">→</span></a></span>
+    </div>
+    <div class="mosaic">
+      {% for img in galeria_catedra %}
+      {% image img max-1600x1600 as grande %}
+      <button type="button" class="mosaic__item reveal {% if forloop.first %}m-wide{% else %}m-1x1{% endif %}" data-lightbox="{{ grande.url }}" data-caption="{{ img.title }}" data-meta="Fondo de estudio">
+        {% image img fill-800x600 loading="lazy" %}
+        <span class="mosaic__cap"><span class="t">{{ img.title }}</span></span>
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# 04 · CTA al equipo #}
+<section class="section section--carmine on-dark" aria-labelledby="t-cta-equipo">
+  <div class="container">
+    <div class="grid" style="align-items:center">
+      <div class="col-7 reveal">
+        <p class="kicker">Dirección y equipo</p>
+        <h2 class="sec-head__title" style="margin:16px 0">Conoce a quienes forman la Cátedra</h2>
+        <p class="serif" style="opacity:.9;max-width:50ch">Dirección, coordinación académica, consejo académico, docentes, investigadores y colaboradores. La página de perfiles se publicará próximamente.</p>
+      </div>
+      <div class="col-5 reveal">
+        <a class="btn btn--light" href="/contacto/">Contactar con la Cátedra <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -76,10 +76,60 @@ class PaginaSimple(Page):
 
     antetitulo = models.CharField(max_length=120, blank=True)
     entradilla = models.TextField(blank=True)
+    imagen_cabecera = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+        verbose_name="imagen de cabecera", help_text="Opcional. Se usa en páginas con diseño enriquecido (p. ej. La Cátedra).",
+    )
     cuerpo = StreamField(CuerpoBlock(), blank=True, use_json_field=True)
 
-    content_panels = Page.content_panels + [FieldPanel("antetitulo"), FieldPanel("entradilla"), FieldPanel("cuerpo")]
+    content_panels = Page.content_panels + [FieldPanel("antetitulo"), FieldPanel("entradilla"), FieldPanel("imagen_cabecera"), FieldPanel("cuerpo")]
     search_fields = Page.search_fields + [index.SearchField("entradilla"), index.SearchField("cuerpo")]
+
+    # Esta misma página se edita siempre con el mismo modelo/panel; lo único que
+    # cambia es la plantilla, para dar a "La Cátedra" un diseño más trabajado
+    # (imagen de cabecera, atlas interactivo de áreas) sin crear un tipo de
+    # página nuevo solo para ella. El resto de páginas de contenido libre
+    # (aviso legal, privacidad…) siguen usando la plantilla genérica.
+    def get_template(self, request, *args, **kwargs):
+        if self.slug == "la-catedra":
+            return "sitio/la_catedra_page.html"
+        return super().get_template(request, *args, **kwargs)
+
+    def get_context(self, request, *args, **kwargs):
+        ctx = super().get_context(request, *args, **kwargs)
+        secciones = []
+        for bloque in self.cuerpo:
+            if bloque.block_type == "titulo" or not secciones:
+                secciones.append({"titulo": bloque.value if bloque.block_type == "titulo" else None, "bloques": []})
+                if bloque.block_type == "titulo":
+                    continue
+            secciones[-1]["bloques"].append(bloque)
+        ctx["secciones"] = secciones
+        if self.slug == "la-catedra":
+            from wagtail.images.models import Image
+
+            ids = [1, 5, 8, 9]
+            imagenes = Image.objects.in_bulk(ids)
+            ctx["galeria_catedra"] = [imagenes[i] for i in ids if i in imagenes]
+            ctx["areas_catedra"] = [
+                {"slug": "historia-patrimonio", "nombre": "Historia y patrimonio",
+                 "descripcion": "El pasado compartido del mundo hispánico: sus fuentes, archivos y memoria material."},
+                {"slug": "lenguas-pensamiento", "nombre": "Lenguas y pensamiento",
+                 "descripcion": "El español y las demás lenguas del mundo hispánico como vehículo de ideas."},
+                {"slug": "derecho-instituciones", "nombre": "Derecho e instituciones",
+                 "descripcion": "Marcos legales e instituciones que articulan las relaciones hispánicas."},
+                {"slug": "arte-cultura-visual", "nombre": "Arte y cultura visual",
+                 "descripcion": "Expresiones artísticas, iconografía y cultura visual compartidas entre orillas."},
+                {"slug": "sociedad-diasporas", "nombre": "Sociedad y diásporas",
+                 "descripcion": "Comunidades, migraciones y vínculos sociales entre las distintas sociedades hispánicas."},
+                {"slug": "relaciones-transatlanticas", "nombre": "Relaciones transatlánticas",
+                 "descripcion": "Intercambios políticos, económicos y culturales entre España y América."},
+                {"slug": "educacion", "nombre": "Educación",
+                 "descripcion": "Formación, docencia y transmisión del conocimiento sobre la Hispanidad."},
+                {"slug": "redes-conocimiento", "nombre": "Redes de conocimiento",
+                 "descripcion": "Colaboración entre investigadores, instituciones y centros académicos."},
+            ]
+        return ctx
 
     class Meta:
         verbose_name = "página de contenido"
