@@ -182,13 +182,16 @@ WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "avif"]
 WAGTAILSEARCH_BACKENDS = {"default": {"BACKEND": "wagtail.search.backends.database"}}
 
 # ---------------------------------------------------------------- Correo
-# En desarrollo se imprimen en consola; en producción, SMTP (Brevo, Resend…).
+# En desarrollo se imprimen en consola; en producción, SMTP (Zoho, Brevo…).
+# Puerto 587: STARTTLS (EMAIL_USE_TLS). Puerto 465: SSL directo (EMAIL_USE_SSL) —
+# son excluyentes entre sí, Django no deja activar los dos a la vez.
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_HOST = env("EMAIL_HOST", default="")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
-EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=not EMAIL_USE_SSL)
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="Cátedra de la Hispanidad <no-responder@localhost>")
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = DEFAULT_FROM_EMAIL
