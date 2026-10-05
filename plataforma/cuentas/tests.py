@@ -1,3 +1,4 @@
+from allauth.mfa.recovery_codes.internal.auth import RecoveryCodes
 from django.contrib.auth.models import Permission
 from django.core import mail
 from django.test import TestCase, override_settings
@@ -50,3 +51,20 @@ class DobleFactorTests(TestCase):
     def test_desactivable_en_local(self):
         self.client.force_login(self.profesor)
         self.assertEqual(self.client.get("/admin/").status_code, 200)
+
+    def _reautenticar(self, usuario):
+        self.client.force_login(usuario)
+        self.client.post(reverse("account_reauthenticate"), {"password": "clave-de-prueba-123"})
+
+    def test_codigos_de_recuperacion_ofrecen_ir_al_panel_a_quien_tiene_acceso(self):
+        RecoveryCodes.activate(self.profesor)
+        self._reautenticar(self.profesor)
+        r = self.client.get(reverse("mfa_view_recovery_codes"))
+        self.assertContains(r, "Ir al panel de administración")
+
+    def test_codigos_de_recuperacion_no_ofrecen_el_panel_a_un_estudiante(self):
+        estudiante = crear_usuario("otro@catedra.test")
+        RecoveryCodes.activate(estudiante)
+        self._reautenticar(estudiante)
+        r = self.client.get(reverse("mfa_view_recovery_codes"))
+        self.assertNotContains(r, "Ir al panel de administración")
