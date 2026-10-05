@@ -749,7 +749,7 @@ ul[class],ol[class],
    interno negro de 3px y esquinas que pasan de suaves a totalmente
    rectas al pasar el cursor, volviendo atrás al quitarlo. */
 .video-embed--destacado{
-  border:3px solid var(--color-ink);
+  border:3px solid var(--color-ink);border-radius:22px;
   transition:border-radius var(--t-med) var(--ease);
 }
 .video-embed--destacado:hover{border-radius:0}
