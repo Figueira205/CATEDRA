@@ -280,6 +280,12 @@ ul[class],ol[class],
 .nav-link .caret{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform var(--t-fast)}
 .nav-link[aria-expanded="true"] .caret{transform:rotate(225deg) translateY(-1px)}
 @media (max-width:1240px){.main-nav{display:none}.mega{display:none}}
+/* El botón ☰ es el acceso al menú de pantalla completa que sustituye al
+   desplegable de escritorio (mega menú) cuando este no cabe: solo tiene
+   sentido por debajo de 1241px, donde .main-nav ya está oculto. Antes no
+   tenía regla de ancho y se veía también en escritorio, duplicando el
+   acceso a las mismas secciones que ya despliega la barra de navegación. */
+@media (min-width:1241px){.burger{display:none}}
 
 /* Con el menú de escritorio oculto (todo lo que no sea un portátil grande: tablet
    incluida), nada empujaba el grupo de buscador+cuenta+☰ hacia el borde derecho:
@@ -347,20 +353,44 @@ ul[class],ol[class],
   display:none;flex-direction:column;overflow-y:auto;
 }
 .mobile-menu.is-open{display:flex}
-.mobile-menu__bar{display:flex;align-items:center;justify-content:space-between;padding:var(--s-4) var(--page-pad)}
-.mobile-menu__close{color:var(--color-paper);font-weight:600;display:inline-flex;align-items:center;gap:8px;min-height:44px}
-.mobile-menu nav{padding:var(--s-4) var(--page-pad) var(--s-7);flex:1}
-.mobile-menu .mm-item{border-bottom:1px solid var(--color-border-dark)}
+.mobile-menu__bar{display:flex;align-items:center;justify-content:space-between;padding:var(--s-4) var(--page-pad);border-bottom:1px solid var(--color-border-dark)}
+.mobile-menu__close{color:var(--color-paper);font-weight:600;display:inline-flex;align-items:center;gap:8px;min-height:44px;transition:color var(--t-fast)}
+.mobile-menu__close:hover{color:var(--color-gold)}
+.mobile-menu nav{padding:var(--s-6) var(--page-pad) var(--s-7);flex:1;position:relative;overflow:hidden}
+.mobile-menu .mm-kicker{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.16em;color:var(--color-gold);margin-bottom:var(--s-4);display:block}
+.mobile-menu .mm-item{border-top:1px solid var(--color-border-dark)}
+.mobile-menu .mm-item:last-child{border-bottom:1px solid var(--color-border-dark)}
 .mobile-menu .mm-top{
-  display:flex;align-items:center;justify-content:space-between;width:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);width:100%;
   font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;letter-spacing:-.01em;
   padding:var(--s-4) 0;color:var(--color-paper);text-decoration:none;text-align:left;
+  transition:color var(--t-fast),padding-left var(--t-fast) var(--ease);
 }
-.mobile-menu .mm-sub{display:none;padding:0 0 var(--s-5)}
+.mobile-menu button.mm-top:hover,.mobile-menu a.mm-top:hover{color:var(--color-gold);padding-left:var(--s-2)}
+.mobile-menu .mm-num{font-family:var(--font-mono);font-size:.7rem;color:var(--color-gold);margin-right:var(--s-4);opacity:.85}
+.mobile-menu .mm-plus{
+  width:30px;height:30px;flex-shrink:0;border:1.5px solid var(--color-gold);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;color:var(--color-gold);
+  font-size:1.1rem;line-height:1;transition:transform var(--t-fast) var(--ease),background var(--t-fast);
+}
+.mobile-menu .mm-item.is-open .mm-plus{transform:rotate(135deg);background:var(--color-gold);color:var(--color-ink)}
+.mobile-menu .mm-sub{display:none;padding:0 0 var(--s-5) calc(.7rem * 3 + var(--s-4))}
 .mobile-menu .mm-item.is-open .mm-sub{display:block}
-.mobile-menu .mm-sub a{display:block;padding:9px 0;color:var(--color-paper-muted);text-decoration:none;font-size:1.05rem}
+.mobile-menu .mm-sub a{
+  display:flex;align-items:baseline;gap:var(--s-3);padding:10px 0;
+  color:var(--color-paper);text-decoration:none;font-size:1.08rem;font-weight:500;
+  transition:color var(--t-fast);
+}
+.mobile-menu .mm-sub a .n{font-family:var(--font-mono);font-size:.7rem;color:var(--color-gold)}
 .mobile-menu .mm-sub a:hover{color:var(--color-gold)}
-.mobile-menu__foot{padding:var(--s-5) var(--page-pad) var(--s-7);border-top:1px solid var(--color-border-dark);display:flex;flex-direction:column;gap:var(--s-4)}
+.mobile-menu__wordmark{
+  position:absolute;right:var(--page-pad);bottom:var(--s-5);
+  font-weight:750;letter-spacing:-.03em;line-height:.85;font-size:clamp(2.5rem,9vw,7rem);
+  color:transparent;-webkit-text-stroke:1px rgba(244,240,231,.14);
+  user-select:none;pointer-events:none;white-space:nowrap;z-index:-1;
+}
+@media (max-width:640px){.mobile-menu__wordmark{display:none}}
+.mobile-menu__foot{padding:var(--s-5) var(--page-pad) var(--s-7);border-top:2px solid var(--color-gold);display:flex;flex-direction:column;gap:var(--s-4)}
 .mobile-menu__foot .mono{color:var(--color-paper-muted)}
 
 /* ---------- 6. HERO PORTADA ---------- */

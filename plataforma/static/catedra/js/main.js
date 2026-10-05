@@ -151,28 +151,37 @@
   var lastFocus = null;
   if (mm && window.CH_NAV) {
     var mnav = $("#mobile-nav");
-    window.CH_NAV.forEach(function (sec) {
+    var mmKicker = d.createElement("span");
+    mmKicker.className = "mm-kicker";
+    mmKicker.textContent = "MENÚ COMPLETO";
+    mnav.appendChild(mmKicker);
+    window.CH_NAV.forEach(function (sec, idx) {
+      var num = String(idx + 1).padStart(2, "0");
       var item = d.createElement("div");
       item.className = "mm-item";
       if (!sec.items) {
-        item.innerHTML = '<a class="mm-top" href="' + sec.url + '">' + esc(sec.label) + "</a>";
+        item.innerHTML = '<a class="mm-top" href="' + sec.url + '"><span class="mm-num">' + num + "</span>" + esc(sec.label) + "</a>";
         mnav.appendChild(item);
         return;
       }
       item.innerHTML =
-        '<button class="mm-top" aria-expanded="false">' + esc(sec.label) +
-        ' <span aria-hidden="true">+</span></button>' +
+        '<button class="mm-top" aria-expanded="false"><span><span class="mm-num">' + num + "</span>" + esc(sec.label) + "</span>" +
+        '<span class="mm-plus" aria-hidden="true">+</span></button>' +
         '<div class="mm-sub">' +
-        sec.items.map(function (it) { return '<a href="' + it[1] + '">' + esc(it[0]) + "</a>"; }).join("") +
+        sec.items.map(function (it, i) { return '<a href="' + it[1] + '"><span class="n">' + String(i + 1).padStart(2, "0") + "</span>" + esc(it[0]) + "</a>"; }).join("") +
         "</div>";
       mnav.appendChild(item);
       var top = item.querySelector(".mm-top");
       top.addEventListener("click", function () {
         var isOpen = item.classList.toggle("is-open");
         top.setAttribute("aria-expanded", String(isOpen));
-        top.querySelector("span").textContent = isOpen ? "−" : "+";
       });
     });
+    var wordmark = d.createElement("div");
+    wordmark.className = "mobile-menu__wordmark";
+    wordmark.setAttribute("aria-hidden", "true");
+    wordmark.textContent = "HISPANIDAD";
+    mnav.appendChild(wordmark);
   }
   function openMobile() {
     lastFocus = d.activeElement;
