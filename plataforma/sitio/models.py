@@ -35,6 +35,21 @@ def _serializar_actividades_calendario(queryset):
     ]
 
 
+#: Selección temporal de clases/conferencias grabadas para la portada (sección
+#: "Clases grabadas y conferencias"), pedida directamente por el usuario con
+#: enlaces de YouTube concretos (2026-10-06). Títulos tomados tal cual del
+#: oEmbed público de cada vídeo. Sustituir por contenido propio del
+#: catálogo de Formación cuando exista.
+CLASES_DESTACADAS = [
+    {"youtube_id": "RaT7aRjkRaM", "titulo": "Las Otras Pandemias del siglo XXI"},
+    {"youtube_id": "7DOrYiVZRow", "titulo": "Delitos de odio en los recintos académicos | TEDxLucena"},
+    {"youtube_id": "1xQNpBHv51E", "titulo": "Felipe II: «El primer monarca Global»"},
+    {"youtube_id": "_mrjXeiGp1k", "titulo": "Felipe II, rey de Inglaterra"},
+    {"youtube_id": "9Z00JzAC17g", "titulo": "El pte. López Obrador es un inculto o un mentiroso"},
+    {"youtube_id": "LmMWFOz64rY", "titulo": "Mariana de Austria"},
+]
+
+
 # --------------------------------------------------------------------- Portada
 class HomePage(Page):
     hero_antetitulo = models.CharField("antetítulo", max_length=120, blank=True,
@@ -69,12 +84,10 @@ class HomePage(Page):
         ctx = super().get_context(request, *args, **kwargs)
         ctx["proximas_actividades"] = ActividadPage.objects.live().filter(fecha_inicio__gte=timezone.now()).order_by("fecha_inicio")[:4]
         ctx["ultimas_publicaciones"] = PublicacionPage.objects.live().order_by("-fecha_publicacion", "-first_published_at")[:4]
-        galeria = GaleriaPage.objects.live().first()
-        ctx["galeria"] = galeria
-        ctx["galeria_elementos"] = list(galeria.elementos)[:5] if galeria else []
         ctx["ultimas_novedades"] = NovedadPage.objects.live().order_by("-fecha")[:3]
         ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
         ctx["equipo_destacado"] = PersonaPage.objects.live().order_by("orden", "title")[:6]
+        ctx["clases_destacadas"] = CLASES_DESTACADAS
         return ctx
 
 
