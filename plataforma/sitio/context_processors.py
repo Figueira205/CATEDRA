@@ -2,12 +2,35 @@ from django.conf import settings
 from wagtail.models import Site
 
 
+#: Sub-apartados fijos para secciones cuyo contenido vive en una sola página
+#: (anclas), en vez de en páginas hijas reales del árbol de Wagtail. Si en el
+#: futuro alguna de estas páginas pasa a tener hijas reales marcadas «Mostrar
+#: en menús», ese slug puede quitarse de aquí y volverá a generarse solo.
+SUBMENU_ANCLAS = {
+    "la-catedra": [
+        ["Quiénes somos", "#quienes-somos"],
+        ["Investigación", "#campo-de-estudio"],
+        ["Misión y valores", "#mision-y-valores"],
+        ["Historia", "#historia"],
+        ["Dirección y equipo", "#direccion-y-equipo"],
+    ],
+    "actividades": [
+        ["Agenda completa", ""],
+        ["Próximas actividades", "#proximas"],
+        ["Vista de calendario", "#calendario"],
+        ["Actividades celebradas", "#celebradas"],
+    ],
+}
+
+
 def _menu(request):
     """Menú principal a partir del árbol de páginas.
 
     Aparecen las hijas de la portada con «Mostrar en menús» marcado; su
     desplegable, las nietas marcadas igual. Así los editores gestionan el
-    menú desde el panel, sin tocar código.
+    menú desde el panel, sin tocar código. Algunas secciones (La Cátedra,
+    Actividades) no tienen hijas reales porque su contenido vive en una
+    sola página con anclas: para esas, SUBMENU_ANCLAS aporta el desplegable.
     """
     site = Site.find_for_request(request)
     if site is None:
@@ -18,6 +41,8 @@ def _menu(request):
         entrada = {"label": seccion.title, "url": seccion.url}
         if hijas:
             entrada["items"] = [["Ver todo", seccion.url]] + [[h.title, h.url] for h in hijas]
+        elif seccion.slug in SUBMENU_ANCLAS:
+            entrada["items"] = [[texto, seccion.url + ancla] for texto, ancla in SUBMENU_ANCLAS[seccion.slug]]
         menu.append(entrada)
     return menu
 

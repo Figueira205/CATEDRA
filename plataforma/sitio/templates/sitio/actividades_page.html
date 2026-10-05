@@ -20,4 +20,14 @@
   </div>
 </section>
 {% endif %}
+<section class="section section--tight" id="calendario" aria-labelledby="t-calendario">
+  <div class="container">
+    <div class="sec-head"><h2 class="sec-head__title" id="t-calendario">Vista de calendario</h2></div>
+    <div class="home-cal" data-home-cal>
+      <div class="home-cal__month reveal reveal--left" data-home-cal-month></div>
+      <div class="home-cal__day reveal reveal--right" data-home-cal-day></div>
+    </div>
+  </div>
+</section>
+{{ actividades_calendario|json_script:"datos-calendario" }}
 {% endblock %}

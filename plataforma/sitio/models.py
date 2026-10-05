@@ -18,6 +18,23 @@ from wagtail.search import index
 from .blocks import CuerpoBlock, ElementoGaleriaBlock
 
 
+def _serializar_actividades_calendario(queryset):
+    """Lista de dicts (fecha/hora/título/url/tipo/lugar) para el widget de
+    calendario de la portada y de la agenda (home_page.html / actividades_page.html,
+    data-home-cal). Centralizado aquí para no duplicar el mismo mapeo dos veces."""
+    return [
+        {
+            "date": timezone.localtime(a.fecha_inicio).date().isoformat(),
+            "time": timezone.localtime(a.fecha_inicio).strftime("%H:%M"),
+            "title": a.title,
+            "url": a.url,
+            "tipo": a.get_tipo_display(),
+            "lugar": a.lugar,
+        }
+        for a in queryset.order_by("fecha_inicio")
+    ]
+
+
 # --------------------------------------------------------------------- Portada
 class HomePage(Page):
     hero_antetitulo = models.CharField("antetítulo", max_length=120, blank=True,
@@ -56,17 +73,7 @@ class HomePage(Page):
         ctx["galeria"] = galeria
         ctx["galeria_elementos"] = list(galeria.elementos)[:5] if galeria else []
         ctx["ultimas_novedades"] = NovedadPage.objects.live().order_by("-fecha")[:3]
-        ctx["actividades_calendario"] = [
-            {
-                "date": timezone.localtime(a.fecha_inicio).date().isoformat(),
-                "time": timezone.localtime(a.fecha_inicio).strftime("%H:%M"),
-                "title": a.title,
-                "url": a.url,
-                "tipo": a.get_tipo_display(),
-                "lugar": a.lugar,
-            }
-            for a in ActividadPage.objects.live().order_by("fecha_inicio")
-        ]
+        ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
         return ctx
 
 
@@ -154,6 +161,7 @@ class ActividadesPage(Page):
         ahora = timezone.now()
         ctx["proximas"] = todas.filter(fecha_inicio__gte=ahora).order_by("fecha_inicio")
         ctx["celebradas"] = Paginator(todas.filter(fecha_inicio__lt=ahora).order_by("-fecha_inicio"), 12).get_page(request.GET.get("pagina"))
+        ctx["actividades_calendario"] = _serializar_actividades_calendario(todas)
         return ctx
 
 

@@ -26,12 +26,12 @@
 
 {# 02 · Secciones del cuerpo editorial (editables desde el panel) #}
 {% for s in secciones %}
-<section class="section {% cycle '' 'section--muted' %}"{% if s.titulo %} aria-labelledby="sec-{{ forloop.counter }}"{% endif %}>
+<section class="section {% cycle '' 'section--muted' %}"{% if s.titulo %} id="{{ s.titulo|slugify }}" aria-labelledby="t-{{ s.titulo|slugify }}"{% endif %}>
   <div class="container">
     {% if s.titulo %}
     <div class="sec-head">
       <span class="sec-head__num" aria-hidden="true"></span>
-      <h2 class="sec-head__title" id="sec-{{ forloop.counter }}">{{ s.titulo }}</h2>
+      <h2 class="sec-head__title" id="t-{{ s.titulo|slugify }}">{{ s.titulo }}</h2>
     </div>
     {% endif %}
     <div class="grid">
@@ -44,7 +44,7 @@
    mismo contenido ya aprobado del párrafo anterior, con un diagrama de red
    que resalta el nodo del área abierta (mismo lenguaje visual que los puntos
    animados de la portada). #}
-<section class="section section--atlantic on-dark" aria-labelledby="t-atlas">
+<section class="section section--atlantic on-dark" id="atlas" aria-labelledby="t-atlas">
   <div class="container">
     <div class="sec-head">
       <span class="sec-head__num" aria-hidden="true"></span>
