@@ -122,6 +122,15 @@ ul[class],ol[class],
   .col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9{grid-column:span 4}
 }
 
+/* Portada en móvil: recorta cantidades para no alargar demasiado la página
+   (el resto de tarjetas sigue a un toque de distancia en su propio
+   apartado — "Ver todas"/"Ver el equipo completo"/"Ir a Biblioteca"). Solo
+   se ocultan por CSS, nunca se dejan de renderizar en el HTML. */
+@media (max-width:767px){
+  .grid--clases-home>:nth-child(n+4){display:none}
+  .grid--equipo-home>:nth-child(n+5){display:none}
+}
+
 .section{padding-block:clamp(var(--s-8),8vw,var(--s-10))}
 .section--tight{padding-block:clamp(var(--s-7),5vw,var(--s-8))}
 .section--dark{background:var(--color-ink);color:var(--color-paper)}
@@ -578,6 +587,29 @@ ul[class],ol[class],
   transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast);
 }
 .card:hover .arr-btn{background:var(--color-carmine);border-color:var(--color-carmine);color:#fff;transform:translateX(4px)}
+
+/* "Explora la Cátedra" en móvil: lista compacta en vez de las tarjetas de
+   escritorio (mucho menos alta). Cada fila es un acordeón: el resumen y el
+   botón solo aparecen al tocarla. En escritorio no se muestra. */
+.explora-mobile{display:none}
+@media (max-width:767px){
+  .explora-desktop{display:none}
+  .explora-mobile{display:block;border-top:var(--line)}
+}
+.explora-row{border-bottom:var(--line)}
+.explora-row__head{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);width:100%;
+  padding:var(--s-4) 0;font-size:1.05rem;font-weight:700;text-align:left;min-height:44px;
+}
+.explora-row__plus{
+  width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--color-ink);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;font-size:1rem;
+  transition:transform var(--t-fast) var(--ease),background var(--t-fast),color var(--t-fast);
+}
+.explora-row.is-open .explora-row__plus{transform:rotate(135deg);background:var(--color-carmine);border-color:var(--color-carmine);color:#fff}
+.explora-row__panel{display:none;padding:0 0 var(--s-5)}
+.explora-row.is-open .explora-row__panel{display:block}
+.explora-row__panel p{font-family:var(--font-serif);color:var(--color-ink-soft);margin-bottom:var(--s-4)}
 
 /* Persona */
 .person{display:flex;flex-direction:column;gap:var(--s-3);text-decoration:none}

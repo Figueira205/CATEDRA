@@ -420,6 +420,15 @@
     });
   });
 
+  /* ---------- "Explora la Cátedra" en móvil (acordeón de filas) ---------- */
+  $$(".explora-row__head").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var row = btn.closest(".explora-row");
+      var open = row.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+
   /* ---------- Atlas de áreas (acordeón de nodos) ---------- */
   $$(".atlas-item__btn").forEach(function (btn) {
     btn.addEventListener("click", function () {

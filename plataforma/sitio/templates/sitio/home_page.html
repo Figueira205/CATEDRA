@@ -110,7 +110,7 @@
       <span class="sec-head__num" aria-hidden="true"></span>
       <h2 class="sec-head__title" id="t-explora">Explora la Cátedra</h2>
     </div>
-    <div class="grid">
+    <div class="grid explora-desktop">
       <div class="col-4 reveal"><a class="card" href="/la-catedra/"><div class="card__body">
         <h3 class="card__title">La Cátedra</h3>
         <p class="card__desc">Quiénes somos, qué investigamos y por qué nació este espacio universitario.</p>
@@ -142,6 +142,66 @@
         <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
       </div></a></div>
     </div>
+
+    {# Listado compacto solo para móvil: una fila por sección, el resumen y el
+       botón de "Ver" quedan ocultos hasta que se toca la fila (acordeón). En
+       escritorio no se muestra (.explora-mobile se oculta por CSS). #}
+    <div class="explora-mobile">
+      <div class="explora-row">
+        <button type="button" class="explora-row__head" aria-expanded="false">
+          <span>La Cátedra</span><span class="explora-row__plus" aria-hidden="true">+</span>
+        </button>
+        <div class="explora-row__panel">
+          <p>Quiénes somos, qué investigamos y por qué nació este espacio universitario.</p>
+          <a class="btn btn--primary" href="/la-catedra/">Ver <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="explora-row">
+        <button type="button" class="explora-row__head" aria-expanded="false">
+          <span>Actividades</span><span class="explora-row__plus" aria-hidden="true">+</span>
+        </button>
+        <div class="explora-row__panel">
+          <p>Seminarios, jornadas y conferencias abiertas a toda la comunidad universitaria.</p>
+          <a class="btn btn--primary" href="/actividades/">Ver <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="explora-row">
+        <button type="button" class="explora-row__head" aria-expanded="false">
+          <span>Biblioteca</span><span class="explora-row__plus" aria-hidden="true">+</span>
+        </button>
+        <div class="explora-row__panel">
+          <p>Publicaciones y libros digitales, de acceso abierto y de pago.</p>
+          <a class="btn btn--primary" href="/biblioteca/">Ver <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="explora-row">
+        <button type="button" class="explora-row__head" aria-expanded="false">
+          <span>Formación</span><span class="explora-row__plus" aria-hidden="true">+</span>
+        </button>
+        <div class="explora-row__panel">
+          <p>Clases en directo y grabadas sobre historia, cultura e instituciones hispánicas.</p>
+          <a class="btn btn--primary" href="/formacion/">Ver <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="explora-row">
+        <button type="button" class="explora-row__head" aria-expanded="false">
+          <span>Galería</span><span class="explora-row__plus" aria-hidden="true">+</span>
+        </button>
+        <div class="explora-row__panel">
+          <p>Fotografías y documentos gráficos de la actividad de la Cátedra.</p>
+          <a class="btn btn--primary" href="/galeria/">Ver <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="explora-row">
+        <button type="button" class="explora-row__head" aria-expanded="false">
+          <span>Contacto</span><span class="explora-row__plus" aria-hidden="true">+</span>
+        </button>
+        <div class="explora-row__panel">
+          <p>Cómo escribirnos, colaborar con la Cátedra o proponer una actividad.</p>
+          <a class="btn btn--primary" href="/contacto/">Ver <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -154,7 +214,7 @@
       <h2 class="sec-head__title" id="t-equipo">Dirección y equipo</h2>
       <span class="sec-head__aside"><a class="link-arrow" href="/equipo/">Ver el equipo completo <span class="arr" aria-hidden="true">→</span></a></span>
     </div>
-    <div class="grid">
+    <div class="grid grid--equipo-home">
       {% for persona in equipo_destacado %}
       <div class="col-2 reveal">{% include "sitio/includes/tarjeta_persona.html" with persona=persona %}</div>
       {% endfor %}
@@ -204,7 +264,7 @@
       <h2 class="sec-head__title" id="t-clases">Clases grabadas y conferencias</h2>
       <span class="sec-head__aside"><a class="link-arrow" href="/formacion/">Ver todas <span class="arr" aria-hidden="true">→</span></a></span>
     </div>
-    <div class="grid">
+    <div class="grid grid--clases-home">
       {% for v in clases_destacadas %}
       <div class="col-4 reveal">
         <div class="video-embed video-embed--destacado" data-yt-id="{{ v.youtube_id }}">
