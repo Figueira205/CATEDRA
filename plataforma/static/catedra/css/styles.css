@@ -744,6 +744,16 @@ ul[class],ol[class],
 
 /* Vídeo de clase (formacion.ClasePage): el iframe lo inyecta clase-video.js tras comprobar acceso */
 .video-embed{position:relative;aspect-ratio:16/9;background:var(--color-ink);border-radius:10px;overflow:hidden}
+
+/* Vídeos destacados de la portada ("Clases grabadas y conferencias"): marco
+   interno negro de 3px y esquinas que pasan de suaves a totalmente
+   rectas al pasar el cursor, volviendo atrás al quitarlo. */
+.video-embed--destacado{
+  border:3px solid var(--color-ink);
+  transition:border-radius var(--t-med) var(--ease);
+}
+.video-embed--destacado:hover{border-radius:0}
+@media (prefers-reduced-motion:reduce){.video-embed--destacado{transition:none}}
 .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-embed__cargando,.video-embed__error{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:var(--s-5);text-align:center;color:var(--color-paper);font-family:var(--font-mono);font-size:.9rem}
 .video-embed__error{color:var(--color-gold)}

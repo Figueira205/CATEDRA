@@ -207,7 +207,7 @@
     <div class="grid">
       {% for v in clases_destacadas %}
       <div class="col-4 reveal">
-        <div class="video-embed" data-yt-id="{{ v.youtube_id }}">
+        <div class="video-embed video-embed--destacado" data-yt-id="{{ v.youtube_id }}">
           <button type="button" class="video-embed__play" aria-label="Reproducir: {{ v.titulo }}">
             <img src="https://i.ytimg.com/vi/{{ v.youtube_id }}/hqdefault.jpg" alt="" loading="lazy">
             <span class="play-badge" aria-hidden="true">
