@@ -280,12 +280,6 @@ ul[class],ol[class],
 .nav-link .caret{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform var(--t-fast)}
 .nav-link[aria-expanded="true"] .caret{transform:rotate(225deg) translateY(-1px)}
 @media (max-width:1240px){.main-nav{display:none}.mega{display:none}}
-/* El botón ☰ es el acceso al menú de pantalla completa que sustituye al
-   desplegable de escritorio (mega menú) cuando este no cabe: solo tiene
-   sentido por debajo de 1241px, donde .main-nav ya está oculto. Antes no
-   tenía regla de ancho y se veía también en escritorio, duplicando el
-   acceso a las mismas secciones que ya despliega la barra de navegación. */
-@media (min-width:1241px){.burger{display:none}}
 
 /* Con el menú de escritorio oculto (todo lo que no sea un portátil grande: tablet
    incluida), nada empujaba el grupo de buscador+cuenta+☰ hacia el borde derecho:
@@ -305,6 +299,13 @@ ul[class],ol[class],
 .util-btn svg{width:20px;height:20px}
 .burger{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;align-items:center}
 .burger span{display:block;width:22px;height:2px;background:var(--color-ink);transition:transform var(--t-fast) var(--ease),opacity var(--t-fast)}
+/* El botón ☰ es el acceso al menú de pantalla completa que sustituye al
+   desplegable de escritorio (mega menú) cuando este no cabe: solo tiene
+   sentido por debajo de 1241px, donde .main-nav ya está oculto. Antes no
+   tenía regla de ancho y se veía también en escritorio, duplicando el
+   acceso a las mismas secciones que ya despliega la barra de navegación.
+   Va después de la regla base para ganar el empate de especificidad. */
+@media (min-width:1241px){.burger{display:none}}
 
 /* Mega menú */
 .mega{
