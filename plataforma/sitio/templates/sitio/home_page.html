@@ -44,17 +44,14 @@
           <div class="hero-carousel__track">
             <a class="hero-carousel__slide is-active" href="/la-catedra/">
               <img src="{% static 'catedra/img/conquista.png' %}" alt="" loading="eager">
-              <span class="hero-carousel__cursor" aria-hidden="true">Ver</span>
               <span class="hero-carousel__cap"><span class="mono">LA CÁTEDRA</span><span class="t">Quiénes somos y qué investigamos</span></span>
             </a>
             <a class="hero-carousel__slide" href="/actividades/">
               <img src="{% static 'catedra/img/aulas.png' %}" alt="" loading="lazy">
-              <span class="hero-carousel__cursor" aria-hidden="true">Ver</span>
               <span class="hero-carousel__cap"><span class="mono">ACTIVIDADES</span><span class="t">Seminarios, jornadas y conferencias</span></span>
             </a>
             <a class="hero-carousel__slide" href="/formacion/">
               <img src="{% static 'catedra/img/estudiantes2.png' %}" alt="" loading="lazy">
-              <span class="hero-carousel__cursor" aria-hidden="true">Ver</span>
               <span class="hero-carousel__cap"><span class="mono">FORMACIÓN</span><span class="t">Clases en directo y grabadas</span></span>
             </a>
           </div>
@@ -191,17 +188,19 @@
 </section>
 {% endif %}
 
-{# 06 · Boletín #}
-<section class="section section--carmine on-dark" aria-labelledby="t-newsletter" id="boletin-portada">
+{# 06 · Calendario de actividades #}
+<section class="section section--muted" aria-labelledby="t-calendario">
   <div class="container">
-    <div class="grid">
-      <div class="col-6">
-        <p class="kicker">Boletín</p>
-        <h2 class="sec-head__title" id="t-newsletter" style="margin:16px 0">Recibir el cuaderno de la Cátedra</h2>
-        <p class="serif" style="opacity:.9;max-width:44ch">Actividades, publicaciones y convocatorias, reunidas en un envío editorial. Sin ruido y con baja frecuencia.</p>
-      </div>
-      <div class="col-6">{% include "includes/boletin_form.html" %}</div>
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-calendario">Calendario de actividades</h2>
+      <span class="sec-head__aside"><a class="link-arrow" href="/actividades/">Ver todas <span class="arr" aria-hidden="true">→</span></a></span>
+    </div>
+    <div class="home-cal reveal" data-home-cal>
+      <div class="home-cal__month" data-home-cal-month></div>
+      <div class="home-cal__day" data-home-cal-day></div>
     </div>
   </div>
 </section>
+{{ actividades_calendario|json_script:"datos-calendario" }}
 {% endblock %}

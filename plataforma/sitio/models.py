@@ -56,6 +56,17 @@ class HomePage(Page):
         ctx["galeria"] = galeria
         ctx["galeria_elementos"] = list(galeria.elementos)[:5] if galeria else []
         ctx["ultimas_novedades"] = NovedadPage.objects.live().order_by("-fecha")[:3]
+        ctx["actividades_calendario"] = [
+            {
+                "date": timezone.localtime(a.fecha_inicio).date().isoformat(),
+                "time": timezone.localtime(a.fecha_inicio).strftime("%H:%M"),
+                "title": a.title,
+                "url": a.url,
+                "tipo": a.get_tipo_display(),
+                "lugar": a.lugar,
+            }
+            for a in ActividadPage.objects.live().order_by("fecha_inicio")
+        ]
         return ctx
 
 

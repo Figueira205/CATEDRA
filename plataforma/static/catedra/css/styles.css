@@ -450,17 +450,6 @@ ul[class],ol[class],
 }
 .hero-carousel__cap .mono{color:var(--color-gold);letter-spacing:.1em}
 .hero-carousel__cap .t{font-weight:700;font-size:1.15rem;line-height:1.25}
-.hero-carousel__cursor{
-  position:absolute;top:0;left:0;z-index:3;pointer-events:none;
-  display:inline-flex;align-items:center;
-  background:var(--color-carmine);color:#fff;
-  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;
-  padding:7px 14px;border-radius:var(--radius-pill);
-  opacity:0;transform:translate(-50%,-50%) scale(.7);
-  transition:opacity .2s var(--ease),transform .2s var(--ease);
-}
-.hero-carousel__slide:hover .hero-carousel__cursor,
-.hero-carousel__slide:focus-visible .hero-carousel__cursor{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .hero-carousel__dots{position:absolute;top:var(--s-4);right:var(--s-4);z-index:3;display:flex;gap:7px}
 .hero-carousel__dots button{
   width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);
@@ -988,7 +977,38 @@ ul[class],ol[class],
 .hero__grid>.col-7>*:nth-child(4){animation-delay:.32s}
 .hero__grid .spotlight{animation-delay:.4s}
 
-/* Calendario */
+/* Calendario de la portada: mes pequeño a la izquierda, contenido del día
+   seleccionado a la derecha. Datos reales (pasados y futuros) servidos por
+   HomePage.get_context vía json_script, sin depender de ningún dato de
+   ejemplo. Sustituye a la franja de boletín, que ya vive también en el
+   pie de página. */
+.home-cal{display:grid;grid-template-columns:340px 1fr;gap:var(--s-7);align-items:start}
+@media (max-width:1023px){.home-cal{grid-template-columns:1fr}}
+.home-cal__month{border:var(--line);border-radius:var(--radius);padding:var(--s-5);background:var(--color-white)}
+.home-cal__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s-4)}
+.home-cal__title{font-weight:700;text-transform:capitalize}
+.home-cal__nav{display:flex;gap:4px}
+.home-cal__nav button{width:32px;height:32px;border:1px solid var(--color-border);border-radius:var(--radius);transition:background var(--t-fast)}
+.home-cal__nav button:hover{background:var(--color-paper-muted)}
+.home-cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.home-cal__dow{font-family:var(--font-mono);font-size:.7rem;color:var(--color-ink-soft);padding-bottom:4px}
+.home-cal__grid button{aspect-ratio:1;border-radius:50%;font-size:.88rem;position:relative;transition:background var(--t-fast),color var(--t-fast)}
+.home-cal__grid button:hover{background:var(--color-paper-muted)}
+.home-cal__grid button.has-events::after{content:"";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--color-carmine)}
+.home-cal__grid button.is-today{font-weight:700;color:var(--color-carmine)}
+.home-cal__grid button.is-selected{background:var(--color-ink);color:var(--color-paper)}
+.home-cal__grid button.is-selected.has-events::after{background:var(--color-gold)}
+.home-cal__day{border:var(--line);border-radius:var(--radius);padding:var(--s-5);background:var(--color-white);min-height:240px}
+.home-cal__date{color:var(--color-carmine);margin-bottom:var(--s-4);display:block}
+.home-cal__empty{font-family:var(--font-serif);color:var(--color-ink-soft)}
+.home-cal__item{display:flex;align-items:center;gap:var(--s-4);padding:var(--s-3) 0;border-top:var(--line);text-decoration:none}
+.home-cal__item:first-child{border-top:0}
+.home-cal__item-time{color:var(--color-carmine);min-width:3.5em;font-family:var(--font-mono);font-size:.8rem}
+.home-cal__item-title{display:block;font-weight:700}
+.home-cal__item-meta{display:block;font-size:.85rem;color:var(--color-ink-soft)}
+.home-cal__item:hover .home-cal__item-title{color:var(--color-carmine)}
+
+/* Calendario (franja de calendario mensual embebido en la página de actividades) */
 .cal{border:var(--line);border-radius:var(--radius);overflow:hidden;background:var(--color-white)}
 .cal__head{display:flex;justify-content:space-between;align-items:center;padding:var(--s-4);border-bottom:var(--line)}
 .cal__title{font-weight:700;text-transform:capitalize}
