@@ -34,6 +34,37 @@
     clase: "Formación", novedad: "Novedades", galeria: "Galería"
   };
 
+  /* ---------- Cortina de entrada de la portada (una vez por sesión) ---------- */
+  var intro = $("#intro");
+  if (intro) {
+    var yaVista = false;
+    try { yaVista = !!sessionStorage.getItem("ch_intro_vista"); } catch (e) {}
+    if (yaVista) {
+      intro.classList.add("is-done");
+      intro = null;
+    }
+  }
+  if (intro) {
+    d.documentElement.style.overflow = "hidden";
+    var introSalir = (function () {
+      var hecho = false;
+      return function () {
+        if (hecho) return;
+        hecho = true;
+        intro.classList.add("is-leaving");
+        d.documentElement.style.overflow = "";
+        try { sessionStorage.setItem("ch_intro_vista", "1"); } catch (e) {}
+        setTimeout(function () { intro.classList.add("is-done"); }, 750);
+      };
+    })();
+    if (reduceMotion) {
+      introSalir();
+    } else {
+      window.addEventListener("load", function () { setTimeout(introSalir, 450); });
+      setTimeout(introSalir, 2200); // salvaguarda si la carga tarda
+    }
+  }
+
   /* ---------- Cabecera: estado scroll ---------- */
   var header = $(".site-header");
   if (header) {

@@ -966,6 +966,34 @@ ul[class],ol[class],
 .reveal.is-visible{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
+/* Cortina de entrada de la portada: cubre la pantalla un instante breve (hasta
+   que la página carga o, como mucho, ~2.2s) y se retira deslizándose hacia
+   arriba, dejando ver el hero ya revelado debajo en vez de plantarlo todo de
+   golpe. Solo una vez por sesión (sessionStorage) y nunca si el visitante
+   pidió prefers-reduced-motion, en cuyo caso ni se muestra. */
+.intro{
+  position:fixed;inset:0;z-index:300;background:var(--color-paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s-4);
+  transition:transform .75s var(--ease),opacity .6s var(--ease);
+}
+.intro__mark{
+  width:52px;height:52px;border-radius:var(--radius);background:var(--color-carmine);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:750;font-size:1.2rem;
+  animation:intro-pop .6s var(--ease) both;
+}
+.intro__line{
+  font-family:var(--font-mono);font-size:.76rem;letter-spacing:.22em;color:var(--color-ink-soft);
+  opacity:0;animation:intro-fade .5s var(--ease) .2s both;
+}
+.intro__bar{width:160px;height:2px;background:var(--color-border);overflow:hidden;border-radius:2px}
+.intro__bar span{display:block;height:100%;width:0;background:var(--color-carmine);animation:intro-bar 1.3s var(--ease) .15s forwards}
+@keyframes intro-pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+@keyframes intro-fade{to{opacity:1}}
+@keyframes intro-bar{to{width:100%}}
+.intro.is-leaving{transform:translateY(-100%);opacity:.5}
+.intro.is-done{display:none}
+@media (prefers-reduced-motion:reduce){.intro{display:none}}
+
 /* Entrada de la portada: el bloque de texto y la pieza «en foco» aparecen en
    cascada nada más cargar, en vez de plantarse de golpe (lo cubre el reset
    global de prefers-reduced-motion de la sección 2, que anula duración). */
