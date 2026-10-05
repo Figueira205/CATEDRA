@@ -52,7 +52,15 @@
       <h2 class="sec-head__title" id="t-presentacion">{{ page.presentacion_titulo }}</h2>
     </div>
     <div class="grid">
-      <div class="col-6 reveal"><div class="prose">{{ page.presentacion_texto|richtext }}</div></div>
+      <div class="col-6 reveal">
+        <div class="prose">{{ page.presentacion_texto|richtext }}</div>
+        <div class="reveal" style="display:flex;gap:var(--s-2);flex-wrap:wrap;margin-top:var(--s-6)">
+          <span class="tag tag--area">Historia</span>
+          <span class="tag tag--area">Cultura</span>
+          <span class="tag tag--area">Derecho</span>
+          <span class="tag tag--area">Sociedad</span>
+        </div>
+      </div>
       <div class="col-6 reveal">
         {% if page.presentacion_imagen %}
         <figure class="img-frame">{% image page.presentacion_imagen fill-960x640 loading="lazy" %}</figure>
@@ -65,6 +73,49 @@
   </div>
 </section>
 {% endif %}
+
+{# 02b · Explora la Cátedra: mapa de secciones reales del sitio, siempre visible
+   aunque agenda/biblioteca todavía no tengan contenido cargado #}
+<section class="section section--muted" aria-labelledby="t-explora">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-explora">Explora la Cátedra</h2>
+    </div>
+    <div class="grid">
+      <div class="col-4 reveal"><a class="card" href="/la-catedra/"><div class="card__body">
+        <h3 class="card__title">La Cátedra</h3>
+        <p class="card__desc">Quiénes somos, qué investigamos y por qué nació este espacio universitario.</p>
+        <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
+      </div></a></div>
+      <div class="col-4 reveal"><a class="card" href="/actividades/"><div class="card__body">
+        <h3 class="card__title">Actividades</h3>
+        <p class="card__desc">Seminarios, jornadas y conferencias abiertas a toda la comunidad universitaria.</p>
+        <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
+      </div></a></div>
+      <div class="col-4 reveal"><a class="card" href="/biblioteca/"><div class="card__body">
+        <h3 class="card__title">Biblioteca</h3>
+        <p class="card__desc">Publicaciones y libros digitales, de acceso abierto y de pago.</p>
+        <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
+      </div></a></div>
+      <div class="col-4 reveal"><a class="card" href="/formacion/"><div class="card__body">
+        <h3 class="card__title">Formación</h3>
+        <p class="card__desc">Clases en directo y grabadas sobre historia, cultura e instituciones hispánicas.</p>
+        <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
+      </div></a></div>
+      <div class="col-4 reveal"><a class="card" href="/galeria/"><div class="card__body">
+        <h3 class="card__title">Galería</h3>
+        <p class="card__desc">Fotografías y documentos gráficos de la actividad de la Cátedra.</p>
+        <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
+      </div></a></div>
+      <div class="col-4 reveal"><a class="card" href="/contacto/"><div class="card__body">
+        <h3 class="card__title">Contacto</h3>
+        <p class="card__desc">Cómo escribirnos, colaborar con la Cátedra o proponer una actividad.</p>
+        <div class="card__foot"><span class="mono">Ver</span><span class="arr-btn" aria-hidden="true">→</span></div>
+      </div></a></div>
+    </div>
+  </div>
+</section>
 
 {# 03 · Agenda #}
 {% if proximas_actividades %}
