@@ -79,6 +79,12 @@ body{
   overflow-x:hidden;
 }
 @media (max-width:767px){ body{font-size:1.09rem} }
+/* Red de seguridad contra desbordamiento horizontal en móvil: body ya tenía
+   overflow-x:hidden, pero un elemento position:fixed más ancho que el
+   viewport no queda recortado por eso (su contenedor es el viewport, no el
+   body) y sigue provocando scroll lateral de toda la página. Se añade
+   también en <html>, solo en móvil, como salvaguarda general. */
+@media (max-width:767px){ html{overflow-x:hidden} }
 img,video{max-width:100%;height:auto;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -601,6 +607,7 @@ ul[class],ol[class],
   display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);width:100%;
   padding:var(--s-4) 0;font-size:1.05rem;font-weight:700;text-align:left;min-height:44px;
 }
+.explora-row__head>span:first-child{min-width:0;overflow-wrap:anywhere}
 .explora-row__plus{
   width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--color-ink);border-radius:50%;
   display:inline-flex;align-items:center;justify-content:center;font-size:1rem;
