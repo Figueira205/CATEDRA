@@ -12,7 +12,7 @@ from django.views.decorators.http import require_POST
 from wagtail.models import Page
 
 from .forms import SuscripcionForm
-from .models import Suscriptor
+from .models import Suscriptor, VideoFavorito, VideoVisto
 
 TIPOS = {
     "publicacionpage": "publicacion", "clasepage": "clase", "actividadpage": "actividad",
@@ -79,3 +79,36 @@ def baja_suscripcion(request, token):
         sus.delete()
         return render(request, "sitio/suscripcion.html", {"baja": True, "hecho": True})
     return render(request, "sitio/suscripcion.html", {"suscriptor": sus, "baja": True})
+
+
+@require_POST
+def video_marcar_visto(request):
+    """Registra que se le dio a reproducir a un vídeo externo (p. ej. los de
+    la portada). Sin cuenta no se guarda nada aquí: el navegador lo recuerda
+    con localStorage (ver clases-video del JS), por eso siempre se responde
+    "ok" aunque no haya sesión."""
+    youtube_id = (request.POST.get("youtube_id") or "")[:20]
+    titulo = (request.POST.get("titulo") or "")[:255]
+    if not youtube_id:
+        return JsonResponse({"error": "falta youtube_id"}, status=400)
+    if request.user.is_authenticated:
+        VideoVisto.objects.update_or_create(
+            usuario=request.user, youtube_id=youtube_id, defaults={"titulo": titulo},
+        )
+    return JsonResponse({"ok": True})
+
+
+@require_POST
+def video_alternar_favorito(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "necesitas una cuenta para guardar favoritos"}, status=401)
+    youtube_id = (request.POST.get("youtube_id") or "")[:20]
+    titulo = (request.POST.get("titulo") or "")[:255]
+    if not youtube_id:
+        return JsonResponse({"error": "falta youtube_id"}, status=400)
+    favorito = VideoFavorito.objects.filter(usuario=request.user, youtube_id=youtube_id).first()
+    if favorito:
+        favorito.delete()
+        return JsonResponse({"ok": True, "favorito": False})
+    VideoFavorito.objects.create(usuario=request.user, youtube_id=youtube_id, titulo=titulo)
+    return JsonResponse({"ok": True, "favorito": True})

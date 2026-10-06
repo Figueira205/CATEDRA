@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from compras.models import Compra
+from sitio.models import VideoFavorito, VideoVisto
 
 
 @login_required
@@ -17,8 +18,11 @@ def mi_cuenta(request):
             libros.append((c, pagina))
         elif tipo == "ClasePage":
             clases.append((c, pagina))
+    favoritos_ids = set(VideoFavorito.objects.filter(usuario=request.user).values_list("youtube_id", flat=True))
     return render(request, "cuentas/mi_cuenta.html", {
         "libros": libros,
         "clases": clases,
         "historial": Compra.objects.filter(usuario=request.user).exclude(estado=Compra.Estado.PENDIENTE).select_related("pagina")[:50],
+        "videos_vistos": VideoVisto.objects.filter(usuario=request.user).order_by("-ultima_vez"),
+        "favoritos_ids": favoritos_ids,
     })

@@ -631,11 +631,42 @@
   }
 
   /* ---------- Portadas de YouTube con reproducción al pulsar ---------- */
+  /* "Visto" se guarda en localStorage para cualquier visitante (así se
+     recuerda sin cuenta) y, si hay sesión, también en el servidor
+     (VideoVisto, visible luego en Mi cuenta → Mis clases). */
+  function cookieValor(nombre) {
+    var m = d.cookie.match("(?:^|; )" + nombre + "=([^;]*)");
+    return m ? decodeURIComponent(m[1]) : "";
+  }
+  function videosVistosLocal() {
+    try { return JSON.parse(localStorage.getItem("ch_videos_vistos") || "[]"); } catch (e) { return []; }
+  }
+  function marcarVistoLocal(id) {
+    var vistos = videosVistosLocal();
+    if (vistos.indexOf(id) === -1) {
+      vistos.push(id);
+      try { localStorage.setItem("ch_videos_vistos", JSON.stringify(vistos)); } catch (e) {}
+    }
+  }
   $$(".video-embed[data-yt-id]").forEach(function (wrap) {
+    var id = wrap.getAttribute("data-yt-id");
+    var badge = $("[data-visto-badge]", wrap);
+    if (badge && videosVistosLocal().indexOf(id) !== -1) badge.hidden = false;
     var btn = $(".video-embed__play", wrap);
     if (!btn) return;
     btn.addEventListener("click", function () {
-      var id = wrap.getAttribute("data-yt-id");
+      var titulo = wrap.getAttribute("data-yt-titulo") || "";
+      marcarVistoLocal(id);
+      if (badge) badge.hidden = false;
+      if (window.CH_VIDEO_VISTO_URL) {
+        var datos = new FormData();
+        datos.append("youtube_id", id);
+        datos.append("titulo", titulo);
+        fetch(window.CH_VIDEO_VISTO_URL, {
+          method: "POST", body: datos, credentials: "same-origin",
+          headers: { "X-CSRFToken": cookieValor("csrftoken") },
+        }).catch(function () {});
+      }
       var ifr = d.createElement("iframe");
       ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
       ifr.title = btn.getAttribute("aria-label") || "";
@@ -643,6 +674,29 @@
       ifr.allowFullscreen = true;
       wrap.innerHTML = "";
       wrap.appendChild(ifr);
+    });
+  });
+
+  /* ---------- Favorito de vídeo (estrella, requiere cuenta) ---------- */
+  $$(".video-favorito-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (!window.CH_VIDEO_FAVORITO_URL) return;
+      var datos = new FormData();
+      datos.append("youtube_id", btn.getAttribute("data-youtube-id"));
+      datos.append("titulo", btn.getAttribute("data-titulo") || "");
+      btn.disabled = true;
+      fetch(window.CH_VIDEO_FAVORITO_URL, {
+        method: "POST", body: datos, credentials: "same-origin",
+        headers: { "X-CSRFToken": cookieValor("csrftoken") },
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data.ok) return;
+          btn.classList.toggle("is-favorito", data.favorito);
+          btn.setAttribute("aria-pressed", String(data.favorito));
+        })
+        .catch(function () {})
+        .finally(function () { btn.disabled = false; });
     });
   });
 

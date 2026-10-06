@@ -42,6 +42,25 @@
     {% else %}
     <div class="empty-state"><p>Todavía no tienes clases exclusivas.</p></div>
     {% endif %}
+
+    <div class="sec-head mt-7" style="margin-top:var(--s-7)"><h3 style="font-size:1.4rem">Vídeos y conferencias vistos</h3></div>
+    {% if videos_vistos %}
+    <div class="lista-cuenta">
+      {% for v in videos_vistos %}
+      <div class="fila-cuenta">
+        <div>
+          <p class="mono">VISTO · {{ v.ultima_vez|date:"j M Y"|upper }}</p>
+          <h3><a href="https://www.youtube.com/watch?v={{ v.youtube_id }}" target="_blank" rel="noopener">{{ v.titulo|default:v.youtube_id }}</a></h3>
+        </div>
+        <button type="button" class="video-favorito-btn{% if v.youtube_id in favoritos_ids %} is-favorito{% endif %}" data-youtube-id="{{ v.youtube_id }}" data-titulo="{{ v.titulo }}" aria-pressed="{% if v.youtube_id in favoritos_ids %}true{% else %}false{% endif %}" aria-label="Guardar como favorito: {{ v.titulo }}">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><p>Todavía no has visto ninguna de las clases grabadas o conferencias de la web.</p></div>
+    {% endif %}
   </div>
 </section>
 

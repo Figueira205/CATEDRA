@@ -147,7 +147,7 @@
 {% endwith %}
 
 {{ menu_principal|json_script:"ch-menu" }}
-<script src="{% static 'catedra/js/plataforma.js' %}" data-buscar="{% url 'buscar' %}" data-indice="{% url 'indice_busqueda' %}" defer></script>
+<script src="{% static 'catedra/js/plataforma.js' %}" data-buscar="{% url 'buscar' %}" data-indice="{% url 'indice_busqueda' %}" data-video-visto="{% url 'video_marcar_visto' %}" data-video-favorito="{% url 'video_alternar_favorito' %}" defer></script>
 <script src="{% static 'catedra/js/main.js' %}" defer></script>
 {% block extra_js %}{% endblock %}
 </body>

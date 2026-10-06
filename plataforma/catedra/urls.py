@@ -21,6 +21,8 @@ urlpatterns = [
     path("boletin/alta/", sitio_views.suscribirse, name="suscribirse"),
     path("boletin/confirmar/<str:token>/", sitio_views.confirmar_suscripcion, name="confirmar_suscripcion"),
     path("boletin/baja/<str:token>/", sitio_views.baja_suscripcion, name="baja_suscripcion"),
+    path("videos/visto/", sitio_views.video_marcar_visto, name="video_marcar_visto"),
+    path("videos/favorito/", sitio_views.video_alternar_favorito, name="video_alternar_favorito"),
     path("sitemap.xml", sitemap),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 ]

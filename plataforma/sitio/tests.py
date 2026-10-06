@@ -7,8 +7,8 @@ from django.urls import reverse
 
 from biblioteca.models import BibliotecaPage
 
-from .models import Suscriptor
-from .pruebas import crear_arbol
+from .models import Suscriptor, VideoFavorito, VideoVisto
+from .pruebas import crear_arbol, crear_usuario
 
 _privado = tempfile.mkdtemp(prefix="catedra-privado-")
 
@@ -84,3 +84,29 @@ class SitioTests(TestCase):
     def test_robots_y_sitemap(self):
         self.assertContains(self.client.get("/robots.txt"), "Disallow: /admin/")
         self.assertEqual(self.client.get("/sitemap.xml").status_code, 200)
+
+    def test_video_visto_sin_cuenta_no_guarda_nada(self):
+        r = self.client.post(reverse("video_marcar_visto"), {"youtube_id": "abc123", "titulo": "Prueba"})
+        self.assertEqual(r.status_code, 200)
+        self.assertFalse(VideoVisto.objects.exists())
+
+    def test_video_visto_con_cuenta_se_guarda_y_es_idempotente(self):
+        usuario = crear_usuario()
+        self.client.force_login(usuario)
+        self.client.post(reverse("video_marcar_visto"), {"youtube_id": "abc123", "titulo": "Prueba"})
+        self.client.post(reverse("video_marcar_visto"), {"youtube_id": "abc123", "titulo": "Prueba"})
+        self.assertEqual(VideoVisto.objects.filter(usuario=usuario, youtube_id="abc123").count(), 1)
+
+    def test_video_favorito_requiere_cuenta(self):
+        r = self.client.post(reverse("video_alternar_favorito"), {"youtube_id": "abc123", "titulo": "Prueba"})
+        self.assertEqual(r.status_code, 401)
+
+    def test_video_favorito_alterna(self):
+        usuario = crear_usuario()
+        self.client.force_login(usuario)
+        r1 = self.client.post(reverse("video_alternar_favorito"), {"youtube_id": "abc123", "titulo": "Prueba"})
+        self.assertTrue(r1.json()["favorito"])
+        self.assertTrue(VideoFavorito.objects.filter(usuario=usuario, youtube_id="abc123").exists())
+        r2 = self.client.post(reverse("video_alternar_favorito"), {"youtube_id": "abc123", "titulo": "Prueba"})
+        self.assertFalse(r2.json()["favorito"])
+        self.assertFalse(VideoFavorito.objects.filter(usuario=usuario, youtube_id="abc123").exists())

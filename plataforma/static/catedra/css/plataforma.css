@@ -48,6 +48,20 @@
 .fila-cuenta h3 a{color:inherit;text-decoration:none}
 .fila-cuenta p{margin:0;color:var(--color-ink-soft)}
 .enlaces-cuenta{list-style:none;padding:0}
+
+/* Estrella de favorito (vídeos externos): en Mi cuenta y en las tarjetas de
+   vídeo de la portada. Contorno hasta que se marca como favorito, que pasa
+   a dorado relleno. */
+.video-favorito-btn{
+  width:40px;height:40px;flex-shrink:0;border:1.5px solid var(--color-ink);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;color:var(--color-ink);
+  transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast),transform var(--t-fast);
+}
+.video-favorito-btn svg{fill:none;stroke:currentColor;stroke-width:1.6}
+.video-favorito-btn:hover{border-color:var(--color-gold);color:var(--color-gold-ink)}
+.video-favorito-btn.is-favorito{background:var(--color-gold);border-color:var(--color-gold);color:var(--color-white)}
+.video-favorito-btn.is-favorito svg{fill:currentColor;stroke:none}
+.video-favorito-btn:active{transform:scale(.92)}
 .tabla-simple{width:100%;border-collapse:collapse;font-size:var(--text-small)}
 .tabla-simple th,.tabla-simple td{text-align:left;padding:10px 8px;border-bottom:var(--line)}
 .tabla-simple th{font-family:var(--font-mono);font-size:var(--text-meta);text-transform:uppercase;letter-spacing:.06em;font-weight:500}

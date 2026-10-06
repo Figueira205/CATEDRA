@@ -3,6 +3,7 @@ import secrets
 from datetime import timedelta
 from datetime import timezone as dt_timezone
 
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.db import models
 from django.utils import timezone
@@ -33,6 +34,38 @@ def _serializar_actividades_calendario(queryset):
         }
         for a in queryset.order_by("fecha_inicio")
     ]
+
+
+# ----------------------------------------------- Vídeos externos (YouTube)
+class VideoVisto(models.Model):
+    """Registro de que un usuario con cuenta le dio a reproducir a uno de los
+    vídeos externos (p. ej. CLASES_DESTACADAS en la portada). Los visitantes
+    sin cuenta se marcan solo en su navegador (localStorage), no aquí."""
+
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="videos_vistos")
+    youtube_id = models.CharField(max_length=20)
+    titulo = models.CharField(max_length=255, blank=True)
+    primera_vez = models.DateTimeField(auto_now_add=True)
+    ultima_vez = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = [("usuario", "youtube_id")]
+        verbose_name = "vídeo visto"
+        verbose_name_plural = "vídeos vistos"
+
+
+class VideoFavorito(models.Model):
+    """Vídeo externo marcado con estrella desde Mi cuenta → Mis clases."""
+
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="videos_favoritos")
+    youtube_id = models.CharField(max_length=20)
+    titulo = models.CharField(max_length=255, blank=True)
+    creado = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = [("usuario", "youtube_id")]
+        verbose_name = "vídeo favorito"
+        verbose_name_plural = "vídeos favoritos"
 
 
 #: Selección temporal de clases/conferencias grabadas para la portada (sección
@@ -88,6 +121,10 @@ class HomePage(Page):
         ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
         ctx["equipo_destacado"] = PersonaPage.objects.live().order_by("orden", "title")[:6]
         ctx["clases_destacadas"] = CLASES_DESTACADAS
+        if request.user.is_authenticated:
+            ctx["videos_favoritos_ids"] = set(
+                VideoFavorito.objects.filter(usuario=request.user).values_list("youtube_id", flat=True)
+            )
         return ctx
 
 

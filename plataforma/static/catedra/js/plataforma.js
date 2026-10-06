@@ -7,5 +7,7 @@
   window.CH_NAV = menu ? JSON.parse(menu.textContent) : [];
   window.CH_SEARCH_URL = yo.getAttribute("data-buscar");
   window.CH_INDEX_URL = yo.getAttribute("data-indice");
+  window.CH_VIDEO_VISTO_URL = yo.getAttribute("data-video-visto");
+  window.CH_VIDEO_FAVORITO_URL = yo.getAttribute("data-video-favorito");
   window.CH_SUGGESTIONS = window.CH_NAV.map(function (s) { return { t: s.label, url: s.url, k: "Sección" }; });
 })();

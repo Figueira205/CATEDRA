@@ -265,15 +265,23 @@
     <div class="grid grid--clases-home">
       {% for v in clases_destacadas %}
       <div class="col-4 reveal">
-        <div class="video-embed video-embed--destacado" data-yt-id="{{ v.youtube_id }}">
+        <div class="video-embed video-embed--destacado" data-yt-id="{{ v.youtube_id }}" data-yt-titulo="{{ v.titulo }}">
           <button type="button" class="video-embed__play" aria-label="Reproducir: {{ v.titulo }}">
             <img src="https://i.ytimg.com/vi/{{ v.youtube_id }}/hqdefault.jpg" alt="" loading="lazy">
             <span class="play-badge" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             </span>
           </button>
+          <span class="video-embed__visto" data-visto-badge hidden>Visto</span>
         </div>
-        <h3 style="font-size:1rem;font-weight:700;line-height:1.3;margin-top:var(--s-3)">{{ v.titulo }}</h3>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s-3);margin-top:var(--s-3)">
+          <h3 style="font-size:1rem;font-weight:700;line-height:1.3">{{ v.titulo }}</h3>
+          {% if user.is_authenticated %}
+          <button type="button" class="video-favorito-btn{% if v.youtube_id in videos_favoritos_ids %} is-favorito{% endif %}" data-youtube-id="{{ v.youtube_id }}" data-titulo="{{ v.titulo }}" aria-pressed="{% if v.youtube_id in videos_favoritos_ids %}true{% else %}false{% endif %}" aria-label="Guardar como favorito: {{ v.titulo }}" style="width:32px;height:32px">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </button>
+          {% endif %}
+        </div>
       </div>
       {% endfor %}
     </div>

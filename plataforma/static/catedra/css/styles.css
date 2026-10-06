@@ -786,6 +786,12 @@ ul[class],ol[class],
 }
 .video-embed--destacado:hover{border-radius:0}
 @media (prefers-reduced-motion:reduce){.video-embed--destacado{transition:none}}
+.video-embed__visto{
+  position:absolute;top:var(--s-3);right:var(--s-3);z-index:2;
+  background:var(--color-ink);color:var(--color-paper);
+  font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:var(--radius-pill);
+}
 .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-embed__cargando,.video-embed__error{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:var(--s-5);text-align:center;color:var(--color-paper);font-family:var(--font-mono);font-size:.9rem}
 .video-embed__error{color:var(--color-gold)}
@@ -1126,7 +1132,7 @@ ul[class],ol[class],
    HomePage.get_context vía json_script, sin depender de ningún dato de
    ejemplo. Sustituye a la franja de boletín, que ya vive también en el
    pie de página. */
-.home-cal{display:grid;grid-template-columns:340px 1fr;gap:var(--s-7);align-items:start}
+.home-cal{display:grid;grid-template-columns:340px 1fr;gap:var(--s-7);align-items:stretch}
 @media (max-width:1023px){.home-cal{grid-template-columns:1fr}}
 .home-cal__month{border:var(--line);border-radius:var(--radius);padding:var(--s-5);background:var(--color-white)}
 .home-cal__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s-4)}
