@@ -374,7 +374,14 @@ ul[class],ol[class],
 .mobile-menu__bar{display:flex;align-items:center;justify-content:space-between;padding:var(--s-4) var(--page-pad);border-bottom:1px solid var(--color-border-dark)}
 .mobile-menu__close{color:var(--color-paper);font-weight:600;display:inline-flex;align-items:center;gap:8px;min-height:44px;transition:color var(--t-fast)}
 .mobile-menu__close:hover{color:var(--color-gold)}
-.mobile-menu nav{padding:var(--s-6) var(--page-pad) var(--s-7);flex:1;position:relative;overflow:hidden}
+/* min-height:0 es necesario para que un hijo flex con overflow:auto pueda
+   encogerse por debajo de la altura de su contenido (el valor por defecto,
+   min-height:auto, se lo impide) — sin esto, al abrir un desplegable con
+   varios sub-apartados (p. ej. Biblioteca), el contenido crecía más allá
+   del hueco disponible y quedaba tapado por el buscador/"Acceder" del pie,
+   sin forma de llegar a verlo. Ahora esa lista central scrollea por su
+   cuenta y el pie (buscador + cuenta) se queda siempre visible abajo. */
+.mobile-menu nav{padding:var(--s-6) var(--page-pad) var(--s-7);flex:1;position:relative;min-height:0;overflow-y:auto}
 .mobile-menu .mm-kicker{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.16em;color:var(--color-gold);margin-bottom:var(--s-4);display:block}
 .mobile-menu .mm-item{border-top:1px solid var(--color-border-dark)}
 .mobile-menu .mm-item:last-child{border-bottom:1px solid var(--color-border-dark)}
