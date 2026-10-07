@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+{# 01 · Cubierta #}
+<section class="page-hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="grid" style="align-items:center">
+      <div class="col-6 reveal">
+        <p class="kicker">{{ page.antetitulo }}</p>
+        <h1 id="hero-title">{{ page.title }}</h1>
+        {% if page.entradilla %}<p class="lead">{{ page.entradilla }}</p>{% endif %}
+        <div class="hero__ctas" style="margin-top:var(--s-6)">
+          <a class="btn btn--primary" href="#convocatoria">Convocatoria de originales <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="#normas">Normas para autores</a>
+        </div>
+      </div>
+      <div class="col-6 reveal">
+        <div class="revista-cover">
+          <span class="revista-cover__seal" aria-hidden="true">CH</span>
+          <p class="revista-cover__kicker">Cátedra para la Promoción Internacional de la Cultura Hispánica</p>
+          <h2 class="revista-cover__title">Horizontes<br>Culturales<br>Hispánicos</h2>
+          <p class="revista-cover__vol">Vol. 1 · 2027 — ISSN en trámite</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# 02 · Presentación #}
+<section class="section" aria-labelledby="t-presentacion">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-presentacion">Presentación</h2>
+    </div>
+    <div class="grid">
+      <div class="col-7 reveal">
+        <div class="prose">
+          <p>Horizontes Culturales Hispánicos es la revista científica de la Cátedra para la Promoción Internacional de la Cultura Hispánica (Universidad Rey Juan Carlos), editada en colaboración con Editorial Dykinson. Nace para ofrecer un espacio académico especializado donde difundir investigación de alta calidad sobre el mundo hispánico, prestando especial atención a la evolución histórica del Derecho, la romanística, el Derecho mercantil y concursal, y las transformaciones contemporáneas del ordenamiento jurídico.</p>
+          <p>Es una publicación de acceso abierto, sin cargos para los autores, de periodicidad anual, que acoge trabajos en español, inglés y portugués bajo un enfoque doctrinal, jurisprudencial, histórico, comparado e interdisciplinar.</p>
+        </div>
+      </div>
+      <div class="col-5 reveal">
+        <blockquote class="prose" style="max-width:none">
+          <p class="cita-destacada">«Un instrumento de apoyo a la actividad de la Cátedra que contribuye a la generación, transferencia y preservación del conocimiento jurídico.»</p>
+        </blockquote>
+        <div class="datasheet mt-6"><dl>
+          <div class="row"><dt>Acceso</dt><dd>Abierto, sin cargos para los autores</dd></div>
+          <div class="row"><dt>Periodicidad</dt><dd>Anual</dd></div>
+          <div class="row"><dt>Idiomas</dt><dd>Español, inglés y portugués</dd></div>
+          <div class="row"><dt>Evaluación</dt><dd>Por pares, doble ciego</dd></div>
+          <div class="row"><dt>Edición</dt><dd>Cátedra URJC · Editorial Dykinson</dd></div>
+        </dl></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# 03 · Alcance temático y tipología #}
+<section class="section section--muted" aria-labelledby="t-alcance">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-alcance">Alcance temático</h2>
+    </div>
+    <div class="grid">
+      <div class="col-12 reveal" style="display:flex;gap:var(--s-2);flex-wrap:wrap;margin-bottom:var(--s-7)">
+        <span class="tag tag--area">Derecho civil y mercantil</span>
+        <span class="tag tag--area">Derecho social y humanístico</span>
+        <span class="tag tag--area">Historia del Derecho y romanística</span>
+        <span class="tag tag--area">Derecho procesal</span>
+        <span class="tag tag--area">Derecho constitucional</span>
+        <span class="tag tag--area">Derecho internacional</span>
+        <span class="tag tag--area">Estudios interdisciplinares</span>
+      </div>
+    </div>
+    <div class="sec-head"><h3 style="font-size:1.4rem" id="t-tipologia">Tipología de los trabajos</h3></div>
+    <div class="reveal" style="overflow-x:auto">
+      <table class="tabla-simple">
+        <thead><tr><th>Modalidad</th><th>Descripción</th><th>Extensión (palabras)</th></tr></thead>
+        <tbody>
+          <tr><td>Artículo de investigación</td><td>Trabajo original con aportación científica sustantiva</td><td>7.000–10.000</td></tr>
+          <tr><td>Estudio o nota</td><td>Contribución más breve o de alcance acotado</td><td>4.000–6.000</td></tr>
+          <tr><td>Nota y debate</td><td>Reflexión metodológica, debate o respuesta crítica</td><td>3.000–5.000</td></tr>
+          <tr><td>Edición de fuentes</td><td>Introducción crítica, transcripción y notas</td><td>Hasta 8.000</td></tr>
+          <tr><td>Entrevista</td><td>Diálogo con especialistas o gestores culturales</td><td>3.000–5.000</td></tr>
+          <tr><td>Reseña bibliográfica</td><td>Análisis de una novedad editorial o recurso</td><td>1.500–2.500</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{# 04 · Convocatoria (Call for Papers) #}
+<section class="section section--atlantic on-dark" id="convocatoria" aria-labelledby="t-convocatoria">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-convocatoria">Convocatoria de originales · Vol. 1 (2027)</h2>
+    </div>
+    <div class="grid">
+      <div class="col-7 reveal">
+        <p class="kicker">Dossier monográfico</p>
+        <p class="lead" style="margin:var(--s-3) 0 var(--s-5)">«El legado hispánico en los Estados Unidos de América: historia, cultura y economía»</p>
+        <div class="prose">
+          <p>Con ocasión del 250.º aniversario de la independencia de los Estados Unidos, el monográfico reúne contribuciones desde las humanidades, las ciencias sociales y la economía que iluminen la profundidad y la vigencia de la huella hispánica en Norteamérica.</p>
+        </div>
+        <ul class="prose" style="margin-top:var(--s-5)">
+          <li>Exploración, presencia e instituciones españolas en Norteamérica.</li>
+          <li>Derecho, tratados y fronteras: de las Capitulaciones al Tratado Adams-Onís.</li>
+          <li>La contribución de España a la independencia de los Estados Unidos.</li>
+          <li>Lengua española, identidad y comunidades hispanas en los Estados Unidos.</li>
+          <li>Economía, comercio y finanzas en el espacio atlántico hispánico.</li>
+          <li>Patrimonio, memoria y proyección cultural del legado español.</li>
+        </ul>
+        <p class="form-note mt-6">Permanecen abiertas, además, las secciones ordinarias de Estudios y artículos, y Reseñas bibliográficas, de temática libre dentro del alcance de la revista.</p>
+      </div>
+      <div class="col-5 reveal">
+        <div class="timeline">
+          <div class="timeline__item">
+            <p class="timeline__fecha">NOVIEMBRE DE 2026</p>
+            <p class="timeline__hito">Apertura de la convocatoria</p>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__fecha">15 DE JULIO DE 2027</p>
+            <p class="timeline__hito">Fecha límite de recepción de originales</p>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__fecha">ENERO – SEPTIEMBRE 2027</p>
+            <p class="timeline__hito">Comunicación continua de resultados</p>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__fecha">HASTA SEPTIEMBRE DE 2027</p>
+            <p class="timeline__hito">Entrega de versiones finales</p>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__fecha">ÚLTIMO TRIMESTRE DE 2027</p>
+            <p class="timeline__hito">Publicación del Vol. 1, núm. 1</p>
+          </div>
+        </div>
+        <p class="form-note mt-6">La evaluación es continua: se recomienda el envío temprano. Fechas orientativas, sujetas a la marcha del proceso editorial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# 05 · Normas para autores #}
+<section class="section" id="normas" aria-labelledby="t-normas">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-normas">Normas para autores</h2>
+    </div>
+    <div class="grid">
+      <div class="col-7 reveal">
+        <div class="prose">
+          <h3>Presentación del manuscrito</h3>
+          <p>Documento de Microsoft Word (.docx), A4, márgenes de 2,5 cm, tipografía de 12 puntos, interlineado de 1,5 y texto justificado. El manuscrito se envía anonimizado —sin nombre, afiliación ni autocitas identificativas—, con los datos del autor en archivo aparte (nombre, afiliación, ORCID, correo y nota biográfica de hasta 80 palabras).</p>
+          <h3>Citas y referencias</h3>
+          <p>Estilo único: norma ISO 690 (UNE-ISO 690). Cita en el texto por el sistema de nombre y fecha — <em>(García Cárcel, 2017, p. 122)</em> — y referencias finales ordenadas alfabéticamente.</p>
+          <h3>Compromisos éticos</h3>
+          <p>Originalidad y ausencia de plagio (control antiplagio obligatorio), no presentación simultánea a otras revistas, declaración de autoría CRediT, financiación, conflictos de interés, disponibilidad de datos y uso de inteligencia artificial generativa.</p>
+          <h3>Proceso y plazos orientativos</h3>
+          <p>Acuse de recibo (≈ 1 semana) → revisión editorial preliminar (2–3 semanas) → evaluación por pares externos en doble ciego (al menos dos informes) → decisión motivada. Proceso completo: de tres a cuatro meses.</p>
+        </div>
+      </div>
+      <div class="col-5 reveal">
+        <div class="datasheet"><dl>
+          <div class="row"><dt>Licencia</dt><dd>Creative Commons (acceso abierto)</dd></div>
+          <div class="row"><dt>Coste para autores</dt><dd>Ninguno</dd></div>
+          <div class="row"><dt>Envío</dt><dd>Exclusivamente por la plataforma editorial (OJS)</dd></div>
+        </dl></div>
+        {% if documentos %}
+        <div class="stack-4 mt-6">
+          <p class="mono" style="color:var(--color-ink-soft)">DOCUMENTOS DESCARGABLES</p>
+          {% for doc in documentos %}
+          <a class="btn btn--ghost btn--bloque" style="justify-content:space-between" href="{{ doc.url }}">{{ doc.titulo }} <span class="arr" aria-hidden="true">↓</span></a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# 06 · Organigrama editorial #}
+<section class="section section--muted" aria-labelledby="t-organigrama">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-organigrama">Organigrama editorial</h2>
+      <span class="sec-head__aside"><p class="form-note" style="max-width:36ch">Codirección conjunta, con un reparto de áreas de responsabilidad ejecutiva.</p></span>
+    </div>
+    <div class="grid">
+      <div class="col-6 reveal">
+        <div class="card" style="height:auto">
+          <div class="card__body">
+            <p class="card__meta"><span class="mono">ÁREA EDITORIAL Y DE DIFUSIÓN</span></p>
+            <h3 class="card__title">Dr. Morris Eidelman Criscautsky</h3>
+            <p class="card__desc">Codirector. Preside el Consejo Editorial; responsable de producción editorial, relación con Editorial Dykinson, comunicación e impacto, y reseñas bibliográficas.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 reveal">
+        <div class="card" style="height:auto">
+          <div class="card__body">
+            <p class="card__meta"><span class="mono">ÁREA CIENTÍFICA Y DE GESTIÓN</span></p>
+            <h3 class="card__title">Dr. Jesús María González Martín</h3>
+            <p class="card__desc">Codirector. Coordina el Comité Científico; responsable de Secretaría Técnica, evaluación por pares, protección de datos, y archivo y preservación digital.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="atlas-wrap mt-7">
+      <div class="atlas-list reveal">
+        <div class="atlas-item" data-area="consejo">
+          <button type="button" class="atlas-item__btn" aria-expanded="false">
+            <span class="atlas-item__num">01</span>
+            <span class="atlas-item__name">Consejo Editorial</span>
+            <span class="atlas-item__count">9 miembros</span>
+          </button>
+          <div class="atlas-item__panel">
+            <p>Órgano colegiado de gobierno editorial. Define la política editorial, aprueba las normas de publicación y supervisa la coherencia temática de los números. Al menos dos terceras partes de sus miembros son ajenos a la entidad editora.</p>
+            <div class="atlas-item__links">
+              <span class="tag">Dr. Morris Eidelman Criscautsky · Presidente</span>
+              <span class="tag">Dr. Félix Martínez Llorente</span>
+              <span class="tag">Dra. Carmen Ruiz Sutil</span>
+              <span class="tag">Dra. Yolanda Quesada Murillas</span>
+              <span class="tag">Dr. Antonio Sánchez Aranda</span>
+              <span class="tag">Dr. Joseph Serrano Daula</span>
+              <span class="tag">Dr. José Antonio Pérez Juan</span>
+              <span class="tag">Dr. José Manuel Calderón Ortega</span>
+              <span class="tag">Dr. Fernando Suárez Bilbao</span>
+            </div>
+          </div>
+        </div>
+        <div class="atlas-item" data-area="cientifico">
+          <button type="button" class="atlas-item__btn" aria-expanded="false">
+            <span class="atlas-item__num">02</span>
+            <span class="atlas-item__name">Comité Científico</span>
+            <span class="atlas-item__count">en composición</span>
+          </button>
+          <div class="atlas-item__panel">
+            <p>Órgano de asesoramiento científico que avala la excelencia académica y la pertinencia de los manuscritos. Entre doce y veinte expertos nacionales e internacionales; los nombramientos pendientes asegurarán mayoría externa y presencia internacional.</p>
+            <div class="atlas-item__links">
+              <span class="tag">Dr. Jesús María González Martín · Coordinador</span>
+              <span class="tag">Dr. Gonzalo Bellón de Aguilar</span>
+              <span class="tag">Dr. Fernando Bermejo Batanero</span>
+              <span class="tag">Dr. Alberto Romero Ania</span>
+              <span class="tag tag--demo">Otros miembros por designar</span>
+            </div>
+          </div>
+        </div>
+        <div class="atlas-item" data-area="titularidad">
+          <button type="button" class="atlas-item__btn" aria-expanded="false">
+            <span class="atlas-item__num">03</span>
+            <span class="atlas-item__name">Titularidad y coedición</span>
+          </button>
+          <div class="atlas-item__panel">
+            <p>La revista es una publicación de la Universidad Rey Juan Carlos a través de la Cátedra para la Promoción Internacional de la Cultura Hispánica, dirigida por el Dr. Ignacio Ruiz Rodríguez y el Dr. Gonzalo Bellón de Aguilar. Editorial Dykinson (Madrid) interviene en la edición, producción y distribución, sin participar en la selección ni evaluación de los originales: una separación que garantiza la independencia editorial.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# 07 · Código ético #}
+<section class="section" aria-labelledby="t-etica">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-etica">Código ético y buenas prácticas</h2>
+      <span class="sec-head__aside"><span class="tag">Estándares COPE</span></span>
+    </div>
+    <div class="grid">
+      <div class="col-4 reveal"><div class="card" style="height:auto"><div class="card__body">
+        <h3 class="card__title" style="font-size:1.1rem">Evaluación imparcial</h3>
+        <p class="card__desc">Doble ciego, confidencialidad de autores y revisores, y abstención ante cualquier conflicto de interés.</p>
+      </div></div></div>
+      <div class="col-4 reveal"><div class="card" style="height:auto"><div class="card__body">
+        <h3 class="card__title" style="font-size:1.1rem">Control antiplagio</h3>
+        <p class="card__desc">Todos los manuscritos se someten a software de detección. El plagio o la autoría indebida conllevan rechazo o retractación.</p>
+      </div></div></div>
+      <div class="col-4 reveal"><div class="card" style="height:auto"><div class="card__body">
+        <h3 class="card__title" style="font-size:1.1rem">Integridad de datos</h3>
+        <p class="card__desc">Los autores conservan y, cuando procede, facilitan sus datos primarios, conforme a los principios de la ciencia abierta.</p>
+      </div></div></div>
+    </div>
+    <p class="prose mt-7" style="max-width:70ch">Horizontes Culturales Hispánicos asume los principios de transparencia del <em>Committee on Publication Ethics</em> (COPE) y trabaja para adecuar a ellos sus procedimientos, contemplando a medio plazo solicitar la membresía institucional como garantía adicional de buenas prácticas.</p>
+  </div>
+</section>
+
+{# 08 · Indexación #}
+<section class="section section--muted" aria-labelledby="t-indexacion">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-indexacion">Indexación y visibilidad</h2>
+    </div>
+    <div class="grid">
+      <div class="col-6 reveal">
+        <p class="mono" style="color:var(--color-ink-soft);margin-bottom:var(--s-4)">OBJETIVO INICIAL</p>
+        <div style="display:flex;gap:var(--s-2);flex-wrap:wrap">
+          <span class="tag tag--state">Google Académico</span>
+          <span class="tag tag--state">Dialnet</span>
+          <span class="tag tag--state">Latindex</span>
+          <span class="tag tag--state">MIAR</span>
+        </div>
+      </div>
+      <div class="col-6 reveal">
+        <p class="mono" style="color:var(--color-ink-soft);margin-bottom:var(--s-4)">OBJETIVO A MEDIO Y LARGO PLAZO</p>
+        <div style="display:flex;gap:var(--s-2);flex-wrap:wrap">
+          <span class="tag tag--demo">DOAJ</span>
+          <span class="tag tag--demo">Scopus</span>
+          <span class="tag tag--demo">Web of Science</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# 09 · Envíos y contacto #}
+<section class="section section--carmine on-dark" aria-labelledby="t-contacto">
+  <div class="container">
+    <div class="grid" style="align-items:center">
+      <div class="col-7 reveal">
+        <p class="kicker">Envíos y contacto</p>
+        <h2 class="sec-head__title" style="margin:16px 0">Escribe a la revista</h2>
+        <p class="serif" style="opacity:.9;max-width:50ch">Los trabajos se remiten a través de la plataforma editorial (OJS) de la revista, en fase de puesta en marcha. Mientras tanto, cualquier consulta puede dirigirse por correo.</p>
+      </div>
+      <div class="col-5 reveal">
+        <ul class="stack-4" style="list-style:none">
+          <li><a class="link-arrow" href="mailto:revista@catedrahispanidad.com">Secretaría y consultas generales · revista@catedrahispanidad.com <span class="arr" aria-hidden="true">→</span></a></li>
+          <li><a class="link-arrow" href="mailto:evaluacion@catedrahispanidad.com">Evaluación por pares · evaluacion@catedrahispanidad.com <span class="arr" aria-hidden="true">→</span></a></li>
+          <li><a class="link-arrow" href="mailto:resenas@catedrahispanidad.com">Reseñas bibliográficas · resenas@catedrahispanidad.com <span class="arr" aria-hidden="true">→</span></a></li>
+          <li><a class="link-arrow" href="/biblioteca/?tipo=revista">Ver los números publicados <span class="arr" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

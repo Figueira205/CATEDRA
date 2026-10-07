@@ -20,7 +20,7 @@ SUBMENU_ANCLAS = {
     ],
     "biblioteca": [
         ["Últimas publicaciones", ""],
-        ["Revista de la Cátedra", "?tipo=revista"],
+        ["Revista de la Cátedra", "/biblioteca/revista/"],
         ["Contenido digital (clases)", "/formacion/"],
         ["Galería", "/galeria/"],
     ],

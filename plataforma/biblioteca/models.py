@@ -16,7 +16,7 @@ class BibliotecaPage(Page):
     entradilla = RichTextField(blank=True, features=["bold", "italic", "link"])
 
     content_panels = Page.content_panels + [FieldPanel("antetitulo"), FieldPanel("entradilla")]
-    subpage_types = ["biblioteca.PublicacionPage"]
+    subpage_types = ["biblioteca.PublicacionPage", "biblioteca.RevistaPage"]
     max_count = 1
 
     class Meta:
@@ -87,4 +87,48 @@ class PublicacionPage(Producto, Page):
     def get_context(self, request, *args, **kwargs):
         ctx = super().get_context(request, *args, **kwargs)
         ctx["tiene_acceso"] = self.usuario_tiene_acceso(request.user)
+        return ctx
+
+
+# -------------------------------------------------- Revista (página informativa)
+class RevistaPage(Page):
+    """«Acerca de la revista»: presentación, convocatoria, normas, organigrama y
+    código ético de Horizontes Culturales Hispánicos. Contenido institucional
+    fijo (actas fundacionales de la revista, septiembre-octubre de 2026);
+    los textos largos viven en la plantilla, no en el panel de Wagtail, para
+    mantener la fidelidad a los documentos originales."""
+
+    antetitulo = models.CharField(max_length=80, blank=True, default="Revista de la Cátedra")
+    entradilla = models.TextField(blank=True)
+    imagen_cabecera = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
+
+    content_panels = Page.content_panels + [FieldPanel("antetitulo"), FieldPanel("entradilla"), FieldPanel("imagen_cabecera")]
+    parent_page_types = ["biblioteca.BibliotecaPage"]
+    subpage_types = []
+    max_count = 1
+
+    class Meta:
+        verbose_name = "revista (página informativa)"
+
+    #: Títulos (tal cual se suben a la biblioteca de documentos de Wagtail) de
+    #: los archivos descargables de esta página, en el orden en que deben
+    #: mostrarse. Si falta alguno, la plantilla simplemente no muestra su
+    #: botón de descarga.
+    DOCUMENTOS_TITULOS = [
+        "Convocatoria de originales · Vol. 1 (2027)",
+        "Normas para autores",
+        "Código ético y de buenas prácticas",
+        "Plantilla de artículo",
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        from wagtail.documents.models import Document
+
+        ctx = super().get_context(request, *args, **kwargs)
+        docs = {d.title: d for d in Document.objects.filter(title__in=self.DOCUMENTOS_TITULOS)}
+        ctx["documentos"] = [
+            {"titulo": t, "url": docs[t].url} for t in self.DOCUMENTOS_TITULOS if t in docs
+        ]
         return ctx

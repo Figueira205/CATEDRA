@@ -925,6 +925,35 @@ ul[class],ol[class],
 .social a:hover{background:var(--color-carmine);border-color:var(--color-carmine)}
 .social svg{width:18px;height:18px}
 
+/* ---------- 15b. REVISTA (cubierta + cronología) ---------- */
+/* Cubierta de la revista: evoca el diseño de portada de la publicación
+   (azul marino + oro, ya usados en los tokens --color-atlantic/--color-gold
+   del resto del sitio) con un filete doble al estilo de una tapa editorial. */
+.revista-cover{
+  position:relative;overflow:hidden;text-align:center;border-radius:var(--radius);
+  padding:clamp(var(--s-7),6vw,var(--s-9)) clamp(var(--s-6),5vw,var(--s-8));
+  background:linear-gradient(165deg,var(--color-atlantic) 0%,var(--color-atlantic-deep) 100%);
+  color:var(--color-paper);
+}
+.revista-cover::before{content:"";position:absolute;inset:14px;border:1px solid rgba(180,138,60,.45);pointer-events:none}
+.revista-cover__seal{
+  width:84px;height:84px;margin:0 auto var(--s-5);border-radius:50%;
+  border:2px solid var(--color-gold);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-serif);font-weight:700;color:var(--color-gold);font-size:1.6rem;
+}
+.revista-cover__kicker{font-family:var(--font-mono);letter-spacing:.18em;color:var(--color-gold);font-size:.78rem;text-transform:uppercase}
+.revista-cover__title{font-family:var(--font-serif);font-weight:700;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.12;margin:var(--s-4) 0}
+.revista-cover__vol{font-family:var(--font-mono);color:var(--color-paper-muted);letter-spacing:.08em;font-size:.84rem}
+
+/* Cronología vertical (convocatoria de originales) */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:rgba(244,240,231,.25)}
+.timeline__item{position:relative;padding-bottom:var(--s-6)}
+.timeline__item:last-child{padding-bottom:0}
+.timeline__item::before{content:"";position:absolute;left:-32px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--color-atlantic-deep);border:3px solid var(--color-gold)}
+.timeline__fecha{font-family:var(--font-mono);font-size:.76rem;color:var(--color-gold);letter-spacing:.06em}
+.timeline__hito{font-weight:700;font-size:1.08rem;margin-top:2px}
+
 /* ---------- 16. PÁGINAS INTERIORES ---------- */
 .page-hero{border-bottom:var(--line);padding-block:clamp(var(--s-7),6vw,var(--s-9)) clamp(var(--s-6),4vw,var(--s-8))}
 .page-hero--dark{background:linear-gradient(155deg,var(--color-carmine) 0%,var(--color-carmine-dark) 52%,#170709 100%);color:var(--color-paper);border-bottom:0}
