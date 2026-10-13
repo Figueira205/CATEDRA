@@ -184,9 +184,31 @@ ul[class],ol[class],
 .carrusel-libros-home.is-arrastrando{cursor:grabbing;scroll-snap-type:none}
 .carrusel-libros-home__item{flex:0 0 calc((100% - 4*var(--gutter))/4.5);scroll-snap-align:start;min-width:0}
 @media (max-width:1023px){.carrusel-libros-home__item{flex-basis:calc((100% - 3*var(--gutter))/4)}}
-/* Móvil: un libro grande por pantalla, el resto se alcanza deslizando con el
-   dedo (scroll-snap nativo), nunca varios encajados a la fuerza. */
-@media (max-width:599px){.carrusel-libros-home__item{flex-basis:78%}}
+
+/* Móvil: rediseño sin gesto táctil sobre las portadas. El scroll por arrastre
+   (aun con touch-action y draggable=false) seguía peleándose con el scroll
+   vertical de la página en algunos navegadores, así que en móvil el carrusel
+   deja de ser «de arrastre»: pasa a ser un panel estático (overflow:hidden,
+   sin scroll ni scroll-snap) que solo avanza al pulsar los botones ‹ › de
+   abajo. Nada bajo el dedo captura el gesto: el scroll vertical nunca puede
+   verse interferido. */
+@media (max-width:599px){
+  .carrusel-libros-home{overflow:hidden;scroll-snap-type:none;touch-action:auto;cursor:default}
+  .carrusel-libros-home__item{flex-basis:100%}
+  .carrusel-libros-home-wrap::after,
+  .carrusel-libros-home-wrap .carrusel-libros-home__pista{display:none}
+}
+.carrusel-mobil-nav{display:none}
+@media (max-width:599px){
+  .carrusel-mobil-nav{display:flex;justify-content:center;gap:var(--s-4);margin-top:var(--s-5)}
+  .carrusel-mobil-nav button{
+    width:44px;height:44px;border-radius:50%;border:1.5px solid var(--color-ink);
+    display:flex;align-items:center;justify-content:center;background:var(--color-white);
+    transition:background var(--t-fast);
+  }
+  .carrusel-mobil-nav button:hover{background:var(--color-paper-muted)}
+  .carrusel-mobil-nav button:disabled{opacity:.3;pointer-events:none}
+}
 
 /* Pista de que hay más contenido a la derecha: degradado + flecha que rebota,
    superpuestos al borde del carrusel (no ocupan espacio ni se arrastran con él). */

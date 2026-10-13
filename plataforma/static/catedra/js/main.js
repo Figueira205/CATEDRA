@@ -1077,5 +1077,32 @@
         carrusel.scrollBy({ left: paso, behavior: "smooth" });
       });
     }
+
+    // Móvil: sin arrastre ni scroll sobre las portadas, solo botones ‹ › que
+    // mueven la fila un libro entero con transform (nada que capture el dedo).
+    var navMobil = $(".carrusel-mobil-nav", wrap);
+    if (navMobil) {
+      var items = $$(".carrusel-libros-home__item", carrusel);
+      var indice = 0;
+      function mqMobil() { return window.matchMedia("(max-width:599px)").matches; }
+      function renderMobil() {
+        if (!mqMobil()) { carrusel.style.transform = ""; return; }
+        indice = Math.max(0, Math.min(indice, items.length - 1));
+        carrusel.style.transform = "translateX(calc(-100% * " + indice + "))";
+        $$("[data-carrusel-mobil-nav]", navMobil).forEach(function (b) {
+          var dir = parseInt(b.getAttribute("data-carrusel-mobil-nav"), 10);
+          b.disabled = (dir < 0 && indice === 0) || (dir > 0 && indice === items.length - 1);
+        });
+      }
+      carrusel.style.transition = "transform .4s ease";
+      $$("[data-carrusel-mobil-nav]", navMobil).forEach(function (b) {
+        b.addEventListener("click", function () {
+          indice += parseInt(b.getAttribute("data-carrusel-mobil-nav"), 10);
+          renderMobil();
+        });
+      });
+      window.addEventListener("resize", renderMobil);
+      renderMobil();
+    }
   });
 })();
