@@ -19,7 +19,7 @@ SUBMENU_ANCLAS = {
     "biblioteca": [
         ["Libros", ""],
         ["Revista de la Cátedra", "/biblioteca/revista/"],
-        ["Contenido digital (clases)", "/formacion/"],
+        ["Contenido (seminarios)", "/formacion/"],
         ["Galería", "/galeria/"],
     ],
 }

@@ -410,7 +410,7 @@ ul[class],ol[class],
 .mega.is-open{opacity:1;visibility:visible;transform:none}
 .mega__inner{display:grid;grid-template-columns:220px 1fr 320px;gap:var(--s-7);padding-block:var(--s-7)}
 .mega__label{font-family:var(--font-mono);font-size:var(--text-meta);letter-spacing:.1em;text-transform:uppercase;color:var(--color-carmine);border-top:2px solid var(--color-ink);padding-top:var(--s-3)}
-.mega__cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,max-content));gap:var(--s-4) var(--s-6);align-content:start;justify-content:start}
+.mega__cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,max-content));gap:var(--s-4) var(--s-6);align-content:start;justify-content:start}
 .mega__cols a{
   display:flex;gap:10px;align-items:baseline;
   padding:7px 0;text-decoration:none;font-weight:500;font-size:.98rem;
