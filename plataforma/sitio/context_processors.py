@@ -15,8 +15,6 @@ SUBMENU_ANCLAS = {
     "actividades": [
         ["Agenda completa", ""],
         ["Próximas actividades", "#proximas"],
-        ["Vista de calendario", "#calendario"],
-        ["Actividades celebradas", "#celebradas"],
     ],
     "biblioteca": [
         ["Libros", ""],
