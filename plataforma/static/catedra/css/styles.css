@@ -178,10 +178,11 @@ ul[class],ol[class],
 }
 .carrusel-libros-home-wrap .carrusel-libros-home__pista{
   position:absolute;top:50%;right:var(--s-4);z-index:2;transform:translateY(-50%);
-  width:40px;height:40px;border-radius:50%;background:var(--color-white);
+  width:40px;height:40px;border-radius:50%;background:var(--color-white);color:var(--color-ink);
   border:1.5px solid var(--color-ink);display:flex;align-items:center;justify-content:center;
-  pointer-events:none;animation:pista-libros 1.6s ease-in-out infinite;
+  cursor:pointer;animation:pista-libros 1.6s ease-in-out infinite;transition:background var(--t-fast);
 }
+.carrusel-libros-home-wrap .carrusel-libros-home__pista:hover{background:var(--color-paper-muted)}
 @keyframes pista-libros{0%,100%{transform:translate(0,-50%)}50%{transform:translate(6px,-50%)}}
 @media (prefers-reduced-motion:reduce){.carrusel-libros-home-wrap .carrusel-libros-home__pista{animation:none}}
 .carrusel-libros-home-wrap.esta-al-final::after,

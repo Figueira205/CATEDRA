@@ -250,9 +250,9 @@
       <div class="carrusel-libros-home" data-carrusel-arrastrable>
         {% for p in ultimas_publicaciones %}<div class="carrusel-libros-home__item reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
       </div>
-      <span class="carrusel-libros-home__pista" aria-hidden="true">
+      <button type="button" class="carrusel-libros-home__pista" data-carrusel-pista-btn aria-label="Ver más libros">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </span>
+      </button>
     </div>
   </div>
 </section>

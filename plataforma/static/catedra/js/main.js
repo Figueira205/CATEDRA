@@ -1063,5 +1063,13 @@
     carrusel.addEventListener("scroll", actualizar);
     window.addEventListener("resize", actualizar);
     actualizar();
+    var btnPista = $("[data-carrusel-pista-btn]", wrap);
+    if (btnPista) {
+      btnPista.addEventListener("click", function () {
+        var item = $(".carrusel-libros-home__item", carrusel);
+        var paso = item ? item.getBoundingClientRect().width + 24 : carrusel.clientWidth * 0.8;
+        carrusel.scrollBy({ left: paso, behavior: "smooth" });
+      });
+    }
   });
 })();
