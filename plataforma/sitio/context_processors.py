@@ -19,7 +19,7 @@ SUBMENU_ANCLAS = {
         ["Actividades celebradas", "#celebradas"],
     ],
     "biblioteca": [
-        ["Últimas publicaciones", ""],
+        ["Libros", ""],
         ["Revista de la Cátedra", "/biblioteca/revista/"],
         ["Contenido digital (clases)", "/formacion/"],
         ["Galería", "/galeria/"],

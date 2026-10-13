@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.db.models import Q
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
@@ -29,7 +30,11 @@ class BibliotecaPage(Page):
         if tipo in PublicacionPage.Tipo.values:
             qs = qs.filter(tipo=tipo)
         acceso = request.GET.get("acceso", "")
-        if acceso in Acceso.values:
+        if acceso == Acceso.PAGO:
+            # Incluye tanto el contenido de pago por Stripe como los libros físicos
+            # a la venta en una editorial externa (acceso libre + enlace_externo).
+            qs = qs.filter(Q(acceso=acceso) | ~Q(enlace_externo=""))
+        elif acceso in Acceso.values:
             qs = qs.filter(acceso=acceso)
         ctx["publicaciones"] = Paginator(qs, 24).get_page(request.GET.get("pagina"))
         ctx["tipos"] = PublicacionPage.Tipo.choices
@@ -61,6 +66,11 @@ class PublicacionPage(Producto, Page):
         validators=[FileExtensionValidator(["pdf", "epub"])],
         help_text="Se guarda en una zona privada: solo se descarga si el usuario tiene acceso.",
     )
+    enlace_externo = models.URLField(
+        "enlace de compra externa", blank=True,
+        help_text="Libro físico a la venta en otra editorial (p. ej. Dykinson): la tarjeta enlaza "
+                   "directamente ahí en vez de a la ficha interna.",
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([FieldPanel("tipo"), FieldPanel("autoria"), FieldPanel("fecha_publicacion")], heading="Ficha"),
@@ -69,6 +79,7 @@ class PublicacionPage(Producto, Page):
         FieldPanel("sinopsis"),
         MultiFieldPanel([FieldPanel("isbn"), FieldPanel("doi"), FieldPanel("paginas")], heading="Datos bibliográficos"),
         FieldPanel("archivo"),
+        FieldPanel("enlace_externo"),
     ] + Producto.producto_panels
 
     search_fields = Page.search_fields + [
