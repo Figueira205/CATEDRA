@@ -160,24 +160,12 @@ ul[class],ol[class],
 .carrusel-libros-home{
   position:relative;display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x proximity;
   cursor:grab;scrollbar-width:none;margin-top:var(--s-6);
-  touch-action:pan-x;
 }
 .carrusel-libros-home::-webkit-scrollbar{display:none}
 @media (max-width:599px){.carrusel-libros-home{margin-top:0}}
 /* Sin zoom de la portada al pasar el ratón aquí: en el carrusel de la home ese
    pequeño scale() generaba un repintado que interfería con el arrastre/scroll. */
 .carrusel-libros-home .card:hover .card__media img{transform:none}
-/* El dedo sobre la propia <img> de la portada no arrastraba la página: el
-   gesto nativo de "arrastrar/guardar imagen" del navegador (drag de imagen,
-   callout de pulsación larga en iOS) competía con el scroll del carrusel y
-   lo bloqueaba. Se repite touch-action en cada nivel (contenedor, tarjeta,
-   imagen) porque en algunos navegadores móviles no basta con fijarlo solo en
-   el contenedor que hace scroll. */
-.carrusel-libros-home,
-.carrusel-libros-home__item,
-.carrusel-libros-home .card,
-.carrusel-libros-home .card__media,
-.carrusel-libros-home .card__media img{touch-action:pan-x}
 .carrusel-libros-home .card__media img{
   -webkit-user-drag:none;user-select:none;-webkit-touch-callout:none;
 }
@@ -185,29 +173,15 @@ ul[class],ol[class],
 .carrusel-libros-home__item{flex:0 0 calc((100% - 4*var(--gutter))/4.5);scroll-snap-align:start;min-width:0}
 @media (max-width:1023px){.carrusel-libros-home__item{flex-basis:calc((100% - 3*var(--gutter))/4)}}
 
-/* Móvil: rediseño sin gesto táctil sobre las portadas. El scroll por arrastre
-   (aun con touch-action y draggable=false) seguía peleándose con el scroll
-   vertical de la página en algunos navegadores, así que en móvil el carrusel
-   deja de ser «de arrastre»: pasa a ser un panel estático (overflow:hidden,
-   sin scroll ni scroll-snap) que solo avanza al pulsar los botones ‹ › de
-   abajo. Nada bajo el dedo captura el gesto: el scroll vertical nunca puede
-   verse interferido. */
+/* Móvil: sin carrusel. Una lista simple, un libro por fila, los 4 primeros;
+   nada de scroll horizontal, JS ni gestos que puedan interferir con el scroll
+   normal de la página. El resto está en «Ir a la Biblioteca». */
 @media (max-width:599px){
-  .carrusel-libros-home{overflow:hidden;scroll-snap-type:none;touch-action:auto;cursor:default}
-  .carrusel-libros-home__item{flex-basis:100%}
+  .carrusel-libros-home{display:grid;grid-template-columns:1fr;gap:var(--s-6);overflow:visible;cursor:default}
+  .carrusel-libros-home__item{flex:none;width:100%;max-width:320px;margin-inline:auto}
+  .carrusel-libros-home__item:nth-child(n+5){display:none}
   .carrusel-libros-home-wrap::after,
   .carrusel-libros-home-wrap .carrusel-libros-home__pista{display:none}
-}
-.carrusel-mobil-nav{display:none}
-@media (max-width:599px){
-  .carrusel-mobil-nav{display:flex;justify-content:center;gap:var(--s-4);margin-top:var(--s-5)}
-  .carrusel-mobil-nav button{
-    width:44px;height:44px;border-radius:50%;border:1.5px solid var(--color-ink);
-    display:flex;align-items:center;justify-content:center;background:var(--color-white);
-    transition:background var(--t-fast);
-  }
-  .carrusel-mobil-nav button:hover{background:var(--color-paper-muted)}
-  .carrusel-mobil-nav button:disabled{opacity:.3;pointer-events:none}
 }
 
 /* Pista de que hay más contenido a la derecha: degradado + flecha que rebota,
