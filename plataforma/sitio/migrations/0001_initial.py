@@ -130,7 +130,7 @@ class Migration(migrations.Migration):
             name='ConfiguracionSitio',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('correo_contacto', models.EmailField(blank=True, default='catedra.hispanidad@urjc.es', max_length=254)),
+                ('correo_contacto', models.EmailField(blank=True, default='administracion@catedrahispanidad.com', max_length=254)),
                 ('direccion', models.CharField(blank=True, default='Universidad Rey Juan Carlos · Madrid, España', max_length=255, verbose_name='dirección')),
                 ('descripcion_pie', models.TextField(blank=True, default='Espacio universitario de investigación, enseñanza y divulgación sobre las realidades históricas, culturales, jurídicas y sociales del mundo hispánico.', verbose_name='descripción en el pie')),
                 ('x', models.URLField(blank=True, verbose_name='X (Twitter)')),

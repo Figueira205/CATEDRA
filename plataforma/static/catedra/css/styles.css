@@ -134,8 +134,11 @@ ul[class],ol[class],
    se ocultan por CSS, nunca se dejan de renderizar en el HTML. */
 @media (max-width:767px){
   .grid--clases-home>:nth-child(n+4){display:none}
-  .grid--equipo-home>:nth-child(n+5){display:none}
 }
+
+/* Home: en la ficha destacada del equipo, el cargo va antes que el nombre
+   (orden inverso al resto de usos de .person, como /equipo/). */
+.grid--equipo-home .person__role{order:-1}
 
 .section{padding-block:clamp(var(--s-8),8vw,var(--s-10))}
 .section--tight{padding-block:clamp(var(--s-7),5vw,var(--s-8))}

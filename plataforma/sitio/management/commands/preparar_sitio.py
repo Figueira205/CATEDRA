@@ -213,7 +213,7 @@ class Command(BaseCommand):
             title="Contacto", slug="contacto",
             entradilla="<p>Escríbenos para dudas, colaboraciones o prensa.</p>",
             gracias="<p>Gracias por escribirnos. Te responderemos lo antes posible.</p>",
-            to_address="catedra.hispanidad@urjc.es", from_address="", subject="Nuevo mensaje desde la web",
+            to_address="administracion@catedrahispanidad.com", from_address="", subject="Nuevo mensaje desde la web",
         )
         c.form_fields = [
             CampoContacto(sort_order=0, label="Nombre", field_type="singleline", required=True),

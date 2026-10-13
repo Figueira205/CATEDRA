@@ -119,7 +119,7 @@ class HomePage(Page):
         ctx["ultimas_publicaciones"] = PublicacionPage.objects.live().order_by("-fecha_publicacion", "-first_published_at")[:4]
         ctx["ultimas_novedades"] = NovedadPage.objects.live().order_by("-fecha")[:3]
         ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
-        ctx["equipo_destacado"] = PersonaPage.objects.live().order_by("orden", "title")[:6]
+        ctx["equipo_destacado"] = PersonaPage.objects.live().order_by("orden", "title")[:5]
         ctx["clases_destacadas"] = CLASES_DESTACADAS
         if request.user.is_authenticated:
             ctx["videos_favoritos_ids"] = set(
@@ -428,7 +428,7 @@ class Suscriptor(models.Model):
 # ------------------------------------------------------------ Ajustes generales
 @register_setting(icon="cog")
 class ConfiguracionSitio(BaseSiteSetting):
-    correo_contacto = models.EmailField(blank=True, default="catedra.hispanidad@urjc.es")
+    correo_contacto = models.EmailField(blank=True, default="administracion@catedrahispanidad.com")
     direccion = models.CharField("dirección", max_length=255, blank=True, default="Universidad Rey Juan Carlos · Madrid, España")
     descripcion_pie = models.TextField(
         "descripción en el pie", blank=True,
