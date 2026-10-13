@@ -1,5 +1,5 @@
 {% load wagtailcore_tags wagtailimages_tags %}{% if publicacion.enlace_externo %}<a class="card" href="{{ publicacion.enlace_externo }}" target="_blank" rel="noopener">{% else %}<a class="card" href="{% pageurl publicacion %}">{% endif %}
-  {% if publicacion.portada %}<div class="card__media portada-libro">{% image publicacion.portada fill-400x560 loading="lazy" %}</div>{% endif %}
+  {% if publicacion.portada %}<div class="card__media portada-libro">{% image publicacion.portada fill-400x560 loading="lazy" draggable="false" %}</div>{% endif %}
   <div class="card__body">
     <p class="card__meta"><span class="mono">{{ publicacion.get_tipo_display|upper }}</span>{% if publicacion.enlace_externo %}<span class="tag tag--pago">A la venta</span>{% else %}{% include "compras/includes/etiqueta_acceso.html" with producto=publicacion %}{% endif %}</p>
     <h3 class="card__title" style="font-size:1.1rem">{{ publicacion.title }}</h3>

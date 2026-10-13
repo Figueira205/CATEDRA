@@ -167,6 +167,20 @@ ul[class],ol[class],
 /* Sin zoom de la portada al pasar el ratón aquí: en el carrusel de la home ese
    pequeño scale() generaba un repintado que interfería con el arrastre/scroll. */
 .carrusel-libros-home .card:hover .card__media img{transform:none}
+/* El dedo sobre la propia <img> de la portada no arrastraba la página: el
+   gesto nativo de "arrastrar/guardar imagen" del navegador (drag de imagen,
+   callout de pulsación larga en iOS) competía con el scroll del carrusel y
+   lo bloqueaba. Se repite touch-action en cada nivel (contenedor, tarjeta,
+   imagen) porque en algunos navegadores móviles no basta con fijarlo solo en
+   el contenedor que hace scroll. */
+.carrusel-libros-home,
+.carrusel-libros-home__item,
+.carrusel-libros-home .card,
+.carrusel-libros-home .card__media,
+.carrusel-libros-home .card__media img{touch-action:pan-x}
+.carrusel-libros-home .card__media img{
+  -webkit-user-drag:none;user-select:none;-webkit-touch-callout:none;
+}
 .carrusel-libros-home.is-arrastrando{cursor:grabbing;scroll-snap-type:none}
 .carrusel-libros-home__item{flex:0 0 calc((100% - 4*var(--gutter))/4.5);scroll-snap-align:start;min-width:0}
 @media (max-width:1023px){.carrusel-libros-home__item{flex-basis:calc((100% - 3*var(--gutter))/4)}}
