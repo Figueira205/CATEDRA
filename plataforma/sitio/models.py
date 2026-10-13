@@ -177,7 +177,7 @@ class PaginaSimple(Page):
             ids = [1, 5, 6, 7]
             imagenes = Image.objects.in_bulk(ids)
             ctx["galeria_catedra"] = [imagenes[i] for i in ids if i in imagenes]
-            ctx["imagen_campo_estudio"] = Image.objects.filter(pk=2).first()
+            ctx["imagen_campo_estudio"] = Image.objects.filter(pk=4).first()
             ids_equipo = [10, 11, 12, 13, 14]
             imagenes_equipo = Image.objects.in_bulk(ids_equipo)
             ctx["equipo_catedra"] = [imagenes_equipo[i] for i in ids_equipo if i in imagenes_equipo]
