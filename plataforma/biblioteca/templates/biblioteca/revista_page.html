@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 {% block content %}
 
 {# 01 · Cubierta #}
@@ -17,10 +17,7 @@
       </div>
       <div class="col-6 reveal">
         <div class="revista-cover">
-          <span class="revista-cover__seal" aria-hidden="true">CH</span>
-          <p class="revista-cover__kicker">Cátedra para la Promoción Internacional de la Cultura Hispánica</p>
-          <h2 class="revista-cover__title">Horizontes<br>Culturales<br>Hispánicos</h2>
-          <p class="revista-cover__vol">Vol. 1 · 2027 — ISSN en trámite</p>
+          <img src="{% static 'catedra/img/revista_portada.jpg' %}" alt="Portada de Horizontes Culturales Hispánicos, Vol. 1, 2027" loading="lazy">
         </div>
       </div>
     </div>
