@@ -560,10 +560,7 @@
     var hcalByDate = {};
     hcalEvents.forEach(function (e) { (hcalByDate[e.date] = hcalByDate[e.date] || []).push(e); });
     var hcalMonthEl = $("[data-home-cal-month]", homeCal);
-    var hcalDayEl = $("[data-home-cal-day]", homeCal);
-    // En la página «Agenda completa» no hay panel lateral: el día se muestra en
-    // un popup flotante junto al botón pulsado, no en un hueco fijo del layout.
-    var hcalEsPopup = homeCal.hasAttribute("data-cal-popup");
+    var hcalDayEl = $("[data-home-cal-day]");
     var hcalTodayIso = new Date().toISOString().slice(0, 10);
     var hcalToday = new Date();
     var hcalCursor = new Date(hcalToday.getFullYear(), hcalToday.getMonth(), 1);
@@ -574,7 +571,9 @@
     function hcalPad(n) { return n < 10 ? "0" + n : "" + n; }
     function hcalIso(y, m, d) { return y + "-" + hcalPad(m + 1) + "-" + hcalPad(d); }
 
-    function hcalDiaHtml(iso) {
+    function hcalRenderDay(iso) {
+      hcalSelected = iso;
+      if (!hcalDayEl) return;
       var evs = hcalByDate[iso] || [];
       var fecha = new Date(iso + "T00:00:00");
       var label = fecha.toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
@@ -584,52 +583,15 @@
       } else {
         html += evs.map(function (e) {
           return '<a class="home-cal__item" href="' + e.url + '">' +
+            (e.imagen ? '<img class="home-cal__item-img" src="' + e.imagen + '" alt="" loading="lazy">' : "") +
             '<span class="home-cal__item-time">' + (e.time || "") + "</span>" +
             '<span class="home-cal__item-body"><span class="home-cal__item-title">' + e.title + '</span>' +
-            '<span class="home-cal__item-meta">' + e.tipo + (e.lugar ? " · " + e.lugar : "") + "</span></span>" +
+            '<span class="home-cal__item-meta">' + e.tipo + (e.lugar ? " · " + e.lugar : "") + "</span>" +
+            (e.resumen ? '<span class="home-cal__item-resumen">' + e.resumen + "</span>" : "") + "</span>" +
             '<span class="arr-btn" aria-hidden="true">→</span></a>';
         }).join("");
       }
-      return html;
-    }
-
-    /* ---- Popup flotante (solo en «Agenda completa») ---- */
-    var hcalPopupEl = null;
-    function hcalCerrarPopup() {
-      if (hcalPopupEl) { hcalPopupEl.remove(); hcalPopupEl = null; }
-      d.removeEventListener("click", hcalClickFuera, true);
-      d.removeEventListener("keydown", hcalEscPopup);
-    }
-    function hcalClickFuera(e) {
-      if (hcalPopupEl && !hcalPopupEl.contains(e.target)) hcalCerrarPopup();
-    }
-    function hcalEscPopup(e) { if (e.key === "Escape") hcalCerrarPopup(); }
-    function hcalAbrirPopup(iso, btnEl) {
-      hcalCerrarPopup();
-      hcalSelected = iso;
-      var pop = d.createElement("div");
-      pop.className = "cal-popup";
-      pop.innerHTML = '<button type="button" class="cal-popup__cerrar" aria-label="Cerrar">✕</button>' + hcalDiaHtml(iso);
-      d.body.appendChild(pop);
-      var r = btnEl.getBoundingClientRect();
-      var top = window.scrollY + r.bottom + 10;
-      var left = window.scrollX + r.left;
-      var maxLeft = window.scrollX + d.documentElement.clientWidth - pop.offsetWidth - 16;
-      if (left > maxLeft) left = Math.max(window.scrollX + 16, maxLeft);
-      pop.style.top = top + "px";
-      pop.style.left = left + "px";
-      $(".cal-popup__cerrar", pop).addEventListener("click", hcalCerrarPopup);
-      hcalPopupEl = pop;
-      setTimeout(function () {
-        d.addEventListener("click", hcalClickFuera, true);
-        d.addEventListener("keydown", hcalEscPopup);
-      }, 0);
-    }
-
-    function hcalRenderDay(iso, btnEl) {
-      if (hcalEsPopup) { if (btnEl) hcalAbrirPopup(iso, btnEl); return; }
-      hcalSelected = iso;
-      if (hcalDayEl) hcalDayEl.innerHTML = hcalDiaHtml(iso);
+      hcalDayEl.innerHTML = html;
     }
 
     function hcalRenderMonth() {
@@ -648,7 +610,7 @@
         var cls = [];
         if (hcalByDate[iso]) cls.push("has-events");
         if (iso === hcalTodayIso) cls.push("is-today");
-        if (!hcalEsPopup && iso === hcalSelected) cls.push("is-selected");
+        if (iso === hcalSelected) cls.push("is-selected");
         html += '<button type="button" class="' + cls.join(" ") + '" data-home-cal-day-btn="' + iso + '">' + day + "</button>";
       }
       html += "</div>";
@@ -661,18 +623,18 @@
       });
       $$("[data-home-cal-day-btn]", hcalMonthEl).forEach(function (b) {
         b.addEventListener("click", function () {
-          hcalRenderDay(b.getAttribute("data-home-cal-day-btn"), b);
-          if (!hcalEsPopup) hcalRenderMonth();
+          hcalRenderDay(b.getAttribute("data-home-cal-day-btn"));
+          hcalRenderMonth();
         });
       });
     }
 
     hcalRenderMonth();
-    if (!hcalEsPopup) hcalRenderDay(hcalSelected);
+    hcalRenderDay(hcalSelected);
 
     /* ---- Vista de año («Agenda completa»): 12 mesecitos del año del cursor;
-       un punto bajo el número marca los días con actividad; al pulsar un día
-       se abre el mismo popup que en la vista de mes. ---- */
+       los días con actividad se ven resaltados igual que en la vista de mes.
+       Pulsar un día actualiza el mismo panel lateral del día. ---- */
     var calAnioEl = $("[data-cal-grande-anio]");
     if (calAnioEl) {
       var vistaBtns = $$("[data-cal-grande-vista]");
@@ -689,9 +651,11 @@
           for (var i = 0; i < startOffset; i++) html += "<span></span>";
           for (var day = 1; day <= daysInMonth; day++) {
             var iso = hcalIso(y, m, day);
-            var cls = hcalByDate[iso] ? "has-events" : "";
-            if (iso === hcalTodayIso) cls += " is-today";
-            html += '<button type="button" class="' + cls + '" data-home-cal-day-btn="' + iso + '">' + day + "</button>";
+            var cls = [];
+            if (hcalByDate[iso]) cls.push("has-events");
+            if (iso === hcalTodayIso) cls.push("is-today");
+            if (iso === hcalSelected) cls.push("is-selected");
+            html += '<button type="button" class="' + cls.join(" ") + '" data-home-cal-day-btn="' + iso + '">' + day + "</button>";
           }
           html += "</div></div>";
         }
@@ -704,19 +668,18 @@
           });
         });
         $$("[data-home-cal-day-btn]", calAnioEl).forEach(function (b) {
-          b.addEventListener("click", function () { hcalAbrirPopup(b.getAttribute("data-home-cal-day-btn"), b); });
+          b.addEventListener("click", function () { hcalRenderDay(b.getAttribute("data-home-cal-day-btn")); hcalRenderAnio(); });
         });
       }
       vistaBtns.forEach(function (b) {
         b.addEventListener("click", function () {
           var vista = b.getAttribute("data-cal-grande-vista");
           vistaBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
-          hcalCerrarPopup();
           if (vista === "anio") {
-            homeCal.hidden = true; calAnioEl.hidden = false;
+            hcalMonthEl.hidden = true; calAnioEl.hidden = false;
             hcalRenderAnio();
           } else {
-            homeCal.hidden = false; calAnioEl.hidden = true;
+            hcalMonthEl.hidden = false; calAnioEl.hidden = true;
           }
         });
       });

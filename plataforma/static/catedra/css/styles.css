@@ -1264,22 +1264,29 @@ ul[class],ol[class],
 .home-cal__dow{font-family:var(--font-mono);font-size:.7rem;color:var(--color-ink-soft);padding-bottom:4px}
 .home-cal__grid button{aspect-ratio:1;border-radius:50%;font-size:.88rem;position:relative;transition:background var(--t-fast),color var(--t-fast)}
 .home-cal__grid button:hover{background:var(--color-paper-muted)}
-.home-cal__grid button.has-events::after{content:"";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--color-carmine)}
-.home-cal__grid button.is-today{font-weight:700;color:var(--color-carmine)}
+/* Día con actividad: relleno de color completo (no un simple puntito), para
+   que se note a simple vista sin tener que fijarse. */
+.home-cal__grid button.has-events{background:var(--color-carmine);color:var(--color-paper);font-weight:700}
+.home-cal__grid button.has-events:hover{background:var(--color-carmine-dark)}
+.home-cal__grid button.is-today{box-shadow:inset 0 0 0 2px var(--color-ink)}
+.home-cal__grid button.is-today.has-events{box-shadow:inset 0 0 0 2px var(--color-gold)}
 .home-cal__grid button.is-selected{background:var(--color-ink);color:var(--color-paper)}
-.home-cal__grid button.is-selected.has-events::after{background:var(--color-gold)}
+.home-cal__grid button.is-selected.has-events{background:var(--color-gold-ink)}
 .home-cal__day{border:var(--line);border-radius:var(--radius);padding:var(--s-5);background:var(--color-white);min-height:240px}
 .home-cal__date{color:var(--color-carmine);margin-bottom:var(--s-4);display:block}
 .home-cal__empty{font-family:var(--font-serif);color:var(--color-ink-soft)}
-.home-cal__item{display:flex;align-items:center;gap:var(--s-4);padding:var(--s-3) 0;border-top:var(--line);text-decoration:none}
+.home-cal__item{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-4);padding:var(--s-4) 0;border-top:var(--line);text-decoration:none}
 .home-cal__item:first-child{border-top:0}
+.home-cal__item-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius)}
 .home-cal__item-time{color:var(--color-carmine);min-width:3.5em;font-family:var(--font-mono);font-size:.8rem}
 .home-cal__item-title{display:block;font-weight:700}
 .home-cal__item-meta{display:block;font-size:.85rem;color:var(--color-ink-soft)}
+.home-cal__item-resumen{display:block;font-family:var(--font-serif);font-size:.92rem;color:var(--color-ink-soft);margin-top:var(--s-2)}
 .home-cal__item:hover .home-cal__item-title{color:var(--color-carmine)}
 
-/* «Agenda completa»: el mismo componente de calendario, pero a toda anchura,
-   en grande, sin el panel lateral fijo (el día se ve en un popup, más abajo). */
+/* «Agenda completa»: el mismo componente de calendario, pero a toda anchura y
+   en grande, con el calendario a la izquierda y el panel del día a la derecha
+   (visible siempre, también en la vista de año). */
 .cal-grande__vistas{display:flex;gap:4px}
 .cal-grande__vistas button{
   padding:8px 16px;border:1px solid var(--color-border);border-radius:var(--radius-pill);
@@ -1287,10 +1294,12 @@ ul[class],ol[class],
   transition:background var(--t-fast),color var(--t-fast);
 }
 .cal-grande__vistas button[aria-pressed="true"]{background:var(--color-ink);color:var(--color-paper);border-color:var(--color-ink)}
-.home-cal--grande{display:block;max-width:720px;margin-inline:auto}
+.home-cal--grande{grid-template-columns:1fr 380px}
 .home-cal--grande .home-cal__month{padding:var(--s-7)}
-.home-cal--grande .home-cal__grid button{font-size:1.1rem}
+.home-cal--grande .home-cal__grid button{font-size:1.15rem}
 .home-cal--grande .home-cal__title{font-size:1.4rem}
+.home-cal--grande .home-cal__day{align-self:start;position:sticky;top:calc(var(--header-h-compact) + var(--s-5))}
+@media (max-width:1023px){.home-cal--grande{grid-template-columns:1fr}.home-cal--grande .home-cal__day{position:static}}
 
 .cal-grande__anio-head{display:flex;align-items:center;justify-content:center;gap:var(--s-6);margin-bottom:var(--s-6)}
 .cal-grande__anio-head button{width:36px;height:36px;border:1px solid var(--color-border);border-radius:50%;transition:background var(--t-fast)}
@@ -1304,21 +1313,9 @@ ul[class],ol[class],
 .cal-mini__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
 .cal-mini__grid button{aspect-ratio:1;border-radius:50%;font-size:.76rem;position:relative;transition:background var(--t-fast)}
 .cal-mini__grid button:hover{background:var(--color-paper-muted)}
-.cal-mini__grid button.has-events::after{content:"";position:absolute;bottom:1px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--color-carmine)}
-.cal-mini__grid button.is-today{font-weight:700;color:var(--color-carmine)}
-
-/* Popup del día (en vez del panel lateral, que no existe en «Agenda completa») */
-.cal-popup{
-  position:absolute;z-index:150;width:min(340px,90vw);max-height:70vh;overflow-y:auto;
-  background:var(--color-white);border:var(--line);border-radius:var(--radius);
-  box-shadow:0 20px 40px -16px rgba(17,17,17,.35);padding:var(--s-5);
-}
-.cal-popup__cerrar{
-  position:absolute;top:var(--s-3);right:var(--s-3);width:30px;height:30px;border-radius:50%;
-  border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;transition:background var(--t-fast);
-}
-.cal-popup__cerrar:hover{background:var(--color-paper-muted)}
+.cal-mini__grid button.has-events{background:var(--color-carmine);color:var(--color-paper);font-weight:700}
+.cal-mini__grid button.is-today{box-shadow:inset 0 0 0 2px var(--color-ink)}
+.cal-mini__grid button.is-selected{background:var(--color-ink);color:var(--color-paper)}
 
 /* CTA «Dirección y equipo» en La Cátedra: fila de retratos superpuestos (estilo
    "avatar stack") antes del botón, da una cara real al equipo sin ocupar una

@@ -20,20 +20,28 @@ from .blocks import CuerpoBlock, ElementoGaleriaBlock
 
 
 def _serializar_actividades_calendario(queryset):
-    """Lista de dicts (fecha/hora/título/url/tipo/lugar) para el widget de
-    calendario de la portada y de la agenda (home_page.html / actividades_page.html,
-    data-home-cal). Centralizado aquí para no duplicar el mismo mapeo dos veces."""
-    return [
-        {
+    """Lista de dicts (fecha/hora/título/url/tipo/lugar/imagen/resumen) para el
+    widget de calendario de la portada y de la agenda (home_page.html /
+    actividades_page.html, data-home-cal). Centralizado aquí para no duplicar
+    el mismo mapeo dos veces."""
+    from wagtail.images.shortcuts import get_rendition_or_not_found
+
+    resultado = []
+    for a in queryset.order_by("fecha_inicio").select_related("imagen"):
+        imagen_url = ""
+        if a.imagen:
+            imagen_url = get_rendition_or_not_found(a.imagen, "fill-480x320").url
+        resultado.append({
             "date": timezone.localtime(a.fecha_inicio).date().isoformat(),
             "time": timezone.localtime(a.fecha_inicio).strftime("%H:%M"),
             "title": a.title,
             "url": a.url,
             "tipo": a.get_tipo_display(),
             "lugar": a.lugar,
-        }
-        for a in queryset.order_by("fecha_inicio")
-    ]
+            "imagen": imagen_url,
+            "resumen": a.resumen,
+        })
+    return resultado
 
 
 # ----------------------------------------------- Vídeos externos (YouTube)
