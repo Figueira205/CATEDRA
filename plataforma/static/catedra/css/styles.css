@@ -173,14 +173,18 @@ ul[class],ol[class],
 .carrusel-libros-home__item{flex:0 0 calc((100% - 4*var(--gutter))/4.5);scroll-snap-align:start;min-width:0}
 @media (max-width:1023px){.carrusel-libros-home__item{flex-basis:calc((100% - 3*var(--gutter))/4)}}
 
-/* Móvil: sin carrusel. Una lista simple, un libro por fila, los 4 primeros;
-   nada de scroll horizontal, JS ni gestos que puedan interferir con el scroll
-   normal de la página. El resto está en «Ir a la Biblioteca». */
+/* Causa real del «sube y baja» al tocar un libro: con overflow-x:auto el
+   navegador convierte overflow-y en auto también, y el translateY(32px) de
+   .reveal hacía que el contenido sobrara en vertical, así que el propio
+   carrusel se desplazaba arriba/abajo en vez de la página. Se bloquea el
+   eje vertical del carrusel (no es scrolleable a mano) y los libros entran
+   solo con fundido, sin desplazamiento. Sin touch-action ni JS táctil: el
+   navegador reparte solo el gesto (horizontal → carrusel, vertical → página). */
+.carrusel-libros-home{overflow-y:hidden}
+.carrusel-libros-home__item.reveal{transform:none}
+/* Móvil: un libro grande con el siguiente asomando, deslizable con el dedo. */
 @media (max-width:599px){
-  .carrusel-libros-home{display:grid;grid-template-columns:1fr;gap:var(--s-6);overflow:visible;cursor:default}
-  .carrusel-libros-home__item{flex:none;width:100%;max-width:320px;margin-inline:auto}
-  .carrusel-libros-home__item:nth-child(n+5){display:none}
-  .carrusel-libros-home-wrap::after,
+  .carrusel-libros-home__item{flex-basis:78%}
   .carrusel-libros-home-wrap .carrusel-libros-home__pista{display:none}
 }
 
