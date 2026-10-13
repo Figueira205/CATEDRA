@@ -246,8 +246,13 @@
       <h2 class="sec-head__title" id="t-biblioteca">Desde la Biblioteca</h2>
       <span class="sec-head__aside"><a class="link-arrow" href="{% pageurl ultimas_publicaciones.0.get_parent %}">Ir a la Biblioteca <span class="arr" aria-hidden="true">→</span></a></span>
     </div>
-    <div class="carrusel-libros-home" data-carrusel-arrastrable>
-      {% for p in ultimas_publicaciones %}<div class="carrusel-libros-home__item reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
+    <div class="carrusel-libros-home-wrap" data-carrusel-pista>
+      <div class="carrusel-libros-home" data-carrusel-arrastrable>
+        {% for p in ultimas_publicaciones %}<div class="carrusel-libros-home__item reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
+      </div>
+      <span class="carrusel-libros-home__pista" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </span>
     </div>
   </div>
 </section>

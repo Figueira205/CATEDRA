@@ -995,4 +995,17 @@
     // Tras un arrastre real, evita que el clic de soltar navegue el enlace del libro.
     carrusel.addEventListener("click", function (e) { if (movido) { e.preventDefault(); movido = false; } }, true);
   });
+
+  // Oculta la flecha-pista del carrusel de libros en cuanto se llega al final.
+  $$("[data-carrusel-pista]").forEach(function (wrap) {
+    var carrusel = $("[data-carrusel-arrastrable]", wrap);
+    if (!carrusel) return;
+    function actualizar() {
+      var alFinal = carrusel.scrollLeft + carrusel.clientWidth >= carrusel.scrollWidth - 4;
+      wrap.classList.toggle("esta-al-final", alFinal);
+    }
+    carrusel.addEventListener("scroll", actualizar);
+    window.addEventListener("resize", actualizar);
+    actualizar();
+  });
 })();
