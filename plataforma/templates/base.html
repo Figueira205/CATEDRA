@@ -114,10 +114,10 @@
           <li>{{ conf.direccion }}</li>
           {% if conf.correo_contacto %}<li><a href="mailto:{{ conf.correo_contacto }}" style="color:inherit">{{ conf.correo_contacto }}</a></li>{% endif %}
         </ul>
-        <div class="footer-inst">
+        <a class="footer-inst" href="https://www.urjc.es" target="_blank" rel="noopener">
           <img src="{% static 'catedra/img/Logo_universidad2.png' %}" alt="Universidad Rey Juan Carlos" loading="lazy">
           <span>Institución responsable de la Cátedra</span>
-        </div>
+        </a>
         <a class="footer-inst" href="https://share.google/avqWhKRagnI3m0yBd" target="_blank" rel="noopener">
           <img src="{% static 'catedra/img/logo_limes.jpg' %}" alt="LIMES — Grupo de Investigación Derecho, Fronteras y Migraciones" loading="lazy">
           <span>Grupo de investigación colaborador</span>
