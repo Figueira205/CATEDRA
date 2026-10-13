@@ -979,7 +979,8 @@ ul[class],ol[class],
 @media (max-width:1023px){.footer-main{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.footer-main{grid-template-columns:1fr}}
 .footer-brand p{font-family:var(--font-serif);color:var(--color-paper-muted);font-size:1rem;max-width:34ch;margin:var(--s-4) 0}
-.footer-inst{display:flex;align-items:center;gap:var(--s-3);margin-top:var(--s-5)}
+.footer-inst{display:flex;align-items:center;gap:var(--s-3);margin-top:var(--s-5);text-decoration:none}
+a.footer-inst:hover span{color:var(--color-gold)}
 .footer-inst img{height:40px;width:auto;background:#fff;padding:5px 8px;border-radius:var(--radius)}
 .footer-inst span{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--color-paper-muted);max-width:22ch}
 .footer-col h2{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-gold);margin-bottom:var(--s-4)}
