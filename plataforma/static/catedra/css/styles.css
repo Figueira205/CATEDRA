@@ -163,6 +163,9 @@ ul[class],ol[class],
   touch-action:pan-x;
 }
 .carrusel-libros-home::-webkit-scrollbar{display:none}
+/* Sin zoom de la portada al pasar el ratón aquí: en el carrusel de la home ese
+   pequeño scale() generaba un repintado que interfería con el arrastre/scroll. */
+.carrusel-libros-home .card:hover .card__media img{transform:none}
 .carrusel-libros-home.is-arrastrando{cursor:grabbing;scroll-snap-type:none}
 .carrusel-libros-home__item{flex:0 0 calc((100% - 4*var(--gutter))/4.5);scroll-snap-align:start;min-width:0}
 @media (max-width:1023px){.carrusel-libros-home__item{flex-basis:calc((100% - 3*var(--gutter))/4)}}
@@ -728,7 +731,7 @@ ul[class],ol[class],
   .event-row{grid-template-columns:1fr 72px}
   .event-row__date{order:2;border-right:0;border-left:2px solid var(--color-carmine);padding-right:0;padding-left:var(--s-4)}
 }
-.event-row__date{text-align:center;border-right:2px solid var(--color-carmine);padding-right:var(--s-4)}
+.event-row__date{display:flex;flex-direction:column;align-items:center;text-align:center;border-right:2px solid var(--color-carmine);padding-right:var(--s-4)}
 .event-row__day{font-size:clamp(2rem,4vw,3rem);font-weight:750;line-height:1;letter-spacing:-.02em}
 .event-row__month{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-carmine)}
 .event-row__title{font-size:1.35rem;font-weight:700;line-height:1.2;margin:4px 0;overflow-wrap:anywhere}
