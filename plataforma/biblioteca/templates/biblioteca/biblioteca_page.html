@@ -10,8 +10,8 @@
       <a class="filter-btn" href="?acceso=pago" aria-pressed="{% if acceso_activo == 'pago' %}true{% else %}false{% endif %}">A la venta</a>
     </nav>
     {% if publicaciones.object_list %}
-    <div class="grid mt-6">
-      {% for p in publicaciones %}<div class="col-3 reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
+    <div class="grid grid--libros mt-6">
+      {% for p in publicaciones %}<div class="col-3 reveal{% if p.enlace_externo %} libro-externo{% endif %}">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
     </div>
     {% include "includes/paginacion.html" with pagina=publicaciones %}
     {% else %}
