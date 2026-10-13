@@ -1156,8 +1156,7 @@ ul[class],ol[class],
   transition:transform .75s var(--ease),opacity .6s var(--ease);
 }
 .intro__mark{
-  width:52px;height:52px;border-radius:var(--radius);background:var(--color-carmine);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-weight:750;font-size:1.2rem;
+  width:120px;height:120px;
   animation:intro-pop .6s var(--ease) both;
 }
 .intro__line{
