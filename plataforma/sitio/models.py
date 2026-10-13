@@ -358,10 +358,15 @@ class PersonaPage(Page):
         help_text="Opcional. Sin foto se muestran las iniciales del nombre.",
     )
     resumen = models.TextField("resumen o biografía breve", blank=True, max_length=600)
+    cuerpo = StreamField(
+        CuerpoBlock(), blank=True, use_json_field=True,
+        verbose_name="currículum ampliado", help_text="Opcional: trayectoria completa en secciones, con títulos y listas.",
+    )
     orden = models.PositiveSmallIntegerField(default=0, help_text="Orden dentro del equipo (menor número primero).")
 
     content_panels = Page.content_panels + [
-        FieldPanel("categoria"), FieldPanel("cargo"), FieldPanel("foto"), FieldPanel("resumen"), FieldPanel("orden"),
+        FieldPanel("categoria"), FieldPanel("cargo"), FieldPanel("foto"), FieldPanel("resumen"),
+        FieldPanel("cuerpo"), FieldPanel("orden"),
     ]
     search_fields = Page.search_fields + [index.SearchField("cargo"), index.SearchField("resumen")]
     parent_page_types = ["sitio.EquipoPage"]

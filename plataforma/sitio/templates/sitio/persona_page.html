@@ -17,8 +17,12 @@
       <p class="kicker">{{ page.get_categoria_display }}</p>
       <h1 class="titulo-doc">{{ page.title }}</h1>
       {% if page.cargo %}<p class="lead">{{ page.cargo }}</p>{% endif %}
-      {% if page.resumen %}<div class="prose mt-6"><p>{{ page.resumen }}</p></div>
-      {% else %}<div class="prose mt-6"><p class="empty-state">Este perfil se completará próximamente.</p></div>{% endif %}
+      {% if page.resumen %}<div class="prose mt-6"><p>{{ page.resumen }}</p></div>{% endif %}
+      {% if page.cuerpo %}
+      <div class="prose cuerpo mt-7">{% for b in page.cuerpo %}{% include_block b %}{% endfor %}</div>
+      {% elif not page.resumen %}
+      <div class="prose mt-6"><p class="empty-state">Este perfil se completará próximamente.</p></div>
+      {% endif %}
     </article>
   </div>
 </div>
