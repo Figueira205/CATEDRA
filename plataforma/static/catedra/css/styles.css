@@ -1274,7 +1274,7 @@ ul[class],ol[class],
 .home-cal__grid button.has-events:hover{background:repeating-linear-gradient(45deg,var(--color-carmine-dark) 0 5px,var(--color-carmine) 5px 10px)}
 .home-cal__grid button.is-today{box-shadow:inset 0 0 0 2px var(--color-ink)}
 .home-cal__grid button.is-today.has-events{box-shadow:inset 0 0 0 2px var(--color-gold)}
-.home-cal__grid button.is-selected{background:var(--color-ink);color:var(--color-paper)}
+.home-cal__grid button.is-selected{background:rgba(17,17,17,.6);color:var(--color-paper)}
 .home-cal__grid button.is-selected.has-events{background:var(--color-gold-ink)}
 .home-cal__day{border:var(--line);border-radius:var(--radius);padding:var(--s-5);background:var(--color-white);min-height:240px}
 .home-cal__date{color:var(--color-carmine);margin-bottom:var(--s-4);display:block}
@@ -1322,7 +1322,7 @@ ul[class],ol[class],
   border-color:var(--color-carmine);color:var(--color-paper);font-weight:700;
 }
 .cal-mini__grid button.is-today{box-shadow:inset 0 0 0 2px var(--color-ink)}
-.cal-mini__grid button.is-selected{background:var(--color-ink);color:var(--color-paper)}
+.cal-mini__grid button.is-selected{background:rgba(17,17,17,.6);color:var(--color-paper)}
 
 /* CTA «Dirección y equipo» en La Cátedra: fila de retratos superpuestos (estilo
    "avatar stack") antes del botón, da una cara real al equipo sin ocupar una
