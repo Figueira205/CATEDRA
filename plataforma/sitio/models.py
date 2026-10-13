@@ -166,9 +166,13 @@ class PaginaSimple(Page):
         if self.slug == "la-catedra":
             from wagtail.images.models import Image
 
-            ids = [1, 5, 8, 9]
+            ids = [1, 5, 6, 7]
             imagenes = Image.objects.in_bulk(ids)
             ctx["galeria_catedra"] = [imagenes[i] for i in ids if i in imagenes]
+            ctx["imagen_campo_estudio"] = Image.objects.filter(pk=2).first()
+            ids_equipo = [10, 11, 12, 13, 14]
+            imagenes_equipo = Image.objects.in_bulk(ids_equipo)
+            ctx["equipo_catedra"] = [imagenes_equipo[i] for i in ids_equipo if i in imagenes_equipo]
             ctx["areas_catedra"] = [
                 {"slug": "historia-patrimonio", "nombre": "Historia y patrimonio",
                  "descripcion": "El pasado compartido del mundo hispánico: sus fuentes, archivos y memoria material."},

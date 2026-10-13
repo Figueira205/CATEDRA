@@ -34,16 +34,20 @@
       <h2 class="sec-head__title" id="t-{{ s.titulo|slugify }}">{{ s.titulo }}</h2>
     </div>
     {% endif %}
-    <div class="grid">
+    <div class="grid" style="align-items:center">
+      {% if s.titulo == "Campo de estudio" and imagen_campo_estudio %}
+      <div class="col-5 reveal">
+        <figure class="img-frame">{% image imagen_campo_estudio fill-640x760 %}</figure>
+      </div>
+      <div class="col-7 reveal"><div class="prose">{% for b in s.bloques %}{% include_block b %}{% endfor %}</div></div>
+      {% else %}
       <div class="col-8 reveal"><div class="prose">{% for b in s.bloques %}{% include_block b %}{% endfor %}</div></div>
+      {% endif %}
     </div>
   </div>
 </section>
 {% if s.titulo == "Campo de estudio" and areas_catedra %}
-{# 02b · Atlas interactivo de las ocho áreas: restablece en formato visual el
-   mismo contenido ya aprobado del párrafo anterior, con un diagrama de red
-   que resalta el nodo del área abierta (mismo lenguaje visual que los puntos
-   animados de la portada). #}
+{# 02b · Atlas interactivo de las ocho áreas: mismo contenido del párrafo anterior en formato de diagrama de red. #}
 <section class="section section--atlantic on-dark" id="atlas" aria-labelledby="t-atlas">
   <div class="container">
     <div class="sec-head">
@@ -103,6 +107,11 @@
         <p class="serif" style="opacity:.9;max-width:50ch">Dirección, coordinación académica, consejo académico, docentes, investigadores y colaboradores.</p>
       </div>
       <div class="col-5 reveal">
+        {% if equipo_catedra %}
+        <div class="equipo-cta-fotos">
+          {% for img in equipo_catedra %}{% image img fill-96x96 %}{% endfor %}
+        </div>
+        {% endif %}
         <a class="btn btn--light" href="/equipo/">Ver el equipo <span class="arr" aria-hidden="true">→</span></a>
       </div>
     </div>
