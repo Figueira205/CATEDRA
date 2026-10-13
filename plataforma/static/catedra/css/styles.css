@@ -1411,3 +1411,6 @@ a.footer-inst:hover span{color:var(--color-gold)}
 @media (max-width:599px){
   .cookie-banner{left:var(--s-3);right:var(--s-3);bottom:var(--s-3);width:auto}
 }
+/* El botón flotante de Wagtail (solo editores con sesión) no debe tapar el aviso. */
+body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-5) + 64px)}
+@media (max-width:599px){body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-3) + 64px)}}
