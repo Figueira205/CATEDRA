@@ -724,7 +724,10 @@ ul[class],ol[class],
   transition:background var(--t-fast);
 }
 .event-row:hover{background:var(--color-white)}
-@media (max-width:767px){.event-row{grid-template-columns:86px 1fr}}
+@media (max-width:767px){
+  .event-row{grid-template-columns:1fr 72px}
+  .event-row__date{order:2;border-right:0;border-left:2px solid var(--color-carmine);padding-right:0;padding-left:var(--s-4)}
+}
 .event-row__date{text-align:center;border-right:2px solid var(--color-carmine);padding-right:var(--s-4)}
 .event-row__day{font-size:clamp(2rem,4vw,3rem);font-weight:750;line-height:1;letter-spacing:-.02em}
 .event-row__month{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-carmine)}
