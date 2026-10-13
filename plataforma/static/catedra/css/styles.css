@@ -165,6 +165,9 @@ ul[class],ol[class],
 .carrusel-libros-home.is-arrastrando{cursor:grabbing;scroll-snap-type:none}
 .carrusel-libros-home__item{flex:0 0 calc((100% - 4*var(--gutter))/4.5);scroll-snap-align:start;min-width:0}
 @media (max-width:1023px){.carrusel-libros-home__item{flex-basis:calc((100% - 3*var(--gutter))/4)}}
+/* Móvil: un libro grande por pantalla, el resto se alcanza deslizando con el
+   dedo (scroll-snap nativo), nunca varios encajados a la fuerza. */
+@media (max-width:599px){.carrusel-libros-home__item{flex-basis:78%}}
 
 /* Pista de que hay más contenido a la derecha: degradado + flecha que rebota,
    superpuestos al borde del carrusel (no ocupan espacio ni se arrastran con él). */
@@ -188,7 +191,7 @@ ul[class],ol[class],
 .grid.grid--libros{grid-template-columns:repeat(5,1fr)}
 .grid.grid--libros>[class*="col-"]{grid-column:span 1}
 @media (max-width:1023px){.grid.grid--libros{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:599px){.grid.grid--libros{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:599px){.grid.grid--libros{grid-template-columns:1fr}}
 
 /* Libros a la venta: en vez del simple scale de .card, un gesto de "coger el
    libro de la estantería" — se inclina en perspectiva 3D y se levanta, como si
