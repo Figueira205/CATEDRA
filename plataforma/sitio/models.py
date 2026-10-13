@@ -192,6 +192,8 @@ class PaginaSimple(Page):
                  "descripcion": "Expresiones artísticas, iconografía y cultura visual compartidas entre orillas."},
                 {"slug": "sociedad-diasporas", "nombre": "Sociedad y diásporas",
                  "descripcion": "Comunidades, migraciones y vínculos sociales entre las distintas sociedades hispánicas."},
+                {"slug": "proyeccion-sefardi", "nombre": "La proyección de la España Sefardí",
+                 "descripcion": "Entre nuestros propósitos se encuentra la investigación de la herencia sefardí española a nivel nacional e internacional."},
                 {"slug": "relaciones-transatlanticas", "nombre": "Relaciones transatlánticas",
                  "descripcion": "Intercambios políticos, económicos y culturales entre España y América."},
                 {"slug": "educacion", "nombre": "Educación",
