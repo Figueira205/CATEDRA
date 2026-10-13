@@ -140,6 +140,17 @@ ul[class],ol[class],
    (orden inverso al resto de usos de .person, como /equipo/). */
 .grid--equipo-home .person__role{order:-1}
 
+/* Home: exactamente 5 fichas en una fila, columnas iguales (las fotos quedan
+   a la misma altura gracias al aspect-ratio de .person__photo), centradas.
+   Selector compuesto .grid.grid--equipo-home para ganar a las reglas de
+   .grid en los media queries de arriba sin depender del orden en el archivo. */
+.grid.grid--equipo-home{grid-template-columns:repeat(5,1fr)}
+.grid.grid--equipo-home>[class*="col-"]{grid-column:span 1}
+.grid--equipo-home .person{align-items:center;text-align:center}
+.grid--equipo-home .person__photo{width:100%}
+@media (max-width:1023px){.grid.grid--equipo-home{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:599px){.grid.grid--equipo-home{grid-template-columns:repeat(2,1fr)}}
+
 .section{padding-block:clamp(var(--s-8),8vw,var(--s-10))}
 .section--tight{padding-block:clamp(var(--s-7),5vw,var(--s-8))}
 .section--dark{background:var(--color-ink);color:var(--color-paper)}
