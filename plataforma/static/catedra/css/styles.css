@@ -1283,7 +1283,8 @@ a.footer-inst:hover span{color:var(--color-gold)}
 .home-cal__empty{font-family:var(--font-serif);color:var(--color-ink-soft)}
 .home-cal__item{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-4);padding:var(--s-4) 0;border-top:var(--line);text-decoration:none}
 .home-cal__item:first-child{border-top:0}
-.home-cal__item-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius)}
+.home-cal__item-img{width:100%;height:auto;border-radius:var(--radius)}
+@media (max-width:599px){.home-cal__item-img{aspect-ratio:16/9;object-fit:cover}}
 .home-cal__item-time{color:var(--color-carmine);min-width:3.5em;font-family:var(--font-mono);font-size:.8rem}
 .home-cal__item-title{display:block;font-weight:700}
 .home-cal__item-meta{display:block;font-size:.85rem;color:var(--color-ink-soft)}
