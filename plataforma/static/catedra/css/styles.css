@@ -163,6 +163,7 @@ ul[class],ol[class],
   touch-action:pan-x;
 }
 .carrusel-libros-home::-webkit-scrollbar{display:none}
+@media (max-width:599px){.carrusel-libros-home{margin-top:0}}
 /* Sin zoom de la portada al pasar el ratón aquí: en el carrusel de la home ese
    pequeño scale() generaba un repintado que interfería con el arrastre/scroll. */
 .carrusel-libros-home .card:hover .card__media img{transform:none}
