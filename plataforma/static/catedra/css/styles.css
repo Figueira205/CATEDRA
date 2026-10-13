@@ -843,6 +843,37 @@ ul[class],ol[class],
 .mosaic__cap .m{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--color-gold)}
 .m-2x2{grid-column:span 4;grid-row:span 3}
 .m-2x1{grid-column:span 4;grid-row:span 2}
+
+/* Lightbox de la galería: la imagen se amplía por encima de la página (el
+   fondo se ve oscurecido detrás, sin salir de la vista actual), con flechas
+   para pasar de una a otra y una X para cerrar. */
+.lightbox{
+  position:fixed;inset:0;z-index:400;display:none;
+  grid-template-columns:auto 1fr auto;grid-template-rows:1fr auto;align-items:center;
+  gap:var(--s-5);padding:var(--s-6);
+  background:rgba(17,17,17,.92);
+}
+.lightbox.is-open{display:grid}
+.lightbox__media{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;height:100%}
+.lightbox__media img,.lightbox__media video{max-width:100%;max-height:80vh;object-fit:contain;border-radius:var(--radius)}
+.lightbox__caption{grid-column:1/-1;grid-row:2;color:var(--color-paper-muted);text-align:center;font-size:.92rem}
+.lightbox__close,.lightbox__prev,.lightbox__next{
+  background:transparent;border:1.5px solid rgba(244,240,231,.4);color:var(--color-paper);
+  border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;line-height:1;cursor:pointer;transition:background var(--t-fast),border-color var(--t-fast);
+}
+.lightbox__close:hover,.lightbox__prev:hover,.lightbox__next:hover{background:rgba(244,240,231,.12);border-color:var(--color-paper)}
+.lightbox__close{position:absolute;top:var(--s-5);right:var(--s-5)}
+.lightbox__prev{grid-column:1;grid-row:1}
+.lightbox__next{grid-column:3;grid-row:1}
+@media (max-width:599px){
+  .lightbox{padding:var(--s-4);grid-template-columns:1fr}
+  .lightbox__prev,.lightbox__next{position:absolute;top:50%;transform:translateY(-50%);z-index:1}
+  .lightbox__prev{left:var(--s-4)}
+  .lightbox__next{right:var(--s-4)}
+  .lightbox__media{grid-column:1}
+  .lightbox__caption{grid-row:2}
+}
 .m-1x1{grid-column:span 2;grid-row:span 2}
 .m-wide{grid-column:span 6;grid-row:span 3}
 @media (max-width:767px){.m-2x2,.m-wide{grid-column:span 4;grid-row:span 3}.m-2x1{grid-column:span 2;grid-row:span 2}.m-1x1{grid-column:span 2;grid-row:span 2}}
