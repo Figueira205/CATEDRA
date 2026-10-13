@@ -1029,7 +1029,12 @@
     }).observe(atlasCanvas);
   }
 
-  /* ---------- Carrusel de libros (home): arrastrar con el ratón ---------- */
+  /* ---------- Carrusel de libros (home): arrastrar con el ratón ----------
+     Solo en dispositivos con ratón de verdad (pointer: fine). En móvil/touch
+     el scroll nativo con scroll-snap ya funciona solo; enganchar aquí los
+     mousedown/mousemove (que el navegador también dispara como eventos
+     sintéticos al tocar) rompía el scroll táctil normal de la página. */
+  if (window.matchMedia("(pointer: fine)").matches) {
   $$("[data-carrusel-arrastrable]").forEach(function (carrusel) {
     var arrastrando = false, movido = false, inicioX = 0, scrollInicio = 0;
     carrusel.addEventListener("mousedown", function (e) {
@@ -1051,6 +1056,7 @@
     // Tras un arrastre real, evita que el clic de soltar navegue el enlace del libro.
     carrusel.addEventListener("click", function (e) { if (movido) { e.preventDefault(); movido = false; } }, true);
   });
+  }
 
   // Oculta la flecha-pista del carrusel de libros en cuanto se llega al final.
   $$("[data-carrusel-pista]").forEach(function (wrap) {
