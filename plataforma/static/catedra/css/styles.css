@@ -158,8 +158,9 @@ ul[class],ol[class],
    se ven 4. scroll-snap da el enganche nativo por touch/trackpad; el arrastre
    con ratón lo añade main.js (data-carrusel-arrastrable). */
 .carrusel-libros-home{
-  position:relative;display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x proximity;
+  position:relative;display:flex;gap:var(--gutter);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
   cursor:grab;scrollbar-width:none;margin-top:var(--s-6);
+  touch-action:pan-x;overscroll-behavior:contain;
 }
 .carrusel-libros-home::-webkit-scrollbar{display:none}
 .carrusel-libros-home.is-arrastrando{cursor:grabbing;scroll-snap-type:none}
