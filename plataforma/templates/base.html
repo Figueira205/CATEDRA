@@ -50,10 +50,6 @@
   </div>
   <nav id="mobile-nav" aria-label="Navegación completa"></nav>
   <div class="mobile-menu__foot">
-    <form data-search-form role="search" class="searchbar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
-      <input type="search" name="q" placeholder="Buscar en la Cátedra" aria-label="Buscar en la Cátedra">
-    </form>
     {% if user.is_authenticated %}
       <a class="btn btn--light" href="{% url 'mi_cuenta' %}">Mi cuenta <span class="arr" aria-hidden="true">→</span></a>
     {% else %}
