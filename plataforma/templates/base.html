@@ -17,7 +17,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'catedra/css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'catedra/css/plataforma.css' %}">
-{% if UMAMI_SCRIPT_URL and UMAMI_WEBSITE_ID %}<script defer src="{{ UMAMI_SCRIPT_URL }}" data-website-id="{{ UMAMI_WEBSITE_ID }}" data-do-not-track="true"></script>{% endif %}
 {% block extra_head %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -149,11 +148,34 @@
     <div class="footer-legal">
       <span class="copy">© {% now "Y" %} Cátedra de la Hispanidad · Universidad Rey Juan Carlos</span>
       {% for p in paginas_legales %}<a href="{{ p.url }}">{{ p.title }}</a>{% endfor %}
+      <button type="button" class="footer-legal__btn" data-cookies-abrir>Configurar cookies</button>
     </div>
     <div class="footer-wordmark" aria-hidden="true">HISPANIDAD</div>
   </div>
 </footer>
 {% endwith %}
+
+
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-titulo" data-umami-src="{% if UMAMI_SCRIPT_URL and UMAMI_WEBSITE_ID %}{{ UMAMI_SCRIPT_URL }}{% endif %}" data-umami-id="{{ UMAMI_WEBSITE_ID }}" hidden>
+  <h2 id="cookie-titulo" class="cookie-banner__title">Valoramos tu privacidad</h2>
+  <p class="cookie-banner__text">Usamos cookies para mejorar tu experiencia de navegación y analizar nuestro tráfico. Al hacer clic en «Aceptar todo» das tu consentimiento a su uso.{% for p in paginas_legales %}{% if p.slug == "cookies" %} <a href="{{ p.url }}">Más información</a>.{% endif %}{% endfor %}</p>
+  <div class="cookie-banner__panel" id="cookie-panel" hidden>
+    <div class="cookie-opt">
+      <div><strong>Necesarias</strong><span>Mantienen tu sesión y la seguridad del sitio. Siempre activas.</span></div>
+      <input type="checkbox" checked disabled aria-label="Cookies necesarias (siempre activas)">
+    </div>
+    <div class="cookie-opt">
+      <div><strong>Analíticas</strong><span>Estadísticas de visitas anónimas para mejorar la web.</span></div>
+      <input type="checkbox" id="cookie-analiticas" aria-label="Cookies analíticas">
+    </div>
+    <button type="button" class="btn btn--primary" data-cookies="guardar">Guardar selección</button>
+  </div>
+  <div class="cookie-banner__actions">
+    <button type="button" class="btn btn--ghost" data-cookies="personalizar" aria-expanded="false" aria-controls="cookie-panel">Personalizar</button>
+    <button type="button" class="btn btn--ghost" data-cookies="rechazar">Rechazar todo</button>
+    <button type="button" class="btn btn--primary" data-cookies="aceptar">Aceptar todo</button>
+  </div>
+</div>
 
 {{ menu_principal|json_script:"ch-menu" }}
 <script src="{% static 'catedra/js/plataforma.js' %}" data-buscar="{% url 'buscar' %}" data-indice="{% url 'indice_busqueda' %}" data-video-visto="{% url 'video_marcar_visto' %}" data-video-favorito="{% url 'video_alternar_favorito' %}" defer></script>

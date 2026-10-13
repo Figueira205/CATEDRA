@@ -1078,4 +1078,58 @@
       });
     }
   });
+  /* ---------- Aviso de cookies ----------
+     El consentimiento se guarda en localStorage (ch_cookies). La analítica
+     (Umami) solo se carga si el visitante la acepta; las necesarias (sesión,
+     CSRF) no requieren consentimiento. «Configurar cookies» del pie reabre el
+     aviso. */
+  var cookieBanner = $("#cookie-banner");
+  if (cookieBanner) {
+    var CLAVE_COOKIES = "ch_cookies";
+    var cookiePanel = $("#cookie-panel", cookieBanner);
+    var cookieAnalit = $("#cookie-analiticas", cookieBanner);
+    var btnPersonalizar = $("[data-cookies='personalizar']", cookieBanner);
+    function leerConsentimiento() {
+      try { return JSON.parse(localStorage.getItem(CLAVE_COOKIES) || "null"); } catch (e) { return null; }
+    }
+    function cargarAnalitica() {
+      var src = cookieBanner.getAttribute("data-umami-src");
+      var id = cookieBanner.getAttribute("data-umami-id");
+      if (!src || !id || $("script[data-umami]")) return;
+      var sc = d.createElement("script");
+      sc.defer = true; sc.src = src;
+      sc.setAttribute("data-website-id", id);
+      sc.setAttribute("data-do-not-track", "true");
+      sc.setAttribute("data-umami", "1");
+      d.head.appendChild(sc);
+    }
+    function guardarConsentimiento(analiticas) {
+      try { localStorage.setItem(CLAVE_COOKIES, JSON.stringify({ analiticas: analiticas, v: 1 })); } catch (e) {}
+      cookieBanner.hidden = true;
+      if (analiticas) cargarAnalitica();
+    }
+    function abrirAviso() {
+      var c = leerConsentimiento();
+      cookieAnalit.checked = !!(c && c.analiticas);
+      cookiePanel.hidden = true;
+      btnPersonalizar.setAttribute("aria-expanded", "false");
+      cookieBanner.hidden = false;
+    }
+    var previo = leerConsentimiento();
+    if (previo) { if (previo.analiticas) cargarAnalitica(); } else { abrirAviso(); }
+    cookieBanner.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-cookies]");
+      if (!b) return;
+      var accion = b.getAttribute("data-cookies");
+      if (accion === "aceptar") guardarConsentimiento(true);
+      else if (accion === "rechazar") guardarConsentimiento(false);
+      else if (accion === "guardar") guardarConsentimiento(cookieAnalit.checked);
+      else if (accion === "personalizar") {
+        cookiePanel.hidden = !cookiePanel.hidden;
+        btnPersonalizar.setAttribute("aria-expanded", String(!cookiePanel.hidden));
+      }
+    });
+    $$("[data-cookies-abrir]").forEach(function (b) { b.addEventListener("click", abrirAviso); });
+  }
+
 })();
