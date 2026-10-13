@@ -1262,12 +1262,16 @@ ul[class],ol[class],
 .home-cal__nav button:hover{background:var(--color-paper-muted)}
 .home-cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
 .home-cal__dow{font-family:var(--font-mono);font-size:.7rem;color:var(--color-ink-soft);padding-bottom:4px}
-.home-cal__grid button{aspect-ratio:1;border-radius:50%;font-size:.88rem;position:relative;transition:background var(--t-fast),color var(--t-fast)}
+.home-cal__grid button{aspect-ratio:1;border-radius:4px;border:1px solid var(--color-border);font-size:.88rem;position:relative;transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast)}
 .home-cal__grid button:hover{background:var(--color-paper-muted)}
-/* Día con actividad: relleno de color completo (no un simple puntito), para
-   que se note a simple vista sin tener que fijarse. */
-.home-cal__grid button.has-events{background:var(--color-carmine);color:var(--color-paper);font-weight:700}
-.home-cal__grid button.has-events:hover{background:var(--color-carmine-dark)}
+/* Día con actividad: recuadro relleno con una trama diagonal suave (no un
+   color sólido ni un simple puntito), para que se note sin ser demasiado
+   fuerte. El resto de días solo llevan el recuadro vacío. */
+.home-cal__grid button.has-events{
+  background:repeating-linear-gradient(45deg,rgba(166,32,53,.16) 0 5px,rgba(166,32,53,.06) 5px 10px);
+  border-color:var(--color-carmine);color:var(--color-carmine-dark);font-weight:700;
+}
+.home-cal__grid button.has-events:hover{background:repeating-linear-gradient(45deg,rgba(166,32,53,.24) 0 5px,rgba(166,32,53,.1) 5px 10px)}
 .home-cal__grid button.is-today{box-shadow:inset 0 0 0 2px var(--color-ink)}
 .home-cal__grid button.is-today.has-events{box-shadow:inset 0 0 0 2px var(--color-gold)}
 .home-cal__grid button.is-selected{background:var(--color-ink);color:var(--color-paper)}
@@ -1311,9 +1315,12 @@ ul[class],ol[class],
 .cal-mini{border:var(--line);border-radius:var(--radius);padding:var(--s-4);background:var(--color-white)}
 .cal-mini__title{font-weight:700;text-transform:capitalize;margin-bottom:var(--s-3);font-size:.92rem}
 .cal-mini__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
-.cal-mini__grid button{aspect-ratio:1;border-radius:50%;font-size:.76rem;position:relative;transition:background var(--t-fast)}
+.cal-mini__grid button{aspect-ratio:1;border-radius:3px;border:1px solid var(--color-border);font-size:.76rem;position:relative;transition:background var(--t-fast)}
 .cal-mini__grid button:hover{background:var(--color-paper-muted)}
-.cal-mini__grid button.has-events{background:var(--color-carmine);color:var(--color-paper);font-weight:700}
+.cal-mini__grid button.has-events{
+  background:repeating-linear-gradient(45deg,rgba(166,32,53,.16) 0 4px,rgba(166,32,53,.06) 4px 8px);
+  border-color:var(--color-carmine);color:var(--color-carmine-dark);font-weight:700;
+}
 .cal-mini__grid button.is-today{box-shadow:inset 0 0 0 2px var(--color-ink)}
 .cal-mini__grid button.is-selected{background:var(--color-ink);color:var(--color-paper)}
 
