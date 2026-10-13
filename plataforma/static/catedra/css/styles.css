@@ -151,6 +151,20 @@ ul[class],ol[class],
 @media (max-width:1023px){.grid.grid--equipo-home{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:599px){.grid.grid--equipo-home{grid-template-columns:repeat(2,1fr)}}
 
+/* Home «Desde la Biblioteca»: carrusel horizontal arrastrable — se ven 5 libros
+   y los otros 3 (8 en total) se alcanzan arrastrando hacia la izquierda, en vez
+   de recortarlos con nth-child como el resto de secciones de la home. En móvil
+   se ven 4. scroll-snap da el enganche nativo por touch/trackpad; el arrastre
+   con ratón lo añade main.js (data-carrusel-arrastrable). */
+.carrusel-libros-home{
+  display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x proximity;
+  cursor:grab;scrollbar-width:none;margin-top:var(--s-6);
+}
+.carrusel-libros-home::-webkit-scrollbar{display:none}
+.carrusel-libros-home.is-arrastrando{cursor:grabbing;scroll-snap-type:none}
+.carrusel-libros-home__item{flex:0 0 calc((100% - 4*var(--gutter))/5);scroll-snap-align:start;min-width:0}
+@media (max-width:1023px){.carrusel-libros-home__item{flex-basis:calc((100% - 3*var(--gutter))/4)}}
+
 /* Biblioteca: 5 fichas por fila en vez de 4. */
 .grid.grid--libros{grid-template-columns:repeat(5,1fr)}
 .grid.grid--libros>[class*="col-"]{grid-column:span 1}

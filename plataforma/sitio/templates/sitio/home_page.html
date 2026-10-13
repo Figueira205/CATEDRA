@@ -246,8 +246,8 @@
       <h2 class="sec-head__title" id="t-biblioteca">Desde la Biblioteca</h2>
       <span class="sec-head__aside"><a class="link-arrow" href="{% pageurl ultimas_publicaciones.0.get_parent %}">Ir a la Biblioteca <span class="arr" aria-hidden="true">→</span></a></span>
     </div>
-    <div class="grid">
-      {% for p in ultimas_publicaciones %}<div class="col-3 reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
+    <div class="carrusel-libros-home" data-carrusel-arrastrable>
+      {% for p in ultimas_publicaciones %}<div class="carrusel-libros-home__item reveal">{% include "biblioteca/includes/tarjeta_publicacion.html" with publicacion=p %}</div>{% endfor %}
     </div>
   </div>
 </section>

@@ -972,4 +972,27 @@
       else { cancelAnimationFrame(raf); raf = null; }
     }).observe(atlasCanvas);
   }
+
+  /* ---------- Carrusel de libros (home): arrastrar con el ratón ---------- */
+  $$("[data-carrusel-arrastrable]").forEach(function (carrusel) {
+    var arrastrando = false, movido = false, inicioX = 0, scrollInicio = 0;
+    carrusel.addEventListener("mousedown", function (e) {
+      arrastrando = true; movido = false;
+      inicioX = e.pageX; scrollInicio = carrusel.scrollLeft;
+      carrusel.classList.add("is-arrastrando");
+    });
+    window.addEventListener("mousemove", function (e) {
+      if (!arrastrando) return;
+      var delta = e.pageX - inicioX;
+      if (Math.abs(delta) > 4) movido = true;
+      carrusel.scrollLeft = scrollInicio - delta;
+    });
+    window.addEventListener("mouseup", function () {
+      if (!arrastrando) return;
+      arrastrando = false;
+      carrusel.classList.remove("is-arrastrando");
+    });
+    // Tras un arrastre real, evita que el clic de soltar navegue el enlace del libro.
+    carrusel.addEventListener("click", function (e) { if (movido) { e.preventDefault(); movido = false; } }, true);
+  });
 })();

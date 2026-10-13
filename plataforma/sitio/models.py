@@ -116,7 +116,7 @@ class HomePage(Page):
 
         ctx = super().get_context(request, *args, **kwargs)
         ctx["proximas_actividades"] = ActividadPage.objects.live().filter(fecha_inicio__gte=timezone.now()).order_by("fecha_inicio")[:4]
-        ctx["ultimas_publicaciones"] = PublicacionPage.objects.live().order_by("-fecha_publicacion", "-first_published_at")[:4]
+        ctx["ultimas_publicaciones"] = PublicacionPage.objects.live().order_by("-fecha_publicacion", "-first_published_at")[:8]
         ctx["ultimas_novedades"] = NovedadPage.objects.live().order_by("-fecha")[:3]
         ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
         ctx["equipo_destacado"] = PersonaPage.objects.live().order_by("orden", "title")[:5]
