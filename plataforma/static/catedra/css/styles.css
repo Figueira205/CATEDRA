@@ -194,18 +194,15 @@ ul[class],ol[class],
    libro de la estantería" — se inclina en perspectiva 3D y se levanta, como si
    se despegara del resto de la fila. Solo en estas fichas (portada con enlace
    de compra externa), no en el resto de tarjetas del sitio. */
-.libro-externo{perspective:1000px}
 .libro-externo .card{
-  transition:transform .5s var(--ease-premium),box-shadow .5s var(--ease-premium);
-  transform-style:preserve-3d;will-change:transform;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+  will-change:transform;
 }
 .libro-externo .card:hover,.libro-externo .card:focus-within{
-  transform:translateY(-12px) scale(1.04) rotateX(5deg) rotateY(-7deg);
-  box-shadow:-22px 30px 44px -20px rgba(17,17,17,.4);
+  transform:translateY(-8px);
+  box-shadow:0 26px 40px -20px rgba(17,17,17,.35);
   border-color:var(--color-carmine);z-index:2;
 }
-.libro-externo .card__media img{transition:transform .6s var(--ease-premium)}
-.libro-externo .card:hover .card__media img{transform:scale(1.07)}
 @media (prefers-reduced-motion:reduce){
   .libro-externo .card{transition:none}
   .libro-externo .card:hover,.libro-externo .card:focus-within{transform:none}
