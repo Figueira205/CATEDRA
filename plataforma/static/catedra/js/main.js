@@ -1116,7 +1116,7 @@
       cookieBanner.hidden = false;
     }
     var previo = leerConsentimiento();
-    if (previo) { if (previo.analiticas) cargarAnalitica(); } else { abrirAviso(); }
+    if (previo) { if (previo.analiticas) cargarAnalitica(); } else { setTimeout(abrirAviso, 4000); }
     cookieBanner.addEventListener("click", function (e) {
       var b = e.target.closest("[data-cookies]");
       if (!b) return;
