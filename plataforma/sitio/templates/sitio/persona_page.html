@@ -20,8 +20,6 @@
       {% if page.resumen %}<div class="prose mt-6"><p>{{ page.resumen }}</p></div>{% endif %}
       {% if page.cuerpo %}
       <div class="prose cuerpo mt-7">{% for b in page.cuerpo %}{% include_block b %}{% endfor %}</div>
-      {% elif not page.resumen %}
-      <div class="prose mt-6"><p class="empty-state">Este perfil se completará próximamente.</p></div>
       {% endif %}
     </article>
   </div>

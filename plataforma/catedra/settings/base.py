@@ -226,8 +226,8 @@ CONTENT_SECURITY_POLICY = {
         "default-src": ["'self'"],
         # Sin 'unsafe-inline': solo se ejecuta JavaScript servido por nosotros.
         "script-src": ["'self'"] + ([_umami_origen] if _umami_origen else []),
-        "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-        "font-src": ["'self'", "https://fonts.gstatic.com", "data:"],
+        "style-src": ["'self'", "'unsafe-inline'"],
+        "font-src": ["'self'", "data:"],
         "img-src": ["'self'", "data:", "blob:", "https://i.ytimg.com", "https://i.vimeocdn.com"],
         "frame-src": [
             "https://www.youtube-nocookie.com", "https://www.youtube.com",
