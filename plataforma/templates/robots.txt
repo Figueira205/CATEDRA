@@ -1,3 +1,4 @@
+# Se permite el acceso a buscadores y asistentes de IA a todo el contenido público.
 User-agent: *
 Disallow: /admin/
 Disallow: /cuenta/
@@ -5,4 +6,172 @@ Disallow: /mi-cuenta/
 Disallow: /compras/
 Disallow: /buscar/
 
-Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: MistralAI-User
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: YouBot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+User-agent: Diffbot
+Allow: /
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /mi-cuenta/
+Disallow: /compras/
+Disallow: /buscar/
+
+Sitemap: https://catedrahispanidad.com/sitemap.xml
