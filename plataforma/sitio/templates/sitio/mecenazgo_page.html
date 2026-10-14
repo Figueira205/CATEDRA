@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include "sitio/includes/cabecera.html" %}
+<section class="section section--tight">
+  <div class="container convenio">
+    <div class="convenio__logos">
+      <img src="{% static 'catedra/img/logo_catedra.png' %}" alt="Cátedra para la Promoción Internacional de la Cultura Hispánica">
+      <span class="convenio__x" aria-hidden="true">+</span>
+      <img src="{% static 'catedra/img/logo_creditaria.png' %}" alt="Creditaria Estudio Legal">
+    </div>
+    <div class="convenio__grid">
+      <article class="convenio__bloque">
+        <h2>Entidades colaboradoras</h2>
+        <p>Convenio de colaboración académica e institucional suscrito entre la Universidad Rey Juan Carlos (URJC) y la entidad Creditaria Estudio Tech, S.L. (Inversiones Dafegobe, S.L.).</p>
+      </article>
+      <article class="convenio__bloque">
+        <h2>Financiación y mecenazgo</h2>
+        <p>La Cátedra cuenta con una aportación económica anual de 25.000&nbsp;€ por parte de Creditaria, amparada en los incentivos fiscales al mecenazgo de la Ley&nbsp;49/2002.</p>
+        <h2>Vigencia</h2>
+        <p>El convenio tiene una duración inicial de tres años, prorrogables por mutuo acuerdo por un período idéntico adicional.</p>
+      </article>
+      <article class="convenio__bloque convenio__bloque--ancho">
+        <h2>Objetivos principales</h2>
+        <ul>
+          <li>Promover la investigación científica de excelencia sobre la cultura hispánica, la Monarquía Hispánica y el patrimonio histórico de España en sus proyecciones internacional y comparada.</li>
+          <li>Contribuir a la revisión crítica y divulgación académica de la Leyenda Negra a través de publicaciones, seminarios y congresos de ámbito nacional e internacional.</li>
+          <li>Impulsar el estudio y la visibilización de la comunidad sefardí a escala mundial, en colaboración con instituciones académicas especializadas.</li>
+        </ul>
+      </article>
+      <article class="convenio__bloque">
+        <h2>Dirección y plan de trabajo</h2>
+        <ul>
+          <li>D. Ignacio Ruiz Rodríguez, catedrático de Universidad.</li>
+          <li>D. Gonzalo Bellón de Aguilar, en representación de Creditaria.</li>
+        </ul>
+      </article>
+      <article class="convenio__bloque">
+        <h2>Comisión de seguimiento paritaria</h2>
+        <ul>
+          <li>Representantes del Vicerrectorado con competencias en Investigación, Innovación y Transferencia de la URJC.</li>
+          <li>La dirección de la Cátedra.</li>
+          <li>Por parte de Creditaria: D. Gonzalo Bellón de Aguilar (administrador) y Dña. Sonia Murcia Majón (jefa de personal).</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}

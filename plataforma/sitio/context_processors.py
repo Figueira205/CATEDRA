@@ -52,7 +52,7 @@ def _menu(request):
     return menu
 
 
-PAGINAS_LEGALES = ["aviso-legal", "privacidad", "cookies", "accesibilidad"]
+PAGINAS_LEGALES = ["aviso-legal", "privacidad", "cookies", "accesibilidad", "mecenazgo"]
 
 
 def _legales(request):

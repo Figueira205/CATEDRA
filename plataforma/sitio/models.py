@@ -159,6 +159,8 @@ class PaginaSimple(Page):
     def get_template(self, request, *args, **kwargs):
         if self.slug == "la-catedra":
             return "sitio/la_catedra_page.html"
+        if self.slug == "mecenazgo":
+            return "sitio/mecenazgo_page.html"
         return super().get_template(request, *args, **kwargs)
 
     def get_context(self, request, *args, **kwargs):

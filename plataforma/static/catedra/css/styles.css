@@ -1414,3 +1414,16 @@ a.footer-inst:hover span{color:var(--color-gold)}
 /* El botón flotante de Wagtail (solo editores con sesión) no debe tapar el aviso. */
 body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-5) + 64px)}
 @media (max-width:599px){body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-3) + 64px)}}
+
+/* Convenio y mecenazgo */
+.convenio__logos{display:flex;align-items:center;justify-content:center;gap:var(--s-6);flex-wrap:wrap;padding:var(--s-6) var(--s-4);border:var(--line);border-radius:var(--radius);background:var(--color-white);margin-bottom:var(--s-6)}
+.convenio__logos img{height:84px;width:auto;max-width:100%}
+.convenio__x{font-family:var(--font-mono);font-size:1.6rem;color:var(--color-ink-soft)}
+.convenio__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-5)}
+.convenio__bloque{border:var(--line);border-radius:var(--radius);padding:var(--s-5);background:var(--color-white)}
+.convenio__bloque--ancho{grid-column:1/-1}
+.convenio__bloque h2{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-ink-soft);margin-bottom:var(--s-3)}
+.convenio__bloque h2:not(:first-child){margin-top:var(--s-5)}
+.convenio__bloque p,.convenio__bloque li{line-height:1.6}
+.convenio__bloque ul{display:flex;flex-direction:column;gap:var(--s-3);padding-left:1.1em;list-style:disc}
+@media (max-width:760px){.convenio__grid{grid-template-columns:1fr}.convenio__logos img{height:64px}}
