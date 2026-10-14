@@ -25,6 +25,7 @@ urlpatterns = [
     path("videos/favorito/", sitio_views.video_alternar_favorito, name="video_alternar_favorito"),
     path("sitemap.xml", sitemap),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    path("llms.txt", TemplateView.as_view(template_name="llms.txt", content_type="text/plain; charset=utf-8")),
 ]
 
 if settings.DEBUG:
