@@ -488,6 +488,12 @@
       lbContent.innerHTML = isVideo
         ? '<video src="' + src + '" controls preload="metadata" style="background:#000"></video>'
         : '<img src="' + src + '" alt="' + esc(el.getAttribute("data-caption") || "") + '">';
+      var dl = $("#lightbox-download");
+      if (dl) {
+        var enlace = el.getAttribute("data-download");
+        dl.hidden = !enlace;
+        if (enlace) dl.href = enlace;
+      }
       lbCap.innerHTML = '<span class="mono">' + esc(el.getAttribute("data-meta") || "") + "</span> " + esc(el.getAttribute("data-caption") || "");
     }
     function openLb(i) {
