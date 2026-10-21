@@ -1120,7 +1120,16 @@
       try { localStorage.setItem(CLAVE_COOKIES, JSON.stringify({ analiticas: analiticas, v: 1 })); } catch (e) {}
       cookieBanner.hidden = true;
       if (analiticas) cargarAnalitica();
-      else if (window.gtag) gtag("consent", "update", { analytics_storage: "denied" });
+      else {
+        if (window.gtag) gtag("consent", "update", { analytics_storage: "denied" });
+        // Al retirar el consentimiento se borran las cookies de Google Analytics (_ga, _ga_*).
+        var partes = location.hostname.split(".");
+        var dominios = ["", "; domain=" + location.hostname, "; domain=." + partes.slice(-2).join(".")];
+        d.cookie.split(";").forEach(function (c) {
+          var n = c.split("=")[0].trim();
+          if (n === "_ga" || n.indexOf("_ga_") === 0) dominios.forEach(function (dm) { d.cookie = n + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/" + dm; });
+        });
+      }
     }
     function abrirAviso() {
       var c = leerConsentimiento();
