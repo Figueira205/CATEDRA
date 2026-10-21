@@ -1430,3 +1430,14 @@ body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-5) + 64px)}
 .convenio__bloque p,.convenio__bloque li{line-height:1.6}
 .convenio__bloque ul{display:flex;flex-direction:column;gap:var(--s-3);padding-left:1.1em;list-style:disc}
 @media (max-width:760px){.convenio__grid{grid-template-columns:1fr}.convenio__logos img{height:64px}}
+
+/* Emblema de la Cátedra asomando a la derecha de la presentación (marca de agua) */
+.section--emblema{position:relative;overflow:hidden;isolation:isolate}
+.section--emblema::after{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  top:50%;right:0;width:min(720px,62vw);aspect-ratio:1;
+  transform:translate(42%,-50%);
+  background:url("../img/logo_marca_agua.png") center/contain no-repeat;
+  opacity:.5;
+}
+@media (max-width:760px){.section--emblema::after{width:92vw;transform:translate(52%,-30%);opacity:.32}}
