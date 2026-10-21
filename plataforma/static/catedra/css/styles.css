@@ -1435,9 +1435,9 @@ body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-5) + 64px)}
 .section--emblema{position:relative;overflow:hidden;isolation:isolate}
 .section--emblema::after{
   content:"";position:absolute;z-index:-1;pointer-events:none;
-  top:50%;right:0;width:min(720px,62vw);aspect-ratio:1;
+  top:calc(50% + 52px);right:0;width:min(720px,62vw);aspect-ratio:1;
   transform:translate(42%,-50%);
   background:url("../img/logo_marca_agua.png") center/contain no-repeat;
   opacity:.5;
 }
-@media (max-width:760px){.section--emblema::after{width:92vw;transform:translate(52%,-30%);opacity:.32}}
+@media (max-width:760px){.section--emblema::after{width:92vw;top:calc(50% + 52px);transform:translate(52%,-30%);opacity:.32}}
