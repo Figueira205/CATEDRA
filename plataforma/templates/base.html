@@ -154,7 +154,7 @@
 {% endwith %}
 
 
-<div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-titulo" data-umami-src="{% if UMAMI_SCRIPT_URL and UMAMI_WEBSITE_ID %}{{ UMAMI_SCRIPT_URL }}{% endif %}" data-umami-id="{{ UMAMI_WEBSITE_ID }}" hidden>
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-titulo" data-umami-src="{% if UMAMI_SCRIPT_URL and UMAMI_WEBSITE_ID %}{{ UMAMI_SCRIPT_URL }}{% endif %}" data-umami-id="{{ UMAMI_WEBSITE_ID }}" data-ga-id="{{ GA_MEASUREMENT_ID }}" hidden>
   <h2 id="cookie-titulo" class="cookie-banner__title">Valoramos tu privacidad</h2>
   <p class="cookie-banner__text">Usamos cookies para mejorar tu experiencia de navegación y analizar nuestro tráfico. Al hacer clic en «Aceptar todo» das tu consentimiento a su uso.{% for p in paginas_legales %}{% if p.slug == "cookies" %} <a href="{{ p.url }}">Más información</a>.{% endif %}{% endfor %}</p>
   <div class="cookie-banner__panel" id="cookie-panel" hidden>
@@ -163,7 +163,7 @@
       <input type="checkbox" checked disabled aria-label="Cookies necesarias (siempre activas)">
     </div>
     <div class="cookie-opt">
-      <div><strong>Analíticas</strong><span>Estadísticas de visitas anónimas para mejorar la web.</span></div>
+      <div><strong>Analíticas</strong><span>Estadísticas de uso (Google Analytics y Umami) para mejorar la web.</span></div>
       <input type="checkbox" id="cookie-analiticas" aria-label="Cookies analíticas">
     </div>
     <button type="button" class="btn btn--primary" data-cookies="guardar">Guardar selección</button>

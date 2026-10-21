@@ -208,6 +208,7 @@ STRIPE_PREFIJO_PRODUCTO = env("STRIPE_PREFIJO_PRODUCTO", default="Cátedra")
 # Umami (autoalojado, sin cookies). Vacío = no se carga el script.
 UMAMI_SCRIPT_URL = env("UMAMI_SCRIPT_URL", default="")
 UMAMI_WEBSITE_ID = env("UMAMI_WEBSITE_ID", default="")
+GA_MEASUREMENT_ID = env("GA_MEASUREMENT_ID", default="G-SPY2416NN5")  # ID público de Google Analytics 4
 
 # ---------------------------------------------------------------- Seguridad
 SESSION_COOKIE_HTTPONLY = True
@@ -225,15 +226,15 @@ CONTENT_SECURITY_POLICY = {
     "DIRECTIVES": {
         "default-src": ["'self'"],
         # Sin 'unsafe-inline': solo se ejecuta JavaScript servido por nosotros.
-        "script-src": ["'self'"] + ([_umami_origen] if _umami_origen else []),
+        "script-src": ["'self'", "https://www.googletagmanager.com"] + ([_umami_origen] if _umami_origen else []),
         "style-src": ["'self'", "'unsafe-inline'"],
         "font-src": ["'self'", "data:"],
-        "img-src": ["'self'", "data:", "blob:", "https://i.ytimg.com", "https://i.vimeocdn.com"],
+        "img-src": ["'self'", "data:", "blob:", "https://*.google-analytics.com", "https://www.googletagmanager.com", "https://i.ytimg.com", "https://i.vimeocdn.com"],
         "frame-src": [
             "https://www.youtube-nocookie.com", "https://www.youtube.com",
             "https://player.vimeo.com",
         ],
-        "connect-src": ["'self'"] + ([_umami_origen] if _umami_origen else []),
+        "connect-src": ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://www.googletagmanager.com"] + ([_umami_origen] if _umami_origen else []),
         "form-action": ["'self'", "https://checkout.stripe.com"],
         "frame-ancestors": ["'self'"],
         "base-uri": ["'self'"],

@@ -69,4 +69,5 @@ def sitio(request):
         "paginas_legales": _legales(request),
         "UMAMI_SCRIPT_URL": settings.UMAMI_SCRIPT_URL,
         "UMAMI_WEBSITE_ID": settings.UMAMI_WEBSITE_ID,
+        "GA_MEASUREMENT_ID": settings.GA_MEASUREMENT_ID,
     }
