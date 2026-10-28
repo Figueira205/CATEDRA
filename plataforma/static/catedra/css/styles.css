@@ -1444,7 +1444,7 @@ body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-5) + 64px)}
 
 /* Anuncio patrocinado en la home */
 .anuncio{padding-block:var(--s-8)}
-.anuncio__card{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:var(--s-7);align-items:center;max-width:1080px;margin-inline:auto;padding:var(--s-6);background:var(--color-white);border:var(--line);border-radius:var(--radius)}
+.anuncio__card{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:var(--s-7);align-items:center;padding:var(--s-6);background:var(--color-white);border:var(--line);border-radius:var(--radius)}
 .anuncio__img img{display:block;width:100%;height:auto;border-radius:var(--radius);box-shadow:0 10px 30px rgba(16,61,80,.18)}
 .anuncio__eyebrow{font-family:var(--font-mono);font-size:var(--text-meta);letter-spacing:.08em;text-transform:uppercase;color:var(--color-gold-ink);margin:0 0 var(--s-3)}
 .anuncio__title{font-family:var(--font-serif);font-size:var(--text-h3);line-height:1.1;margin:0 0 var(--s-4);color:var(--color-atlantic)}
