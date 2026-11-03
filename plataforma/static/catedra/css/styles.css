@@ -1467,4 +1467,13 @@ body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-5) + 64px)}
 .comites-home__cara img{width:100%;height:100%;object-fit:cover}
 .comites-home__txt{grid-area:txt;font-size:var(--text-small);color:var(--color-ink-soft)}
 .comites-home__item .link-arrow{grid-area:cta;font-size:var(--text-small)}
-@media (max-width:760px){.comites-home{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .comites-home{grid-template-columns:1fr;gap:var(--s-4)}
+  .comites-home__item{grid-template-columns:1fr auto;grid-template-areas:"label caras" "txt txt" "cta cta";row-gap:var(--s-3);padding:var(--s-5) var(--s-4)}
+  .comites-home__label{margin-bottom:0;align-self:center}
+  .comites-home__caras{justify-self:end}
+  .comites-home__cara{width:40px;height:40px}
+  .comites-home__cara+.comites-home__cara{margin-left:-10px}
+  .comites-home__txt{font-size:1rem;line-height:1.5}
+  .comites-home__item .link-arrow{padding-top:var(--s-3);border-top:var(--line);white-space:nowrap}
+}
