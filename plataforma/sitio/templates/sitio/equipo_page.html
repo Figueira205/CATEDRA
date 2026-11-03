@@ -15,4 +15,43 @@
     {% endif %}
   </div>
 </section>
+
+{% if comite_cientifico %}
+<section class="section section--muted comite" id="comite-cientifico" aria-labelledby="t-comite-cientifico">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-comite-cientifico">Comité Científico</h2>
+    </div>
+    <div class="comite__intro reveal">
+      <p>El Comité Científico es el órgano asesor de la Cátedra de la Hispanidad en materia de investigación, desarrollo académico y difusión del conocimiento. Está compuesto por especialistas de reconocido prestigio en las áreas de conocimiento vinculadas a sus líneas de investigación.</p>
+      <p>Entre sus funciones se encuentran la orientación científica, la evaluación de proyectos y la supervisión de la calidad de las actividades desarrolladas. Igualmente, contribuye a impulsar la excelencia investigadora, la colaboración interdisciplinar y la proyección científica de la Cátedra de la Hispanidad.</p>
+    </div>
+    <div class="grid comite__grid">
+      {% for persona in comite_cientifico %}
+      <div class="col-2 reveal">{% include "sitio/includes/tarjeta_persona.html" with persona=persona %}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if comite_honor %}
+<section class="section comite" id="comite-de-honor" aria-labelledby="t-comite-honor">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-head__num" aria-hidden="true"></span>
+      <h2 class="sec-head__title" id="t-comite-honor">Comité de Honor</h2>
+    </div>
+    <div class="comite__intro reveal">
+      <p>El Comité de Honor de la Cátedra de la Hispanidad está integrado por personalidades de reconocido prestigio académico, científico, institucional y profesional. Su composición constituye un respaldo institucional y un reconocimiento a la relevancia de las actividades desarrolladas por la Cátedra de la Hispanidad.</p>
+    </div>
+    <div class="grid comite__grid">
+      {% for persona in comite_honor %}
+      <div class="col-2 reveal">{% include "sitio/includes/tarjeta_persona.html" with persona=persona %}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 {% endblock %}

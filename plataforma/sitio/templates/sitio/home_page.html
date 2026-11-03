@@ -217,6 +217,26 @@
       <div class="col-2 reveal">{% include "sitio/includes/tarjeta_persona.html" with persona=persona %}</div>
       {% endfor %}
     </div>
+    {% if comite_cientifico or comite_honor %}
+    <div class="comites-home reveal">
+      {% if comite_cientifico %}
+      <a class="comites-home__item" href="/equipo/#comite-cientifico">
+        <span class="comites-home__label">Comité Científico</span>
+        <span class="comites-home__caras" aria-hidden="true">{% for p in comite_cientifico|slice:":6" %}<span class="comites-home__cara">{% if p.foto %}{% image p.foto fill-96x96 loading="lazy" alt="" %}{% else %}{{ p.iniciales }}{% endif %}</span>{% endfor %}</span>
+        <span class="comites-home__txt">Especialistas que orientan la investigación y la calidad académica de la Cátedra.</span>
+        <span class="link-arrow">Conocer el comité <span class="arr" aria-hidden="true">→</span></span>
+      </a>
+      {% endif %}
+      {% if comite_honor %}
+      <a class="comites-home__item" href="/equipo/#comite-de-honor">
+        <span class="comites-home__label">Comité de Honor</span>
+        <span class="comites-home__caras" aria-hidden="true">{% for p in comite_honor|slice:":6" %}<span class="comites-home__cara">{% if p.foto %}{% image p.foto fill-96x96 loading="lazy" alt="" %}{% else %}{{ p.iniciales }}{% endif %}</span>{% endfor %}</span>
+        <span class="comites-home__txt">Personalidades de reconocido prestigio que respaldan la labor de la Cátedra.</span>
+        <span class="link-arrow">Conocer el comité <span class="arr" aria-hidden="true">→</span></span>
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
   </div>
 </section>
 {% endif %}

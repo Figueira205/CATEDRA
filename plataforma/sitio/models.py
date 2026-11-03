@@ -127,7 +127,11 @@ class HomePage(Page):
         ctx["ultimas_publicaciones"] = PublicacionPage.objects.live().order_by("-fecha_publicacion", "-first_published_at")[:8]
         ctx["ultimas_novedades"] = NovedadPage.objects.live().order_by("-fecha")[:3]
         ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
-        ctx["equipo_destacado"] = PersonaPage.objects.live().order_by("orden", "title")[:5]
+        personas = PersonaPage.objects.live().order_by("orden", "title")
+        comites = [PersonaPage.Categoria.COMITE_CIENTIFICO, PersonaPage.Categoria.COMITE_HONOR]
+        ctx["equipo_destacado"] = personas.exclude(categoria__in=comites)[:5]
+        ctx["comite_cientifico"] = personas.filter(categoria=PersonaPage.Categoria.COMITE_CIENTIFICO)
+        ctx["comite_honor"] = personas.filter(categoria=PersonaPage.Categoria.COMITE_HONOR)
         ctx["clases_destacadas"] = CLASES_DESTACADAS
         if request.user.is_authenticated:
             ctx["videos_favoritos_ids"] = set(
@@ -342,7 +346,11 @@ class EquipoPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         ctx = super().get_context(request, *args, **kwargs)
-        ctx["personas"] = PersonaPage.objects.child_of(self).live().order_by("orden", "title")
+        todas = PersonaPage.objects.child_of(self).live().order_by("orden", "title")
+        comites = [PersonaPage.Categoria.COMITE_CIENTIFICO, PersonaPage.Categoria.COMITE_HONOR]
+        ctx["personas"] = todas.exclude(categoria__in=comites)
+        ctx["comite_cientifico"] = todas.filter(categoria=PersonaPage.Categoria.COMITE_CIENTIFICO)
+        ctx["comite_honor"] = todas.filter(categoria=PersonaPage.Categoria.COMITE_HONOR)
         return ctx
 
 
@@ -354,6 +362,8 @@ class PersonaPage(Page):
         DOCENCIA = "docencia", "Docencia"
         INVESTIGACION = "investigacion", "Investigación"
         COLABORACION = "colaboracion", "Colaboración"
+        COMITE_CIENTIFICO = "comite_cientifico", "Comité Científico"
+        COMITE_HONOR = "comite_honor", "Comité de Honor"
 
     categoria = models.CharField(max_length=20, choices=Categoria.choices, default=Categoria.COLABORACION)
     cargo = models.CharField("cargo o rol", max_length=160, blank=True)

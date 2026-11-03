@@ -1451,3 +1451,20 @@ body:has(wagtail-userbar) .cookie-banner{bottom:calc(var(--s-5) + 64px)}
 .anuncio__lead{font-size:var(--text-body);color:var(--color-ink-soft);margin:0 0 var(--s-4)}
 .anuncio__datos{list-style:none;padding:0;margin:0 0 var(--s-6);font-size:var(--text-small);display:grid;gap:var(--s-2)}
 @media (max-width:760px){.anuncio__card{grid-template-columns:1fr;padding:var(--s-5);gap:var(--s-5)}.anuncio__img{max-width:320px;margin-inline:auto}}
+
+/* Comités (página de equipo y franja de la home) */
+.comite{scroll-margin-top:var(--header-h)}
+.comite__intro{max-width:72ch;margin-bottom:var(--s-7);font-family:var(--font-serif);font-size:1.15rem;line-height:1.6;color:var(--color-ink-soft)}
+.comite__intro p+p{margin-top:var(--s-4)}
+.comite__grid .person__name{font-size:1rem}
+.comites-home{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);margin-top:var(--s-8);padding-top:var(--s-6);border-top:var(--line)}
+.comites-home__item{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"label label" "caras txt" "caras cta";column-gap:var(--s-5);row-gap:var(--s-2);align-items:center;text-decoration:none;color:inherit;padding:var(--s-5);border:var(--line);border-radius:var(--radius);background:var(--color-paper);transition:border-color var(--t-fast) var(--ease)}
+.comites-home__item:hover{border-color:var(--color-gold)}
+.comites-home__label{grid-area:label;font-family:var(--font-mono);font-size:var(--text-meta);letter-spacing:.08em;text-transform:uppercase;color:var(--color-gold-ink);margin-bottom:var(--s-2)}
+.comites-home__caras{grid-area:caras;display:flex}
+.comites-home__cara{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--color-paper);background:var(--color-paper-muted);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:.95rem;color:var(--color-atlantic)}
+.comites-home__cara+.comites-home__cara{margin-left:-12px}
+.comites-home__cara img{width:100%;height:100%;object-fit:cover}
+.comites-home__txt{grid-area:txt;font-size:var(--text-small);color:var(--color-ink-soft)}
+.comites-home__item .link-arrow{grid-area:cta;font-size:var(--text-small)}
+@media (max-width:760px){.comites-home{grid-template-columns:1fr}}
