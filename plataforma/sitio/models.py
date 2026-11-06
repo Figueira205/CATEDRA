@@ -129,7 +129,7 @@ class HomePage(Page):
         ctx["actividades_calendario"] = _serializar_actividades_calendario(ActividadPage.objects.live())
         personas = PersonaPage.objects.live().order_by("orden", "title")
         comites = [PersonaPage.Categoria.COMITE_CIENTIFICO, PersonaPage.Categoria.COMITE_HONOR]
-        ctx["equipo_destacado"] = personas.exclude(categoria__in=comites)[:5]
+        ctx["equipo_destacado"] = personas.exclude(categoria__in=comites)[:6]
         ctx["comite_cientifico"] = personas.filter(categoria=PersonaPage.Categoria.COMITE_CIENTIFICO)
         ctx["comite_honor"] = personas.filter(categoria=PersonaPage.Categoria.COMITE_HONOR)
         ctx["clases_destacadas"] = CLASES_DESTACADAS
@@ -184,9 +184,10 @@ class PaginaSimple(Page):
             imagenes = Image.objects.in_bulk(ids)
             ctx["galeria_catedra"] = [imagenes[i] for i in ids if i in imagenes]
             ctx["imagen_campo_estudio"] = Image.objects.filter(pk=4).first()
-            ids_equipo = [10, 11, 12, 13, 14]
-            imagenes_equipo = Image.objects.in_bulk(ids_equipo)
-            ctx["equipo_catedra"] = [imagenes_equipo[i] for i in ids_equipo if i in imagenes_equipo]
+            principal = PersonaPage.objects.live().filter(
+                categoria__in=[PersonaPage.Categoria.DIRECCION, PersonaPage.Categoria.COORDINACION], foto__isnull=False
+            ).select_related("foto").order_by("orden", "title")
+            ctx["equipo_catedra"] = [p.foto for p in principal]
             ctx["areas_catedra"] = [
                 {"slug": "historia-patrimonio", "nombre": "Historia y patrimonio",
                  "descripcion": "El pasado compartido del mundo hispánico: sus fuentes, archivos y memoria material."},
